@@ -10,6 +10,7 @@ import { RequestCallbackComponent } from './components/request-callback/request-
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import {EnquiryService} from './services/enquiry.service';
+import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {EnquiryService} from './services/enquiry.service';
     SearchComponent,
     NavigationbarComponent,
     RequestCallbackComponent,
+    PremiumBrandsComponent,
   ],
   imports: [
     BrowserModule,
