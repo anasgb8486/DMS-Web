@@ -10,8 +10,9 @@ import { SearchComponent } from './components/search/search.component';
 import { NavigationbarComponent } from './shared/components/navigationbar/navigationbar.component';
 import { RequestCallbackComponent } from './components/request-callback/request-callback.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { ToastrModule } from 'ngx-toastr';
 import {EnquiryService} from './services/enquiry.service';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {EnquiryService} from './services/enquiry.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     EnquiryService

@@ -1,7 +1,7 @@
 export class RequestCallback {
     name: string;
     email: string;
-    mobileNumber: number;
+    mobileNumber: string;
     city: string;
     requestType: number;
 }

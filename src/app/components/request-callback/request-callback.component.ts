@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { from } from 'rxjs';
 import { EnquiryService } from 'src/app/services/enquiry.service';
-import {RequestCallback} from 'src/app/models/request-Callback.model';
+import {RequestCallback} from 'src/app/models/request-callback.model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class RequestCallbackComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, 
     private _enquiryService: EnquiryService,
             private _spinnerService: NgxSpinnerService,
-            private _router: Router) { }
+            private _router: Router,
+            private _toastr: ToastrService) { }
 
   requestCallbackForm: FormGroup;
 
@@ -40,10 +42,13 @@ export class RequestCallbackComponent implements OnInit {
     },
     mobileNumber: {
       required: 'Mobile number is required.',
-      minlength: 'Mobile number should have at least 10 characters.'
+      minlength: 'Mobile number should have 10 characters.',
+      maxlength: 'Mobile number should have 10 characters.',
+      pattern: 'Only numbers are allowed.'
     },
     email: {
-      required: 'email is required.'
+      required: 'Email is required.',
+      email: 'Please provide valid email address.'
     },
     city: {
       required: 'City is required.',
@@ -56,8 +61,8 @@ export class RequestCallbackComponent implements OnInit {
   ngOnInit(): void {
     this.requestCallbackForm = this._formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      mobileNumber: ['', [Validators.required, Validators.minLength(10)]],
-      email: ['', Validators.required],
+      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      email: ['', [Validators.required, Validators.email]],
       city: ['', Validators.required],
       requestType: ['', Validators.required],
     });
@@ -89,8 +94,9 @@ export class RequestCallbackComponent implements OnInit {
   handleSuccess(resp: any): void{
     this._spinnerService.hide();
     this.requestCallbackForm.reset();
-    alert('request callback submitted');
-    this._router.navigate(['home']);
+    //alert('request callback submitted');
+    this._toastr.success('Callback request submitted successfully.', 'Result');
+    //this._router.navigate(['home']);
   }
 
   mapFormValuesToRequestCallbackModel(): RequestCallback{
