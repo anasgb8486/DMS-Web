@@ -104,7 +104,12 @@ export class RequestCallbackComponent implements OnInit {
     this.requestCallbackForm.reset();
     //alert('request callback submitted');
     this._toastr.success('Callback request submitted successfully.', 'Result');
-    //this._router.navigate(['home']);
+    this._router.navigate(['home']);
+  }
+
+  cancelRequest(): void {
+    this.requestCallbackForm.reset();
+    this._router.navigate(['home']);
   }
 
   mapFormValuesToRequestCallbackModel(): RequestCallback{
