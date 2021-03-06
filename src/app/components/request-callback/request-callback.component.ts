@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { from } from 'rxjs';
 import { EnquiryService } from 'src/app/services/enquiry.service';
+import {RequestCallback} from 'src/app/models/request-Callback.model';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-request-callback', 
@@ -12,7 +16,8 @@ export class RequestCallbackComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder, 
     private _enquiryService: EnquiryService,
-            private SpinnerService: NgxSpinnerService) { }
+            private _spinnerService: NgxSpinnerService,
+            private _router: Router) { }
 
   requestCallbackForm: FormGroup;
 
@@ -62,16 +67,41 @@ export class RequestCallbackComponent implements OnInit {
     });
   }
 
-  saveRequestCallback(): void{
-    this.SpinnerService.show();
+  saveRequestCallback(): void {
+    this._spinnerService.show();
+    var request = this.mapFormValuesToRequestCallbackModel();
+    this._enquiryService.saveCallbackRequest(request).subscribe((result: any) => {
+      this.handleSuccess(result);
+    }, (error: any) => {
+      this.handleError(error);
+    });
+  }
+
+  handleError(error: any): void {
+    // if (error.statusText === 'Bad Request' || error.status === 400) {
+    //   alert(error.error);
+    //   this._spinnerService.hide();
+    // }
+    console.log(error);
+    this._spinnerService.hide();
+  }
+
+  handleSuccess(resp: any): void{
+    this._spinnerService.hide();
+    this.requestCallbackForm.reset();
     alert('request callback submitted');
-    // this.mapFormValuesToEmployeeModel();
-    // const employeeToCreate = Object.assign({}, this.employee);
-    // this._employeeService.createEmployee(employeeToCreate).subscribe((result: any) => {
-    //    this.handleSuccss(employeeToCreate, result);
-    // }, (error: any) => {
-    //   this.handleError(error);
-    // });
+    this._router.navigate(['home']);
+  }
+
+  mapFormValuesToRequestCallbackModel(): RequestCallback{
+    var request = new RequestCallback();
+    request.name = this.requestCallbackForm.value.name;
+    request.email = this.requestCallbackForm.value.email;
+    request.mobileNumber = this.requestCallbackForm.value.mobileNumber;
+    request.city = this.requestCallbackForm.value.city;
+    request.requestType = this.requestCallbackForm.value.requestType;
+
+    return request;
   }
 
   logValidationErrors(group: FormGroup = this.requestCallbackForm): void {

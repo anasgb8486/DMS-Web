@@ -1,4 +1,4 @@
-export class RequestCallback{
+export class RequestCallback {
     name: string;
     email: string;
     mobileNumber: number;
