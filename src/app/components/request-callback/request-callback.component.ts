@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-request-callback', 
+  selector: 'app-request-callback',
   templateUrl: './request-callback.component.html',
   styleUrls: ['./request-callback.component.css']
 })
@@ -67,8 +67,16 @@ export class RequestCallbackComponent implements OnInit {
       requestType: ['', Validators.required],
     });
 
-    this.requestCallbackForm.valueChanges.subscribe((data) => {
-      this.logValidationErrors(this.requestCallbackForm);
+    this.requestCallbackForm.valueChanges.subscribe(
+      (data) => {
+        this.logValidationErrors(this.requestCallbackForm);
+         // Called when success
+       },
+      (error) => {
+         // Called when error
+      }
+    ).add(() => {
+         // Called when operation is complete (both success and error)
     });
   }
 
