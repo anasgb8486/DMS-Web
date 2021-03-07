@@ -7,11 +7,11 @@ import { EnquiryService } from 'src/app/services/enquiry.service';
 import { Enquiry } from 'src/app/models/enquiry.model';
 
 @Component({
-  selector: 'app-request-callback',
-  templateUrl: './request-callback.component.html',
-  styleUrls: ['./request-callback.component.css']
+  selector: 'app-post-requirement',
+  templateUrl: './post-requirement.component.html',
+  styleUrls: ['./post-requirement.component.css']
 })
-export class RequestCallbackComponent implements OnInit {
+export class PostRequirementComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     private _enquiryService: EnquiryService,
@@ -19,24 +19,22 @@ export class RequestCallbackComponent implements OnInit {
     private _router: Router,
     private _toastr: ToastrService) { }
 
-  requestCallbackForm: FormGroup;
+  postRequirmentForm: FormGroup;
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
   // corresponding form control
   formErrors = {
-    name: '',
-    mobileNumber: '',
-    email: '',
-    city: '',
     requestType: '',
+    mobileNumber: '',
+    description: '',
+    isAgreed: '',
   };
 
   // This object contains all the validation messages for this form
   validationMessages = {
-    name: {
-      required: 'Name is required.',
-      minlength: 'Name should have at least 2 characters.'
+    requestType: {
+      required: 'Request type is required.',
     },
     mobileNumber: {
       required: 'Mobile number is required.',
@@ -44,30 +42,27 @@ export class RequestCallbackComponent implements OnInit {
       maxlength: 'Mobile number should have 10 characters.',
       pattern: 'Only numbers are allowed.'
     },
-    email: {
-      required: 'Email is required.',
-      email: 'Please provide valid email address.'
+    description: {
+      required: 'description is required.',
+      maxlength: 'Description should not exceed more than 1000 characters.'
     },
-    city: {
-      required: 'City is required.',
+    isAgreed: {
+      requiredTrue: 'Please accept the agreement before submitting your requirements.',
     },
-    requestType: {
-      required: 'Request type is required.',
-    },
+
   };
 
   ngOnInit(): void {
-    this.requestCallbackForm = this._formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      city: ['', Validators.required],
+    this.postRequirmentForm = this._formBuilder.group({
       requestType: ['', Validators.required],
+      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      description: ['', [Validators.required, Validators.maxLength(2000)]],
+      isAgreed: ['', Validators.requiredTrue],
     });
 
-    this.requestCallbackForm.valueChanges.subscribe(
+    this.postRequirmentForm.valueChanges.subscribe(
       (data) => {
-        this.logValidationErrors(this.requestCallbackForm);
+        this.logValidationErrors(this.postRequirmentForm);
         // Called when success
       },
       (error) => {
@@ -78,10 +73,10 @@ export class RequestCallbackComponent implements OnInit {
     });
   }
 
-  saveRequestCallback(): void {
+  postRequirment(): void {
     this._spinnerService.show();
-    var request = this.mapFormValuesToRequestCallbackModel();
-    this._enquiryService.saveEnquiry(request).subscribe((result: any) => {
+    var requirement = this.mapFormValuesToRquirementModel();
+    this._enquiryService.saveEnquiry(requirement).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {
       this.handleError(error);
@@ -93,37 +88,35 @@ export class RequestCallbackComponent implements OnInit {
     //   alert(error.error);
     //   this._spinnerService.hide();
     // }
-    this._toastr.error('Oops something went wrong !!! Please try again after sometime.', 'Error');
     console.log(error);
+    this._toastr.error('Oops something went wrong !!! Please try again after sometime', 'Error');
     this._spinnerService.hide();
   }
 
   handleSuccess(resp: any): void {
     this._spinnerService.hide();
-    this.requestCallbackForm.reset();
+    this.postRequirmentForm.reset();
     //alert('request callback submitted');
-    this._toastr.success('Callback request submitted successfully.', 'Success');
+    this._toastr.success('Your requirements are saved successfully. We will conact you soon.', 'Success');
     this._router.navigate(['home']);
   }
 
   cancelRequest(): void {
-    this.requestCallbackForm.reset();
+    this.postRequirmentForm.reset();
     this._router.navigate(['home']);
   }
 
-  mapFormValuesToRequestCallbackModel(): Enquiry {
-    var request = new Enquiry();
-    request.isCallbackRequest = true;
-    request.name = this.requestCallbackForm.value.name;
-    request.email = this.requestCallbackForm.value.email;
-    request.mobileNumber = this.requestCallbackForm.value.mobileNumber;
-    request.city = this.requestCallbackForm.value.city;
-    request.requestType = this.requestCallbackForm.value.requestType;
+  mapFormValuesToRquirementModel(): Enquiry {
+    var requirement = new Enquiry();
+    requirement.isCallbackRequest = false;
+    requirement.requestType = this.postRequirmentForm.value.requestType;
+    requirement.mobileNumber = this.postRequirmentForm.value.mobileNumber;
+    requirement.description = this.postRequirmentForm.value.description;
 
-    return request;
+    return requirement;
   }
 
-  logValidationErrors(group: FormGroup = this.requestCallbackForm): void {
+  logValidationErrors(group: FormGroup = this.postRequirmentForm): void {
     // Loop through each control key in the FormGroup
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = group.get(key);

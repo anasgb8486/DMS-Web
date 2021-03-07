@@ -13,6 +13,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import {EnquiryService} from './services/enquiry.service';
 import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
+import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { PremiumBrandsComponent } from './components/premium-brands/premium-bran
     NavigationbarComponent,
     RequestCallbackComponent,
     PremiumBrandsComponent,
+    PostRequirementComponent,
   ],
   imports: [
     BrowserModule,
