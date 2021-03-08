@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { Enquiry } from 'src/app/models/enquiry.model';
+import { CustomValidators } from 'src/app/shared/custom.validators';
+
 
 @Component({
   selector: 'app-post-requirement',
@@ -43,7 +45,8 @@ export class PostRequirementComponent implements OnInit {
       pattern: 'Only numbers are allowed.'
     },
     description: {
-      required: 'description is required.',
+      required: 'Description is required.',
+      startingWithEmptySpace: 'You cannot start description with empty spaces.',
       maxlength: 'Description should not exceed more than 1000 characters.'
     },
     isAgreed: {
@@ -56,7 +59,7 @@ export class PostRequirementComponent implements OnInit {
     this.postRequirmentForm = this._formBuilder.group({
       requestType: ['', Validators.required],
       mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      description: ['', [Validators.required, Validators.maxLength(2000)]],
+      description: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.maxLength(2000)]],
       isAgreed: ['', Validators.requiredTrue],
     });
 

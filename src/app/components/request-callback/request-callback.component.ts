@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { Enquiry } from 'src/app/models/enquiry.model';
+import { CustomValidators } from 'src/app/shared/custom.validators';
 
 @Component({
   selector: 'app-request-callback',
@@ -36,6 +37,7 @@ export class RequestCallbackComponent implements OnInit {
   validationMessages = {
     name: {
       required: 'Name is required.',
+      startingWithEmptySpace: 'You cannot start name with empty spaces.',
       minlength: 'Name should have at least 2 characters.'
     },
     mobileNumber: {
@@ -46,10 +48,12 @@ export class RequestCallbackComponent implements OnInit {
     },
     email: {
       required: 'Email is required.',
-      email: 'Please provide valid email address.'
+      startingWithEmptySpace: 'You cannot start description with empty spaces.',
+      pattern: 'Please provide valid email address.'
     },
     city: {
       required: 'City is required.',
+      startingWithEmptySpace: 'You cannot start description with empty spaces.',
     },
     requestType: {
       required: 'Request type is required.',
@@ -58,10 +62,10 @@ export class RequestCallbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.requestCallbackForm = this._formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.minLength(2)]],
       mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      city: ['', Validators.required],
+      email: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      city: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       requestType: ['', Validators.required],
     });
 
