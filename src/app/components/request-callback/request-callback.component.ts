@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -15,12 +15,13 @@ import { CustomValidators } from 'src/app/shared/custom.validators';
 export class RequestCallbackComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
-    private _enquiryService: EnquiryService,
-    private _spinnerService: NgxSpinnerService,
-    private _router: Router,
-    private _toastr: ToastrService) { }
+              private _enquiryService: EnquiryService,
+              private _spinnerService: NgxSpinnerService,
+              private _router: Router,
+              private _toastr: ToastrService) { }
 
   requestCallbackForm: FormGroup;
+  @Output() closePopupEvent = new EventEmitter<void>();
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -63,8 +64,13 @@ export class RequestCallbackComponent implements OnInit {
   ngOnInit(): void {
     this.requestCallbackForm = this._formBuilder.group({
       name: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.minLength(2)]],
-      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      email: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      mobileNumber: ['', [Validators.required,
+                          Validators.minLength(10),
+                          Validators.maxLength(10),
+                          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      email: ['', [Validators.required,
+                  CustomValidators.startingWithEmptySpace(),
+                  Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       city: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       requestType: ['', Validators.required],
     });
@@ -84,7 +90,7 @@ export class RequestCallbackComponent implements OnInit {
 
   saveRequestCallback(): void {
     this._spinnerService.show();
-    var request = this.mapFormValuesToRequestCallbackModel();
+    let request = this.mapFormValuesToRequestCallbackModel();
     this._enquiryService.saveEnquiry(request).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {
@@ -105,18 +111,19 @@ export class RequestCallbackComponent implements OnInit {
   handleSuccess(resp: any): void {
     this._spinnerService.hide();
     this.requestCallbackForm.reset();
-    //alert('request callback submitted');
+    // alert('request callback submitted');
     this._toastr.success('Callback request submitted successfully.', 'Success');
     this._router.navigate(['home']);
   }
 
   cancelRequest(): void {
-    this.requestCallbackForm.reset();
-    this._router.navigate(['home']);
+    // this.requestCallbackForm.reset();
+    // this._router.navigate(['home']);
+     this.closePop();
   }
 
   mapFormValuesToRequestCallbackModel(): Enquiry {
-    var request = new Enquiry();
+    let request = new Enquiry();
     request.isCallbackRequest = true;
     request.name = this.requestCallbackForm.value.name;
     request.email = this.requestCallbackForm.value.email;
@@ -146,6 +153,10 @@ export class RequestCallbackComponent implements OnInit {
         }
       }
     });
+  }
+
+  closePop(): void {
+    this.closePopupEvent.emit();
   }
 
 }

@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
@@ -11,9 +13,10 @@ import { NavigationbarComponent } from './shared/components/navigationbar/naviga
 import { RequestCallbackComponent } from './components/request-callback/request-callback.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import {EnquiryService} from './services/enquiry.service';
+import { EnquiryService } from './services/enquiry.service';
 import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 
 @NgModule({
@@ -25,6 +28,7 @@ import { PostRequirementComponent } from './components/post-requirement/post-req
     RequestCallbackComponent,
     PremiumBrandsComponent,
     PostRequirementComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,11 +38,13 @@ import { PostRequirementComponent } from './components/post-requirement/post-req
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    MatDialogModule,
     ToastrModule.forRoot()
   ],
   providers: [
     EnquiryService
   ],
+  entryComponents: [ DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

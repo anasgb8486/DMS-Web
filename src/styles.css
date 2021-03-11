@@ -2,3 +2,10 @@
 body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
 }
+
+.cdk-overlay-container {
+    position: fixed;
+    z-index: 2000;
+    top: 15%;
+    left: 25%;       
+}

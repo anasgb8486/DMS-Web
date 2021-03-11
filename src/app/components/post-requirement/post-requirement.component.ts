@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -16,12 +16,13 @@ import { CustomValidators } from 'src/app/shared/custom.validators';
 export class PostRequirementComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
-    private _enquiryService: EnquiryService,
-    private _spinnerService: NgxSpinnerService,
-    private _router: Router,
-    private _toastr: ToastrService) { }
+              private _enquiryService: EnquiryService,
+              private _spinnerService: NgxSpinnerService,
+              private _router: Router,
+              private _toastr: ToastrService) { }
 
   postRequirmentForm: FormGroup;
+  @Output() closePopupEvent = new EventEmitter<void>();
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -58,8 +59,13 @@ export class PostRequirementComponent implements OnInit {
   ngOnInit(): void {
     this.postRequirmentForm = this._formBuilder.group({
       requestType: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      description: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.maxLength(2000)]],
+      mobileNumber: ['', [Validators.required,
+                            Validators.minLength(10),
+                            Validators.maxLength(10),
+                            Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      description: ['', [Validators.required,
+                         CustomValidators.startingWithEmptySpace(),
+                        Validators.maxLength(2000)]],
       isAgreed: ['', Validators.requiredTrue],
     });
 
@@ -78,7 +84,7 @@ export class PostRequirementComponent implements OnInit {
 
   postRequirment(): void {
     this._spinnerService.show();
-    var requirement = this.mapFormValuesToRquirementModel();
+    let requirement = this.mapFormValuesToRquirementModel();
     this._enquiryService.saveEnquiry(requirement).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {
@@ -99,18 +105,19 @@ export class PostRequirementComponent implements OnInit {
   handleSuccess(resp: any): void {
     this._spinnerService.hide();
     this.postRequirmentForm.reset();
-    //alert('request callback submitted');
+    // alert('request callback submitted');
     this._toastr.success('Your requirements are saved successfully. We will conact you soon.', 'Success');
     this._router.navigate(['home']);
   }
 
   cancelRequest(): void {
-    this.postRequirmentForm.reset();
-    this._router.navigate(['home']);
+    // this.postRequirmentForm.reset();
+    // this._router.navigate(['home']);
+    this.closePop();
   }
 
   mapFormValuesToRquirementModel(): Enquiry {
-    var requirement = new Enquiry();
+    let requirement = new Enquiry();
     requirement.isCallbackRequest = false;
     requirement.requestType = this.postRequirmentForm.value.requestType;
     requirement.mobileNumber = this.postRequirmentForm.value.mobileNumber;
@@ -140,4 +147,7 @@ export class PostRequirementComponent implements OnInit {
     });
   }
 
+  closePop(): void {
+    this.closePopupEvent.emit();
+  }
 }
