@@ -5,9 +5,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { Enquiry } from 'src/app/models/enquiry.model';
+import { InquiryType } from 'src/app/models/system.enums';
 import { CustomValidators } from 'src/app/shared/custom.validators';
-
-
 @Component({
   selector: 'app-post-requirement',
   templateUrl: './post-requirement.component.html',
@@ -106,7 +105,7 @@ export class PostRequirementComponent implements OnInit {
     this._spinnerService.hide();
     this.postRequirmentForm.reset();
     // alert('request callback submitted');
-    this._toastr.success('Your requirements are saved successfully. We will conact you soon.', 'Success');
+    this._toastr.success('Your requirements are saved successfully. We will contact you soon.', 'Success');
     this._router.navigate(['home']);
   }
 
@@ -118,7 +117,7 @@ export class PostRequirementComponent implements OnInit {
 
   mapFormValuesToRquirementModel(): Enquiry {
     let requirement = new Enquiry();
-    requirement.isCallbackRequest = false;
+    requirement.InquiryType = InquiryType.PostedRequirements;
     requirement.requestType = this.postRequirmentForm.value.requestType;
     requirement.mobileNumber = this.postRequirmentForm.value.mobileNumber;
     requirement.description = this.postRequirmentForm.value.description;

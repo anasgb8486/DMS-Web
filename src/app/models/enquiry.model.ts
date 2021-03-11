@@ -5,5 +5,5 @@ export class Enquiry {
     city: string;
     requestType: number;
     description: string;
-    isCallbackRequest: boolean;
+    InquiryType: number;
 }

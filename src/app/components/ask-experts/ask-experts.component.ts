@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { Enquiry } from 'src/app/models/enquiry.model';
@@ -9,20 +8,18 @@ import {InquiryType} from 'src/app/models/system.enums';
 import { CustomValidators } from 'src/app/shared/custom.validators';
 
 @Component({
-  selector: 'app-request-callback',
-  templateUrl: './request-callback.component.html',
-  styleUrls: ['./request-callback.component.css']
+  selector: 'app-ask-experts',
+  templateUrl: './ask-experts.component.html',
+  styleUrls: ['./ask-experts.component.css']
 })
-export class RequestCallbackComponent implements OnInit {
+export class AskExpertsComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
-              private _enquiryService: EnquiryService,
-              private _spinnerService: NgxSpinnerService,
-              private _router: Router,
-              private _toastr: ToastrService) { }
+    private _enquiryService: EnquiryService,
+    private _spinnerService: NgxSpinnerService,
+    private _toastr: ToastrService) { }
 
-  requestCallbackForm: FormGroup;
-  @Output() closePopupEvent = new EventEmitter<void>();
+  askExpertsForm: FormGroup;
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -30,9 +27,8 @@ export class RequestCallbackComponent implements OnInit {
   formErrors = {
     name: '',
     mobileNumber: '',
-    email: '',
-    city: '',
-    requestType: '',
+    description: '',
+    isAgreed: '',
   };
 
   // This object contains all the validation messages for this form
@@ -48,37 +44,33 @@ export class RequestCallbackComponent implements OnInit {
       maxlength: 'Mobile number should have 10 characters.',
       pattern: 'Only numbers are allowed.'
     },
-    email: {
-      required: 'Email is required.',
+    description: {
+      required: 'Description is required.',
       startingWithEmptySpace: 'You cannot start description with empty spaces.',
-      pattern: 'Please provide valid email address.'
+      maxlength: 'Description should not exceed more than 1000 characters.'
     },
-    city: {
-      required: 'City is required.',
-      startingWithEmptySpace: 'You cannot start description with empty spaces.',
+    isAgreed: {
+      requiredTrue: 'Please accept the agreement before submitting your requirements.',
     },
-    requestType: {
-      required: 'Request type is required.',
-    },
+
   };
 
   ngOnInit(): void {
-    this.requestCallbackForm = this._formBuilder.group({
+    this.askExpertsForm = this._formBuilder.group({
       name: ['', [Validators.required, CustomValidators.startingWithEmptySpace(), Validators.minLength(2)]],
       mobileNumber: ['', [Validators.required,
-                          Validators.minLength(10),
-                          Validators.maxLength(10),
-                          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      email: ['', [Validators.required,
-                  CustomValidators.startingWithEmptySpace(),
-                  Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      city: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      requestType: ['', Validators.required],
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      description: ['', [Validators.required,
+      CustomValidators.startingWithEmptySpace(),
+      Validators.maxLength(2000)]],
+      isAgreed: ['', Validators.requiredTrue],
     });
 
-    this.requestCallbackForm.valueChanges.subscribe(
+    this.askExpertsForm.valueChanges.subscribe(
       (data) => {
-        this.logValidationErrors(this.requestCallbackForm);
+        this.logValidationErrors(this.askExpertsForm);
         // Called when success
       },
       (error) => {
@@ -89,10 +81,10 @@ export class RequestCallbackComponent implements OnInit {
     });
   }
 
-  saveRequestCallback(): void {
+  askExperts(): void {
     this._spinnerService.show();
-    let request = this.mapFormValuesToRequestCallbackModel();
-    this._enquiryService.saveEnquiry(request).subscribe((result: any) => {
+    let requirement = this.mapFormValuesToRquirementModel();
+    this._enquiryService.saveEnquiry(requirement).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {
       this.handleError(error);
@@ -104,38 +96,29 @@ export class RequestCallbackComponent implements OnInit {
     //   alert(error.error);
     //   this._spinnerService.hide();
     // }
-    this._toastr.error('Oops something went wrong !!! Please try again after sometime.', 'Error');
     console.log(error);
+    this._toastr.error('Oops something went wrong !!! Please try again after sometime', 'Error');
     this._spinnerService.hide();
   }
 
   handleSuccess(resp: any): void {
     this._spinnerService.hide();
-    this.requestCallbackForm.reset();
+    this.askExpertsForm.reset();
     // alert('request callback submitted');
-    this._toastr.success('Callback request submitted successfully. We will contact you soon.', 'Success');
-    this._router.navigate(['home']);
+    this._toastr.success('Thanks for you interest, you query has been haved. We will connect with you soon.', 'Success');
   }
 
-  cancelRequest(): void {
-    // this.requestCallbackForm.reset();
-    // this._router.navigate(['home']);
-     this.closePop();
+  mapFormValuesToRquirementModel(): Enquiry {
+    let requirement = new Enquiry();
+    requirement.InquiryType = InquiryType.AskExperts;
+    requirement.name = this.askExpertsForm.value.name;
+    requirement.mobileNumber = this.askExpertsForm.value.mobileNumber;
+    requirement.description = this.askExpertsForm.value.description;
+
+    return requirement;
   }
 
-  mapFormValuesToRequestCallbackModel(): Enquiry {
-    let request = new Enquiry();
-    request.InquiryType = InquiryType.Callback;
-    request.name = this.requestCallbackForm.value.name;
-    request.email = this.requestCallbackForm.value.email;
-    request.mobileNumber = this.requestCallbackForm.value.mobileNumber;
-    request.city = this.requestCallbackForm.value.city;
-    request.requestType = this.requestCallbackForm.value.requestType;
-
-    return request;
-  }
-
-  logValidationErrors(group: FormGroup = this.requestCallbackForm): void {
+  logValidationErrors(group: FormGroup = this.askExpertsForm): void {
     // Loop through each control key in the FormGroup
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = group.get(key);
@@ -154,10 +137,6 @@ export class RequestCallbackComponent implements OnInit {
         }
       }
     });
-  }
-
-  closePop(): void {
-    this.closePopupEvent.emit();
   }
 
 }

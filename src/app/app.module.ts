@@ -17,8 +17,7 @@ import { EnquiryService } from './services/enquiry.service';
 import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
-
-
+import { AskExpertsComponent } from './components/ask-experts/ask-experts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +28,7 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
     PremiumBrandsComponent,
     PostRequirementComponent,
     DialogComponent,
+    AskExpertsComponent,
   ],
   imports: [
     BrowserModule,
