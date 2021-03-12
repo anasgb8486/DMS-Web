@@ -29,3 +29,11 @@ img {
     margin-bottom: 10px;
 }
 
+.fl{
+    float: left;
+}
+
+.alingCenter{
+    width:100%;
+    text-align: center !important;
+}
