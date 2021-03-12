@@ -18,6 +18,7 @@ import { PremiumBrandsComponent } from './components/premium-brands/premium-bran
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { AskExpertsComponent } from './components/ask-experts/ask-experts.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { AskExpertsComponent } from './components/ask-experts/ask-experts.compon
     PostRequirementComponent,
     DialogComponent,
     AskExpertsComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
