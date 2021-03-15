@@ -20,6 +20,7 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { AskExpertsComponent } from './components/ask-experts/ask-experts.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     AskExpertsComponent,
     CategoriesComponent,
     CarouselComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
