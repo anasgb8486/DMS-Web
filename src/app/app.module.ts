@@ -19,6 +19,7 @@ import { PostRequirementComponent } from './components/post-requirement/post-req
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { AskExpertsComponent } from './components/ask-experts/ask-experts.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
     DialogComponent,
     AskExpertsComponent,
     CategoriesComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
