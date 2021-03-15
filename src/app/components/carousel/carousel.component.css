@@ -1,8 +1,8 @@
 
 
 .cta-100 {
-    margin-top: 100px;
-    /* padding-left: 8%; */
+    /* margin-top: 100px;
+    padding-left: 8%; */
     padding-top: 7%;
   }
   .col-md-4{
@@ -19,7 +19,7 @@
   figure img{width:300px;}
   
   #blogCarousel {
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
   }
   
   .blog .carousel-indicators {
