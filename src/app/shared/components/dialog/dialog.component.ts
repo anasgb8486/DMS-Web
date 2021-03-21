@@ -15,10 +15,13 @@ export class DialogComponent implements OnInit {
               private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    // this.renderer.addClass(this.document.getElementById('popup'), 'overlay');
+    this.renderer.addClass(this.document.getElementById('popup'), 'overlay');
+    // document.body.classList.add('overlay');
   }
 
   onNoClick(value: any): void {
+    // document.body.classList.remove('overlay');
+    this.renderer.removeClass(this.document.getElementById('popup'), 'overlay');
     this.dialogRef.close();
   }
 

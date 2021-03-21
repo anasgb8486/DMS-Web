@@ -24,7 +24,7 @@
   
   .blog .carousel-indicators {
     left: 0;
-    top: -50px;
+    top: 260px;
     height: 50%;
   }
   
@@ -34,8 +34,8 @@
   .blog .carousel-indicators li {
     background: #708198;
     border-radius: 50%;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 0px !important;
   }
   
   .blog .carousel-indicators .active {
