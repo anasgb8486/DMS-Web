@@ -3,6 +3,10 @@ export enum InquiryType {
     PostedRequirements = 2,
     AskExperts = 3
 }
+export enum RequestType {
+    BecomeDistributor = 1,
+    AppointDistributor = 2
+}
 export enum BusinessNature {
     Manufacturer = 1,
     Trader = 2,

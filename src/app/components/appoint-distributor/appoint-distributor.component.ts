@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CustomValidators } from 'src/app/shared/custom.validators';
+import { DistributorService } from 'src/app/services/distributor.service';
+import { Brand } from 'src/app/models/brand.model';
+import { Category } from 'src/app/models/category.model';
+import { RequestType } from 'src/app/models/system.enums';
 
 @Component({
   selector: 'app-appoint-distributor',
@@ -15,11 +17,12 @@ export class AppointDistributorComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     private _spinnerService: NgxSpinnerService,
-    private _toastr: ToastrService) { }
+    private _toastr: ToastrService,
+    private _distributorService: DistributorService,) { }
 
   appointDistributorForm: FormGroup;
   categoriesSettings = {};
-  categories = [];
+  categories: Category[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -40,14 +43,14 @@ export class AppointDistributorComponent implements OnInit {
   // This object contains all the validation messages for this form
   validationMessages = {
     brandName: {
-      required: 'brand name is required.',
+      required: 'Brand name is required.',
       startingWithEmptySpace: 'You cannot start with empty spaces.',
     },
     businessNature: {
-      required: 'business nature is required.',
+      required: 'Business nature is required.',
     },
     investmentRequired: {
-      required: 'investment amount is required.',
+      required: 'Investment amount is required.',
       pattern: 'Only numbers are allowed.'
     },
     establishmentYear: {
@@ -60,38 +63,38 @@ export class AppointDistributorComponent implements OnInit {
       startingWithEmptySpace: 'You cannot start with empty spaces.',
     },
     categories: {
-      required: 'categories are required.',
+      required: 'Categories are required.',
     },
     totalDistributors: {
-      requiredTrue: 'Please enter total number of distributors.',
+      required: 'Please enter total number of distributors.',
       pattern: 'Only numbers are allowed.'
     },
     annualSales: {
-      requiredTrue: 'Please provide annual sales figures.',
+      required: 'Please provide annual sales figures.',
       pattern: 'Only numbers are allowed.'
     },
     productsKeywords: {
-      requiredTrue: 'Products keywords are required',
+      required: 'Products keywords are required',
       startingWithEmptySpace: 'You cannot start with empty spaces.',
     },
     distributorshipType: {
-      requiredTrue: 'distributorship type is required.',
+      required: 'Distributorship type is required.',
     },
 
   };
 
   ngOnInit(): void {
     this.categories = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
+      { id: 1, name: 'Farma' },
+      { id: 2, name: 'Automobile' },
+      { id: 3, name: 'Food' },
+      { id: 4, name: 'Travel' },
+      { id: 5, name: 'Hardware' }
     ];
     this.categoriesSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
+      idField: 'id',
+      textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 6,
@@ -99,28 +102,16 @@ export class AppointDistributorComponent implements OnInit {
     };
 
     this.appointDistributorForm = this._formBuilder.group({
-      brandName: ['', [Validators.required,
-      CustomValidators.startingWithEmptySpace()]],
-      businessNature: ['', Validators.requiredTrue],
-      mobileNumber: ['', [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      investmentRequired: ['', [Validators.required,
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      establishmentYear: ['', [Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(4),]],
-      spaceRequired: ['', [Validators.required,
-      CustomValidators.startingWithEmptySpace()]],
-      categories: ['', [Validators.required]],
-      totalDistributors: ['', [Validators.required,
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      annualSales: ['', [Validators.required,
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      productsKeywords: ['', [Validators.required,
-      CustomValidators.startingWithEmptySpace()]],
-      distributorshipType: ['', [Validators.required]],
+      brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      businessNature: ['', Validators.required],
+      investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
+      spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      categories: ['', Validators.required],
+      totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      distributorshipType: ['', Validators.required],
       description: [''],
     });
 
@@ -139,12 +130,32 @@ export class AppointDistributorComponent implements OnInit {
 
   appointDistributorSubmit(): void {
     this._spinnerService.show();
-    // let requirement = this.mapFormValuesToRquirementModel();
-    // this._enquiryService.saveEnquiry(requirement).subscribe((result: any) => {
-    //   this.handleSuccess(result);
-    // }, (error: any) => {
-    //   this.handleError(error);
-    // });
+    //console.log(this.appointDistributorForm.value);
+    let brandDto = this.mapFormValuesToModel();
+    this._distributorService.appointDistributor(brandDto).subscribe((result: any) => {
+      this.handleSuccess(result);
+    }, (error: any) => {
+      this.handleError(error);
+    });
+  }
+
+  mapFormValuesToModel(): Brand {
+    let brand = new Brand();
+
+    brand.name = this.appointDistributorForm.value.brandName;
+    brand.description = this.appointDistributorForm.value.description;
+    brand.businessNature = this.appointDistributorForm.value.businessNature;
+    brand.investmentRequired = this.appointDistributorForm.value.investmentRequired;
+    brand.establishmentYear = this.appointDistributorForm.value.establishmentYear;
+    brand.spaceRequired = this.appointDistributorForm.value.spaceRequired;
+    brand.categories = this.appointDistributorForm.value.categories.map(({ id }) => id);
+    brand.totalDistributors = this.appointDistributorForm.value.totalDistributors;
+    brand.annualSales = this.appointDistributorForm.value.annualSales;
+    brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
+    brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
+    brand.requestType = RequestType.AppointDistributor;
+    
+    return brand;
   }
 
   handleError(error: any): void {
