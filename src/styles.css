@@ -37,3 +37,7 @@ body{
     text-align: center;
     z-index: 20;
   }
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+    max-width: none !important;
+  }

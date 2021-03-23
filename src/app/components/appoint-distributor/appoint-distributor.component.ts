@@ -206,7 +206,7 @@ export class AppointDistributorComponent implements OnInit {
       } else {
         this.formErrors[key] = '';
         if (abstractControl && !abstractControl.valid
-          && (abstractControl.touched || abstractControl.dirty)) {
+          && (key == 'categories' || abstractControl.touched || abstractControl.dirty)) {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
             if (errorKey) {
