@@ -4,8 +4,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidators } from 'src/app/shared/custom.validators';
 import { DistributorService } from 'src/app/services/distributor.service';
+import { MasterDataService } from 'src/app/services/master-data.service';
 import { Brand } from 'src/app/models/brand.model';
-import { Category } from 'src/app/models/category.model';
+import { MasterDataDto } from 'src/app/models/master-data.model';
 import { RequestType } from 'src/app/models/system.enums';
 
 @Component({
@@ -15,14 +16,11 @@ import { RequestType } from 'src/app/models/system.enums';
 })
 export class AppointDistributorComponent implements OnInit {
 
-  constructor(private _formBuilder: FormBuilder,
-    private _spinnerService: NgxSpinnerService,
-    private _toastr: ToastrService,
-    private _distributorService: DistributorService,) { }
-
   appointDistributorForm: FormGroup;
   categoriesSettings = {};
-  categories: Category[] = [];
+  categories: MasterDataDto[] = [];
+  businessNatures: MasterDataDto[] = [];
+  distributorshipTypes: MasterDataDto[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -57,6 +55,8 @@ export class AppointDistributorComponent implements OnInit {
       required: 'Establishment year is required.',
       minlength: 'Establishment year should have 4 digits.',
       maxlength: 'Establishment year should have 4 digits.',
+      min: 'Year cannot be less than 1900',
+      max: 'Year cannot be greater than 2050'
     },
     spaceRequired: {
       required: 'Space is required.',
@@ -83,37 +83,17 @@ export class AppointDistributorComponent implements OnInit {
 
   };
 
-  ngOnInit(): void {
-    this.categories = [
-      { id: 1, name: 'Farma' },
-      { id: 2, name: 'Automobile' },
-      { id: 3, name: 'Food' },
-      { id: 4, name: 'Travel' },
-      { id: 5, name: 'Hardware' }
-    ];
-    this.categoriesSettings = {
-      singleSelection: false,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
-      allowSearchFilter: true
-    };
+  constructor(private _formBuilder: FormBuilder,
+    private _spinnerService: NgxSpinnerService,
+    private _toastr: ToastrService,
+    private _distributorService: DistributorService,
+    private _masterDataService: MasterDataService) { }
 
-    this.appointDistributorForm = this._formBuilder.group({
-      brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      businessNature: ['', Validators.required],
-      investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      categories: ['', Validators.required],
-      totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      distributorshipType: ['', Validators.required],
-      description: [''],
-    });
+  ngOnInit(): void {
+    
+    this.loadMasterData();
+
+    this.setupForm();
 
     this.appointDistributorForm.valueChanges.subscribe(
       (data) => {
@@ -136,6 +116,47 @@ export class AppointDistributorComponent implements OnInit {
       this.handleSuccess(result);
     }, (error: any) => {
       this.handleError(error);
+    });
+  }
+
+  setupForm() {
+    this.categoriesSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 6,
+      allowSearchFilter: true
+    };
+
+    this.appointDistributorForm = this._formBuilder.group({
+      brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      businessNature: ['', Validators.required],
+      investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
+      spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      categories: [[], Validators.required],
+      totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      distributorshipType: ['', Validators.required],
+      description: [''],
+    });
+
+  }
+
+  loadMasterData() {
+    this._masterDataService.getAllCategories().subscribe((data: MasterDataDto[])=>{
+      this.categories = data;
+    });
+
+    this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[])=>{
+      this.businessNatures = data;
+    });
+
+    this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[])=>{
+      this.distributorshipTypes = data;
     });
   }
 

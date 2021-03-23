@@ -1,4 +1,5 @@
-export class Category {
+export class MasterDataDto {
     id: number;
     name: string;
 }
+

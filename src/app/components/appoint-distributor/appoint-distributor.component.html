@@ -21,13 +21,9 @@
                     <select class="form-control" id="businessNature" formControlName="businessNature"
                         [ngClass]="{'is-invalid': formErrors.businessNature}" (blur)="logValidationErrors()">
                         <option value="" disabled>Select</option>
-                        <option value="1">Manufacturer</option>
-                        <option value="2">Trader</option>
-                        <option value="3">Supplier</option>
-                        <option value="4">Importer</option>
-                        <option value="5">Explorer</option>
-                        <option value="6">Retailer</option>
-                        <option value="7">Distributor</option>
+                        <option *ngFor="let businessNature of businessNatures" value={{businessNature.id}}>
+                            {{businessNature.name}}
+                        </option>
                     </select>
                     <span class="invalid-feedback" *ngIf="formErrors.businessNature">
                         {{formErrors.businessNature}}
@@ -118,10 +114,9 @@
                     <select class="form-control" id="distributorshipType" formControlName="distributorshipType"
                         [ngClass]="{'is-invalid': formErrors.distributorshipType}" (blur)="logValidationErrors()">
                         <option value="" disabled>Select</option>
-                        <option value="1">Country-wise</option>
-                        <option value="2">Region-wise</option>
-                        <option value="3">State-wise</option>
-                        <option value="4">City-wise</option>
+                        <option *ngFor="let distributorshipType of distributorshipTypes" value={{distributorshipType.id}}>
+                            {{distributorshipType.name}}
+                        </option>
                     </select>
                     <span class="invalid-feedback" *ngIf="formErrors.distributorshipType">
                         {{formErrors.distributorshipType}}
