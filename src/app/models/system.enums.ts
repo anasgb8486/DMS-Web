@@ -22,3 +22,7 @@ export enum DistributorshipType {
     State_wise = 3,
     City_wise = 4
 }
+export enum ExperianceType{
+    Fresher = 1,
+    Experianced = 2
+}

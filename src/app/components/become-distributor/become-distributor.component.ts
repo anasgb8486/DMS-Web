@@ -10,15 +10,15 @@ import { MasterDataDto } from 'src/app/models/master-data.model';
 import { RequestType } from 'src/app/models/system.enums';
 
 @Component({
-  selector: 'app-appoint-distributor',
-  templateUrl: './appoint-distributor.component.html',
-  styleUrls: ['./appoint-distributor.component.css']
+  selector: 'app-become-distributor',
+  templateUrl: './become-distributor.component.html',
+  styleUrls: ['./become-distributor.component.css']
 })
-export class AppointDistributorComponent implements OnInit {
+export class BecomeDistributorComponent implements OnInit {
 
-  appointDistributorForm: FormGroup;
-  categoriesSettings = {};
-  categories: MasterDataDto[] = [];
+  becomeDistributorForm: FormGroup;
+  productsSettings = {};
+  products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   distributorshipTypes: MasterDataDto[] = [];
 
@@ -29,12 +29,9 @@ export class AppointDistributorComponent implements OnInit {
     brandName: '',
     businessNature: '',
     investmentRequired: '',
-    establishmentYear: '',
-    spaceRequired: '',
-    categories: '',
-    totalDistributors: '',
-    annualSales: '',
-    productsKeywords: '',
+    pan: '',
+    gstNumber: '',
+    experianceType: '',
     distributorshipType: '',
   };
 
@@ -51,31 +48,20 @@ export class AppointDistributorComponent implements OnInit {
       required: 'Investment amount is required.',
       pattern: 'Only numbers are allowed.'
     },
-    establishmentYear: {
-      required: 'Establishment year is required.',
-      minlength: 'Establishment year should have 4 digits.',
-      maxlength: 'Establishment year should have 4 digits.',
-      min: 'Year cannot be less than 1900',
-      max: 'Year cannot be greater than 2050'
+    pan: {
+      required: 'PAN is required.',
+      minlength: 'PAN should have 10 characters.',
+      maxlength: 'PAN should have 10 characters.',
+      pattern: 'Enter a valid PAN.'
     },
-    spaceRequired: {
-      required: 'Space is required.',
-      startingWithEmptySpace: 'You cannot start with empty spaces.',
+    gstNumber: {
+      required: 'GST number is required.',
+      minlength: 'GST number should have 15 characters.',
+      maxlength: 'GST number should have 15 characters.',
+      pattern: 'Enter a valid GST number.'
     },
-    categories: {
-      required: 'Categories are required.',
-    },
-    totalDistributors: {
-      required: 'Please enter total number of distributors.',
-      pattern: 'Only numbers are allowed.'
-    },
-    annualSales: {
-      required: 'Please provide annual sales figures.',
-      pattern: 'Only numbers are allowed.'
-    },
-    productsKeywords: {
-      required: 'Products keywords are required',
-      startingWithEmptySpace: 'You cannot start with empty spaces.',
+    experianceType: {
+      required: 'Select experiance.',
     },
     distributorshipType: {
       required: 'Distributorship type is required.',
@@ -90,14 +76,14 @@ export class AppointDistributorComponent implements OnInit {
     private _masterDataService: MasterDataService) { }
 
   ngOnInit(): void {
-    
+
     this.loadMasterData();
 
     this.setupForm();
 
-    this.appointDistributorForm.valueChanges.subscribe(
+    this.becomeDistributorForm.valueChanges.subscribe(
       (data) => {
-        this.logValidationErrors(this.appointDistributorForm);
+        this.logValidationErrors(this.becomeDistributorForm);
         // Called when success
       },
       (error) => {
@@ -108,7 +94,7 @@ export class AppointDistributorComponent implements OnInit {
     });
   }
 
-  appointDistributorSubmit(): void {
+  becomeDistributorSubmit(): void {
     this._spinnerService.show();
     //console.log(this.appointDistributorForm.value);
     let brandDto = this.mapFormValuesToModel();
@@ -120,7 +106,7 @@ export class AppointDistributorComponent implements OnInit {
   }
 
   setupForm() {
-    this.categoriesSettings = {
+    this.productsSettings = {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
@@ -130,16 +116,13 @@ export class AppointDistributorComponent implements OnInit {
       allowSearchFilter: true
     };
 
-    this.appointDistributorForm = this._formBuilder.group({
+    this.becomeDistributorForm = this._formBuilder.group({
       brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       businessNature: ['', Validators.required],
       investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
-      spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      categories: [[], Validators.required],
-      totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
+      gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
+      experiance: [[], Validators.required],
       distributorshipType: ['', Validators.required],
       description: [''],
     });
@@ -147,15 +130,16 @@ export class AppointDistributorComponent implements OnInit {
   }
 
   loadMasterData() {
-    this._masterDataService.getAllCategories().subscribe((data: MasterDataDto[])=>{
-      this.categories = data;
-    });
+    //TODO to be written
+    // this._masterDataService.getProducts().subscribe((data: MasterDataDto[]) => {
+    //   this.products = data;
+    // });
 
-    this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[])=>{
+    this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[]) => {
       this.businessNatures = data;
     });
 
-    this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[])=>{
+    this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[]) => {
       this.distributorshipTypes = data;
     });
   }
@@ -163,19 +147,17 @@ export class AppointDistributorComponent implements OnInit {
   mapFormValuesToModel(): Brand {
     let brand = new Brand();
 
-    brand.name = this.appointDistributorForm.value.brandName;
-    brand.description = this.appointDistributorForm.value.description;
-    brand.businessNature = this.appointDistributorForm.value.businessNature;
-    brand.investmentRequired = this.appointDistributorForm.value.investmentRequired;
-    brand.establishmentYear = this.appointDistributorForm.value.establishmentYear;
-    brand.spaceRequired = this.appointDistributorForm.value.spaceRequired;
-    brand.categories = this.appointDistributorForm.value.categories.map(({ id }) => id);
-    brand.totalDistributors = this.appointDistributorForm.value.totalDistributors;
-    brand.annualSales = this.appointDistributorForm.value.annualSales;
-    brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
-    brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
-    brand.requestType = RequestType.AppointDistributor;
-    
+    brand.name = this.becomeDistributorForm.value.brandName;
+    brand.description = this.becomeDistributorForm.value.description;
+    brand.businessNature = this.becomeDistributorForm.value.businessNature;
+    brand.investmentRequired = this.becomeDistributorForm.value.investmentRequired;
+    brand.products = this.becomeDistributorForm.value.products.map(({ id }) => id);
+    brand.pan = this.becomeDistributorForm.value.pan;
+    brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
+    brand.experianceType = this.becomeDistributorForm.value.experianceType;
+    brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
+    brand.requestType = RequestType.BecomeDistributor;
+
     return brand;
   }
 
@@ -191,13 +173,13 @@ export class AppointDistributorComponent implements OnInit {
 
   handleSuccess(resp: any): void {
     this._spinnerService.hide();
-    this.appointDistributorForm.reset();
+    this.becomeDistributorForm.reset();
     // alert('request callback submitted');
     this._toastr.success('Your data has been saved successfully.', 'Success');
     //this._router.navigate(['home']);
   }
 
-  logValidationErrors(group: FormGroup = this.appointDistributorForm): void {
+  logValidationErrors(group: FormGroup = this.becomeDistributorForm): void {
     // Loop through each control key in the FormGroup
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = group.get(key);
@@ -206,7 +188,7 @@ export class AppointDistributorComponent implements OnInit {
       } else {
         this.formErrors[key] = '';
         if (abstractControl && !abstractControl.valid
-          && (key == 'categories' || abstractControl.touched || abstractControl.dirty)) {
+          && (abstractControl.touched || abstractControl.dirty)) {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
             if (errorKey) {

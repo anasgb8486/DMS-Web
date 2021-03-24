@@ -1,0 +1,133 @@
+<form class="form-horizontal" [formGroup]="becomeDistributorForm" (ngSubmit)="becomeDistributorSubmit()">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Become Distributor
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="brandName">Brand Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="brandName" formControlName="brandName"
+                        placeholder="Enter brand name" name="brandName" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.brandName}">
+                    <span class="invalid-feedback" *ngIf="formErrors.brandName">
+                        {{formErrors.brandName}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="businessNature">Business Nature:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="businessNature" formControlName="businessNature"
+                        [ngClass]="{'is-invalid': formErrors.businessNature}" (blur)="logValidationErrors()">
+                        <option value="" disabled>Select</option>
+                        <option *ngFor="let businessNature of businessNatures" value={{businessNature.id}}>
+                            {{businessNature.name}}
+                        </option>
+                    </select>
+                    <span class="invalid-feedback" *ngIf="formErrors.businessNature">
+                        {{formErrors.businessNature}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="investmentRequired">Investment Required:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="investmentRequired" formControlName="investmentRequired"
+                        placeholder="Enter investment required" name="investmentRequired" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.investmentRequired}">
+                    <span class="invalid-feedback" *ngIf="formErrors.investmentRequired">
+                        {{formErrors.investmentRequired}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="categories">Products for Distributorship:</label>
+                <div class="col-sm-10">
+                    <ng-multiselect-dropdown formControlName="products"
+                        [placeholder]="'Select one or more products'" [settings]="productsSettings"
+                        [data]="products">
+                    </ng-multiselect-dropdown>
+                    <!-- <ng-multiselect-dropdown formControlName="products"
+                        [placeholder]="'Select one or more products'" [settings]="productsSettings"
+                        [data]="products" [ngClass]="{'is-invalid': formErrors.products}" (onDropDownClose)="logValidationErrors()" >
+                    </ng-multiselect-dropdown>
+                    <span class="invalid-feedback" style="display: block;">
+                        {{formErrors.products}}
+                    </span> -->
+                </div>
+            </div>
+            <div class="form-group  row">
+                <label class="control-label col-sm-2" for="pan">PAN:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="pan" formControlName="pan"
+                        placeholder="Enter PAN" name="pan" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.pan}">
+                    <span class="invalid-feedback" *ngIf="formErrors.pan">
+                        {{formErrors.pan}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="gstNumber">GST:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gstNumber" formControlName="gstNumber"
+                        placeholder="Enter GST number" name="gstNumber" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.gstNumber}">
+                    <span class="invalid-feedback" *ngIf="formErrors.gstNumber">
+                        {{formErrors.gstNumber}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="experiance">Experiance:</label>
+                <div class="col-sm-10">
+                    <label>
+                        <input type="radio" value="1" formControlName="experianceType">
+                          <span>Fresher</span>
+                      </label>
+                      <label>
+                        <input type="radio" value="2" formControlName="experianceType">
+                          <span>Experianced</span>
+                      </label>
+                    <span class="invalid-feedback" *ngIf="formErrors.experianceType">
+                        {{formErrors.experianceType}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="distributorshipType">Distributorship Type:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="distributorshipType" formControlName="distributorshipType"
+                        [ngClass]="{'is-invalid': formErrors.distributorshipType}" (blur)="logValidationErrors()">
+                        <option value="" disabled>Select</option>
+                        <option *ngFor="let distributorshipType of distributorshipTypes" value={{distributorshipType.id}}>
+                            {{distributorshipType.name}}
+                        </option>
+                    </select>
+                    <span class="invalid-feedback" *ngIf="formErrors.distributorshipType">
+                        {{formErrors.distributorshipType}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="description" rows="3" formControlName="description"
+                        placeholder="Comments" name="description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <input type="submit" class="btn btn-primary" [disabled]="becomeDistributorForm.invalid" value="Submit"
+                        style="margin-right: 20px;">
+                    <!-- <input type="button" class="btn btn-secondary pl-2" (mousedown)="cancelRequest()" value="Cancel"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait...</p>
+</ngx-spinner>

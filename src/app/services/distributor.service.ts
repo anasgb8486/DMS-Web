@@ -22,7 +22,7 @@ export class DistributorService {
     this.webAPIUrl = 'http://localhost:51276/api/BrandProduct/';
   }
 
-  appointDistributor(brandDto: Brand): Observable<any> {
+  appointOrBecomeDistributorRequest(brandDto: Brand): Observable<any> {
     console.log(brandDto);
     return this._httpClient.post<any>(this.webAPIUrl, JSON.stringify(brandDto), this.httpOptions);
   }
