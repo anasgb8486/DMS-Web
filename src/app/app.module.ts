@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -22,6 +23,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoginComponent } from './shared/components/login/login.component';
+import { AppointDistributorComponent } from './components/appoint-distributor/appoint-distributor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,7 @@ import { LoginComponent } from './shared/components/login/login.component';
     CarouselComponent,
     FooterComponent,
     LoginComponent,
+    AppointDistributorComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { LoginComponent } from './shared/components/login/login.component';
     ReactiveFormsModule,
     NgxSpinnerModule,
     MatDialogModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     EnquiryService
