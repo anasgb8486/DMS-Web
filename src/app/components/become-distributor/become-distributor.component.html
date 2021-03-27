@@ -82,14 +82,16 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="experiance">Experiance:</label>
                 <div class="col-sm-10">
-                    <label>
-                        <input type="radio" value="1" formControlName="experianceType">
-                          <span>Fresher</span>
-                      </label>
-                      <label>
-                        <input type="radio" value="2" formControlName="experianceType">
-                          <span>Experianced</span>
-                      </label>
+                      <div class="form-check-inline">
+                        <label class="form-check-label">
+                          <input type="radio" value="1" formControlName="experianceType" class="form-check-input">Fresher
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label">
+                          <input type="radio" value="2" formControlName="experianceType" class="form-check-input">Experianced
+                        </label>
+                      </div>
                     <span class="invalid-feedback" *ngIf="formErrors.experianceType">
                         {{formErrors.experianceType}}
                     </span>

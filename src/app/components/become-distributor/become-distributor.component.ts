@@ -119,10 +119,11 @@ export class BecomeDistributorComponent implements OnInit {
     this.becomeDistributorForm = this._formBuilder.group({
       brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       businessNature: ['', Validators.required],
+      products: [''],
       investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
-      experiance: [[], Validators.required],
+      experianceType: [[], Validators.required],
       distributorshipType: ['', Validators.required],
       description: [''],
     });
@@ -151,7 +152,7 @@ export class BecomeDistributorComponent implements OnInit {
     brand.description = this.becomeDistributorForm.value.description;
     brand.businessNature = this.becomeDistributorForm.value.businessNature;
     brand.investmentRequired = this.becomeDistributorForm.value.investmentRequired;
-    brand.products = this.becomeDistributorForm.value.products.map(({ id }) => id);
+    brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
     brand.pan = this.becomeDistributorForm.value.pan;
     brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
     brand.experianceType = this.becomeDistributorForm.value.experianceType;
