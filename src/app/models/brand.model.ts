@@ -1,4 +1,4 @@
-import { RequestType } from "./system.enums";
+import { ExperianceType, RequestType } from "./system.enums";
 
 export class Brand {
     id: number;
@@ -13,5 +13,9 @@ export class Brand {
     annualSales: number;
     productsKeywords: string;
     distributorshipType: number;
-    requestType: RequestType
+    requestType: RequestType;
+    products: number[];
+    pan: string;
+    gstNumber: string;
+    experianceType: ExperianceType
 }
