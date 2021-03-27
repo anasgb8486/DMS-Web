@@ -17,7 +17,7 @@ a:hover{
 
 .centered {
     position: absolute;
-    top: 30%;
+    top: 8%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 70px;
