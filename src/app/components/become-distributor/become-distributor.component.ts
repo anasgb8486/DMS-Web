@@ -7,6 +7,7 @@ import { DistributorService } from 'src/app/services/distributor.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { Brand } from 'src/app/models/brand.model';
 import { MasterDataDto } from 'src/app/models/master-data.model';
+import { LocationDto } from 'src/app/models/location.model';
 import { RequestType } from 'src/app/models/system.enums';
 
 @Component({
@@ -17,10 +18,12 @@ import { RequestType } from 'src/app/models/system.enums';
 export class BecomeDistributorComponent implements OnInit {
 
   becomeDistributorForm: FormGroup;
-  productsSettings = {};
-  products: MasterDataDto[] = [];
+  multiSelectSettings = {};
+  //products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   distributorshipTypes: MasterDataDto[] = [];
+  allLocations: LocationDto[] = [];
+  locations: LocationDto[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -33,6 +36,7 @@ export class BecomeDistributorComponent implements OnInit {
     gstNumber: '',
     experianceType: '',
     distributorshipType: '',
+    locations: '',
   };
 
   // This object contains all the validation messages for this form
@@ -106,42 +110,49 @@ export class BecomeDistributorComponent implements OnInit {
   }
 
   setupForm() {
-    this.productsSettings = {
+    this.multiSelectSettings = {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
+      itemsShowLimit: 5,
       allowSearchFilter: true
     };
 
     this.becomeDistributorForm = this._formBuilder.group({
-      brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      businessNature: ['', Validators.required],
+      // brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      brandName: ['', [CustomValidators.startingWithEmptySpace()]],
+      // businessNature: ['', Validators.required],
+      businessNature: [''],
       products: [''],
-      investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
-      gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
-      experianceType: [[], Validators.required],
-      distributorshipType: ['', Validators.required],
+      // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      investmentRequired: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      // pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
+      pan: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
+      // gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
+      gstNumber: ['', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
+      // experianceType: [[], Validators.required],
+      experianceType: [],
+      // distributorshipType: ['', Validators.required],
+      distributorshipType: [''],
+      locations: [[]],
       description: [''],
     });
 
   }
 
   loadMasterData() {
-    //TODO to be written
-    // this._masterDataService.getProducts().subscribe((data: MasterDataDto[]) => {
-    //   this.products = data;
-    // });
-
     this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[]) => {
       this.businessNatures = data;
     });
 
     this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[]) => {
       this.distributorshipTypes = data;
+    });
+
+    this._masterDataService.getAllLocations().subscribe((data: LocationDto[]) => {
+      this.allLocations = data;
     });
   }
 
@@ -199,6 +210,12 @@ export class BecomeDistributorComponent implements OnInit {
         }
       }
     });
+  }
+
+  public ondistributorshipTypeChange(event){
+    const value = event.target.value;
+    this.locations = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    console.log(value);
   }
 
 }

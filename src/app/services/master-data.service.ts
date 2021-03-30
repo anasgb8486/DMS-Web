@@ -27,4 +27,8 @@ export class MasterDataService {
     return this._httpClient.get(this.webAPIUrl + 'GetAllProducts/');
   }
 
+  public getAllLocations() {
+    return this._httpClient.get(this.webAPIUrl + 'GetAllLocations/');
+  }
+
 }
