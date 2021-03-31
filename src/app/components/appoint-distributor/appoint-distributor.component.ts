@@ -18,6 +18,7 @@ export class AppointDistributorComponent implements OnInit {
 
   appointDistributorForm: FormGroup;
   categoriesSettings = {};
+  businessNatureMultiSelectSettings = {};
   categories: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   distributorshipTypes: MasterDataDto[] = [];
@@ -130,9 +131,19 @@ export class AppointDistributorComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    this.businessNatureMultiSelectSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+
     this.appointDistributorForm = this._formBuilder.group({
       brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      businessNature: ['', Validators.required],
+      businessNatures: [[]],
       investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
@@ -165,7 +176,7 @@ export class AppointDistributorComponent implements OnInit {
 
     brand.name = this.appointDistributorForm.value.brandName;
     brand.description = this.appointDistributorForm.value.description;
-    brand.businessNature = this.appointDistributorForm.value.businessNature;
+    brand.businessNatures = this.appointDistributorForm.value.businessNatures != "" ? this.appointDistributorForm.value.businessNatures.map(({ id }) => id) : null;
     brand.investmentRequired = this.appointDistributorForm.value.investmentRequired;
     brand.establishmentYear = this.appointDistributorForm.value.establishmentYear;
     brand.spaceRequired = this.appointDistributorForm.value.spaceRequired;
@@ -173,7 +184,7 @@ export class AppointDistributorComponent implements OnInit {
     brand.totalDistributors = this.appointDistributorForm.value.totalDistributors;
     brand.annualSales = this.appointDistributorForm.value.annualSales;
     brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
-    brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
+    //brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.AppointDistributor;
     
     return brand;

@@ -18,12 +18,19 @@ import { RequestType } from 'src/app/models/system.enums';
 export class BecomeDistributorComponent implements OnInit {
 
   becomeDistributorForm: FormGroup;
-  multiSelectSettings = {};
+  locationMultiSelectSettings = {};
+  businessNatureMultiSelectSettings = {};
   //products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   distributorshipTypes: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
   locations: LocationDto[] = [];
+  regions: LocationDto[] = [];
+  selectedRegions: LocationDto[] = [];
+  states: LocationDto[] = [];
+  selectedStates: LocationDto[] = [];
+  cities: LocationDto[] = [];
+  selectedCities: LocationDto[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -110,7 +117,18 @@ export class BecomeDistributorComponent implements OnInit {
   }
 
   setupForm() {
-    this.multiSelectSettings = {
+
+    this.locationMultiSelectSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 2,
+      allowSearchFilter: true
+    };
+
+    this.businessNatureMultiSelectSettings = {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
@@ -124,7 +142,7 @@ export class BecomeDistributorComponent implements OnInit {
       // brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       brandName: ['', [CustomValidators.startingWithEmptySpace()]],
       // businessNature: ['', Validators.required],
-      businessNature: [''],
+      businessNatures: [[]],
       products: [''],
       // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       investmentRequired: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
@@ -135,8 +153,13 @@ export class BecomeDistributorComponent implements OnInit {
       // experianceType: [[], Validators.required],
       experianceType: [],
       // distributorshipType: ['', Validators.required],
-      distributorshipType: [''],
-      locations: [[]],
+      countrywise: [false],
+      regionwise: [false],
+      regions: [this.selectedRegions],
+      statewise: [false],
+      states: [this.selectedStates],
+      citywise: [false],
+      cities: [this.selectedCities],
       description: [''],
     });
 
@@ -161,13 +184,13 @@ export class BecomeDistributorComponent implements OnInit {
 
     brand.name = this.becomeDistributorForm.value.brandName;
     brand.description = this.becomeDistributorForm.value.description;
-    brand.businessNature = this.becomeDistributorForm.value.businessNature;
+    brand.businessNatures = this.becomeDistributorForm.value.businessNatures != "" ? this.becomeDistributorForm.value.businessNatures.map(({ id }) => id) : null;
     brand.investmentRequired = this.becomeDistributorForm.value.investmentRequired;
     brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
     brand.pan = this.becomeDistributorForm.value.pan;
     brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
     brand.experianceType = this.becomeDistributorForm.value.experianceType;
-    brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
+    // brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.BecomeDistributor;
 
     return brand;
@@ -212,10 +235,34 @@ export class BecomeDistributorComponent implements OnInit {
     });
   }
 
-  public ondistributorshipTypeChange(event){
-    const value = event.target.value;
-    this.locations = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    console.log(value);
+  public onRegionChecked(event){
+    if(event.target.checked){
+      this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    }
+    else{
+      this.regions = [];
+      this.selectedRegions=[];
+    }
+  }
+
+  public onStateChecked(event){
+    if(event.target.checked){
+      this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    }
+    else{
+      this.states = [];
+      this.selectedStates=[];
+    }
+  }
+
+  public onCityChecked(event){
+    if(event.target.checked){
+      this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    }
+    else{
+      this.cities = [];
+      this.selectedCities=[];
+    }
   }
 
 }

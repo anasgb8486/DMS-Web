@@ -4,7 +4,7 @@ export class Brand {
     id: number;
     name: string;
     description: string;
-    businessNature: number;
+    businessNatures: number[];
     investmentRequired: number;
     establishmentYear: number;
     spaceRequired: string;
@@ -12,10 +12,11 @@ export class Brand {
     totalDistributors: number;
     annualSales: number;
     productsKeywords: string;
-    distributorshipType: number;
+    distributorshipTypes: number[];
     requestType: RequestType;
     products: number[];
     pan: string;
     gstNumber: string;
-    experianceType: ExperianceType
+    experianceType: ExperianceType;
+    locations: number[];
 }
