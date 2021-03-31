@@ -103,17 +103,51 @@
             </div>
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="distributorshipType">Distributorship Type:</label>
-                <div class="col-sm-10">
-                    <select class="form-control" id="distributorshipType" formControlName="distributorshipType"
-                        [ngClass]="{'is-invalid': formErrors.distributorshipType}" (blur)="logValidationErrors()">
-                        <option value="" disabled>Select</option>
-                        <option *ngFor="let distributorshipType of distributorshipTypes" value={{distributorshipType.id}}>
-                            {{distributorshipType.name}}
-                        </option>
-                    </select>
-                    <span class="invalid-feedback" *ngIf="formErrors.distributorshipType">
-                        {{formErrors.distributorshipType}}
-                    </span>
+                <div class="col-sm-2">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="countrywise" value="1" formControlName="countrywise" name="countrywise">
+                            Country-wise
+                    </label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="regionwise" value="2" formControlName="regionwise" 
+                        name="regionwise" (change)='onRegionChecked($event)'>
+                            Region-wise
+                    </label>
+                </div>
+                <div class="col-sm-3">
+                    <ng-multiselect-dropdown formControlName="regions" [placeholder]="'Regions'"
+                        [settings]="locationMultiSelectSettings" [data]="regions" [(ngModel)]="selectedRegions">
+                    </ng-multiselect-dropdown>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="statewise" value="3" formControlName="statewise" 
+                        name="statewise" (change)='onStateChecked($event)'>
+                            State-wise
+                    </label>
+                </div>
+                <div class="col-sm-3">
+                    <ng-multiselect-dropdown formControlName="states" [placeholder]="'States'"
+                        [settings]="locationMultiSelectSettings" [data]="states" [(ngModel)]="selectedStates">
+                    </ng-multiselect-dropdown>
+                </div>
+                <div class="col-sm-2">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="citywise" value="4" formControlName="citywise" 
+                        name="citywise" (change)='onCityChecked($event)'>
+                            City-wise
+                    </label>
+                </div>
+                <div class="col-sm-3">
+                    <ng-multiselect-dropdown formControlName="cities" [placeholder]="'Cities'"
+                        [settings]="locationMultiSelectSettings" [data]="cities" [(ngModel)]="selectedCities">
+                    </ng-multiselect-dropdown>
                 </div>
             </div>
             <div class="form-group row">

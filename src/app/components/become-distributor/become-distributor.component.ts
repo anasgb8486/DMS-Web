@@ -18,13 +18,13 @@ import { RequestType } from 'src/app/models/system.enums';
 export class BecomeDistributorComponent implements OnInit {
 
   becomeDistributorForm: FormGroup;
+
   locationMultiSelectSettings = {};
   businessNatureMultiSelectSettings = {};
   //products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
-  distributorshipTypes: MasterDataDto[] = [];
+  // distributorshipTypes: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
-  locations: LocationDto[] = [];
   regions: LocationDto[] = [];
   selectedRegions: LocationDto[] = [];
   states: LocationDto[] = [];
@@ -42,8 +42,7 @@ export class BecomeDistributorComponent implements OnInit {
     pan: '',
     gstNumber: '',
     experianceType: '',
-    distributorshipType: '',
-    locations: '',
+    //distributorshipType: ''
   };
 
   // This object contains all the validation messages for this form
@@ -170,9 +169,9 @@ export class BecomeDistributorComponent implements OnInit {
       this.businessNatures = data;
     });
 
-    this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[]) => {
-      this.distributorshipTypes = data;
-    });
+    // this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[]) => {
+    //   this.distributorshipTypes = data;
+    // });
 
     this._masterDataService.getAllLocations().subscribe((data: LocationDto[]) => {
       this.allLocations = data;
@@ -235,33 +234,33 @@ export class BecomeDistributorComponent implements OnInit {
     });
   }
 
-  public onRegionChecked(event){
-    if(event.target.checked){
+  public onRegionChecked(event) {
+    if (event.target.checked) {
       this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
     }
-    else{
+    else {
       this.regions = [];
-      this.selectedRegions=[];
+      this.selectedRegions = [];
     }
   }
 
-  public onStateChecked(event){
-    if(event.target.checked){
+  public onStateChecked(event) {
+    if (event.target.checked) {
       this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
     }
-    else{
+    else {
       this.states = [];
-      this.selectedStates=[];
+      this.selectedStates = [];
     }
   }
 
-  public onCityChecked(event){
-    if(event.target.checked){
+  public onCityChecked(event) {
+    if (event.target.checked) {
       this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
     }
-    else{
+    else {
       this.cities = [];
-      this.selectedCities=[];
+      this.selectedCities = [];
     }
   }
 

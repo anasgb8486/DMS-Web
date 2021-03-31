@@ -7,6 +7,7 @@ import { DistributorService } from 'src/app/services/distributor.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { Brand } from 'src/app/models/brand.model';
 import { MasterDataDto } from 'src/app/models/master-data.model';
+import { LocationDto } from 'src/app/models/location.model';
 import { RequestType } from 'src/app/models/system.enums';
 
 @Component({
@@ -17,11 +18,20 @@ import { RequestType } from 'src/app/models/system.enums';
 export class AppointDistributorComponent implements OnInit {
 
   appointDistributorForm: FormGroup;
+
+  locationMultiSelectSettings = {};
   categoriesSettings = {};
   businessNatureMultiSelectSettings = {};
   categories: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
-  distributorshipTypes: MasterDataDto[] = [];
+  //distributorshipTypes: MasterDataDto[] = [];
+  allLocations: LocationDto[] = [];
+  regions: LocationDto[] = [];
+  selectedRegions: LocationDto[] = [];
+  states: LocationDto[] = [];
+  selectedStates: LocationDto[] = [];
+  cities: LocationDto[] = [];
+  selectedCities: LocationDto[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -36,7 +46,7 @@ export class AppointDistributorComponent implements OnInit {
     totalDistributors: '',
     annualSales: '',
     productsKeywords: '',
-    distributorshipType: '',
+    //distributorshipType: '',
   };
 
   // This object contains all the validation messages for this form
@@ -91,7 +101,7 @@ export class AppointDistributorComponent implements OnInit {
     private _masterDataService: MasterDataService) { }
 
   ngOnInit(): void {
-    
+
     this.loadMasterData();
 
     this.setupForm();
@@ -131,6 +141,16 @@ export class AppointDistributorComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    this.locationMultiSelectSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 2,
+      allowSearchFilter: true
+    };
+
     this.businessNatureMultiSelectSettings = {
       singleSelection: false,
       idField: 'id',
@@ -151,24 +171,36 @@ export class AppointDistributorComponent implements OnInit {
       totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      distributorshipType: ['', Validators.required],
+      //distributorshipType: ['', Validators.required],
+      countrywise: [false],
+      regionwise: [false],
+      regions: [this.selectedRegions],
+      statewise: [false],
+      states: [this.selectedStates],
+      citywise: [false],
+      cities: [this.selectedCities],
       description: [''],
     });
 
   }
 
   loadMasterData() {
-    this._masterDataService.getAllCategories().subscribe((data: MasterDataDto[])=>{
+    this._masterDataService.getAllCategories().subscribe((data: MasterDataDto[]) => {
       this.categories = data;
     });
 
-    this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[])=>{
+    this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[]) => {
       this.businessNatures = data;
     });
 
-    this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[])=>{
-      this.distributorshipTypes = data;
+    // this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[])=>{
+    //   this.distributorshipTypes = data;
+    // });
+
+    this._masterDataService.getAllLocations().subscribe((data: LocationDto[]) => {
+      this.allLocations = data;
     });
+
   }
 
   mapFormValuesToModel(): Brand {
@@ -186,7 +218,7 @@ export class AppointDistributorComponent implements OnInit {
     brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
     //brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.AppointDistributor;
-    
+
     return brand;
   }
 
@@ -227,6 +259,36 @@ export class AppointDistributorComponent implements OnInit {
         }
       }
     });
+  }
+
+  public onRegionChecked(event) {
+    if (event.target.checked) {
+      this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    }
+    else {
+      this.regions = [];
+      this.selectedRegions = [];
+    }
+  }
+
+  public onStateChecked(event) {
+    if (event.target.checked) {
+      this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    }
+    else {
+      this.states = [];
+      this.selectedStates = [];
+    }
+  }
+
+  public onCityChecked(event) {
+    if (event.target.checked) {
+      this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+    }
+    else {
+      this.cities = [];
+      this.selectedCities = [];
+    }
   }
 
 }
