@@ -164,15 +164,15 @@ export class AppointDistributorComponent implements OnInit {
     };
 
     this.appointDistributorForm = this._formBuilder.group({
-      brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      brandName: ['', [CustomValidators.startingWithEmptySpace()]],
       businessNatures: [[]],
-      investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
-      spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      investmentRequired: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      establishmentYear: ['', [Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
+      spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
       categories: [''],
-      totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      totalDistributors: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      annualSales: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      productsKeywords: ['', [CustomValidators.startingWithEmptySpace()]],
       //distributorshipType: ['', Validators.required],
       countrywise: [false],
       regionwise: [false],
