@@ -18,9 +18,9 @@ import { RequestType } from 'src/app/models/system.enums';
 export class AppointDistributorComponent implements OnInit {
 
   appointDistributorForm: FormGroup;
-
+  brandLogoUrl: string = '';
   locationMultiSelectSettings = {};
-  categoriesSettings = {};
+  //categoriesSettings = {};
   businessNatureMultiSelectSettings = {};
   categories: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
@@ -32,6 +32,8 @@ export class AppointDistributorComponent implements OnInit {
   selectedStates: LocationDto[] = [];
   cities: LocationDto[] = [];
   selectedCities: LocationDto[] = [];
+  productsImages: string[] = [];
+
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -131,15 +133,15 @@ export class AppointDistributorComponent implements OnInit {
   }
 
   setupForm() {
-    this.categoriesSettings = {
-      singleSelection: false,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
-      allowSearchFilter: true
-    };
+    // this.categoriesSettings = {
+    //   singleSelection: false,
+    //   idField: 'id',
+    //   textField: 'name',
+    //   selectAllText: 'Select All',
+    //   unSelectAllText: 'UnSelect All',
+    //   itemsShowLimit: 6,
+    //   allowSearchFilter: true
+    // };
 
     this.locationMultiSelectSettings = {
       singleSelection: false,
@@ -167,7 +169,7 @@ export class AppointDistributorComponent implements OnInit {
       investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      categories: [[], Validators.required],
+      categories: [''],
       totalDistributors: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
@@ -179,6 +181,8 @@ export class AppointDistributorComponent implements OnInit {
       states: [this.selectedStates],
       citywise: [false],
       cities: [this.selectedCities],
+      brandLogo: [''],
+      productsImages: [[]],
       description: [''],
     });
 
@@ -261,7 +265,7 @@ export class AppointDistributorComponent implements OnInit {
     });
   }
 
-  public onRegionChecked(event) {
+  onRegionChecked(event) {
     if (event.target.checked) {
       this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
     }
@@ -271,7 +275,7 @@ export class AppointDistributorComponent implements OnInit {
     }
   }
 
-  public onStateChecked(event) {
+  onStateChecked(event) {
     if (event.target.checked) {
       this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
     }
@@ -281,13 +285,54 @@ export class AppointDistributorComponent implements OnInit {
     }
   }
 
-  public onCityChecked(event) {
+  onCityChecked(event) {
     if (event.target.checked) {
       this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
     }
     else {
       this.cities = [];
       this.selectedCities = [];
+    }
+  }
+
+  onLogoSelected(e) {
+    if (e.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.brandLogoUrl = event.target.result;
+      }
+    }
+  }
+
+  onProductsImagesSelected(e) {
+    if (e.target.files && e.target.files[0]) {
+      var totalFilesUploaded = e.target.files.length + this.productsImages.length;
+      if(totalFilesUploaded > 10){
+        this._toastr.error('You can upload a maximum of 10 images', 'Error');
+      }
+      else{
+        for (let i = 0; i < e.target.files.length; i++) {
+          var reader = new FileReader();
+          reader.readAsDataURL(e.target.files[i]);
+          reader.onload = (event: any) => {
+            this.productsImages.push(event.target.result);
+  
+            this.appointDistributorForm.patchValue({
+              productsImages: this.productsImages
+            });
+          }
+        }
+      }
+      
+    }
+  }
+
+  onDeleteProductImage(event) {
+    console.log(event.target.value);
+    const index = this.productsImages.indexOf(event.target.value, 0);
+    if (index > -1) {
+      this.productsImages.splice(index, 1);
     }
   }
 

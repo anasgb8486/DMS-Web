@@ -59,13 +59,20 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="categories">Business Categories:</label>
                 <div class="col-sm-10">
-                    <ng-multiselect-dropdown formControlName="categories"
+                    <!-- <ng-multiselect-dropdown formControlName="categories"
                         [placeholder]="'Select one or more categories'" [settings]="categoriesSettings"
                         [data]="categories" [ngClass]="{'is-invalid': formErrors.categories}" (onDropDownClose)="logValidationErrors()" >
                     </ng-multiselect-dropdown>
                     <span class="invalid-feedback" style="display: block;">
                         {{formErrors.categories}}
-                    </span>
+                    </span> -->
+                    <select class="form-control" id="categories" formControlName="categories"
+                        [ngClass]="{'is-invalid': formErrors.categories}" (blur)="logValidationErrors()">
+                        <option value="" disabled>Select</option>
+                        <option *ngFor="let category of categories" value={{category.id}}>
+                            {{category.name}}
+                        </option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
@@ -121,7 +128,6 @@
                         [settings]="locationMultiSelectSettings" [data]="regions" [(ngModel)]="selectedRegions">
                     </ng-multiselect-dropdown>
                 </div>
-                
             </div>
             <div class="form-group row">
                 <div class="col-sm-2"></div>
@@ -148,6 +154,35 @@
                     <ng-multiselect-dropdown formControlName="cities" [placeholder]="'Cities'"
                         [settings]="locationMultiSelectSettings" [data]="cities" [(ngModel)]="selectedCities">
                     </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="brandLogo">Company Logo:</label>
+                <div class="col-sm-6">
+                    <input type="file" class="form-control" id="brandLogo" formControlName="brandLogo" name="brandLogo" placeholder="Select company logo" (change)='onLogoSelected($event)'>
+                </div>
+                <div class="col-sm-4">
+                    <img [src]="brandLogoUrl" height="50">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="productsImages">Products Images:</label>
+                <div class="col-sm-10">
+                    <input type="file" multiple class="form-control" id="productsImages" name="productsImages" placeholder="Select products images" (change)='onProductsImagesSelected($event)'>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10 preview-images">
+                    <table class="table table-striped">
+                        <tr>
+                            <td *ngFor='let url of productsImages'>
+                                <img [src]="url" height="80" width="80">
+                                <i class="fa fa-trash fa-lg image-delete" aria-hidden="true" title="Delete" 
+                                [value]="url" (click)='onDeleteProductImage($event)'></i>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="form-group row">

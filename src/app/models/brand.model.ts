@@ -19,4 +19,5 @@ export class Brand {
     gstNumber: string;
     experianceType: ExperianceType;
     locations: number[];
+    brandLogo: string;
 }
