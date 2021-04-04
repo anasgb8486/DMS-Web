@@ -4,6 +4,7 @@ import { AppointDistributorComponent } from './components/appoint-distributor/ap
 import { BecomeDistributorComponent } from './components/become-distributor/become-distributor.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { RequestCallbackComponent } from './components/request-callback/request-callback.component';
 
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'postrequirements', component: PostRequirementComponent},
   {path: 'appointDistributor', component: AppointDistributorComponent},
   {path: 'becomeDistributor', component: BecomeDistributorComponent},
+  {path: 'register', component: RegistrationComponent},
 ];
 
 @NgModule({

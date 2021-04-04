@@ -26,6 +26,7 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { AppointDistributorComponent } from './components/appoint-distributor/appoint-distributor.component';
 import { BecomeDistributorComponent } from './components/become-distributor/become-distributor.component';
 import { ReviewsliderComponent } from './components/reviewslider/reviewslider.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { ReviewsliderComponent } from './components/reviewslider/reviewslider.co
     LoginComponent,
     AppointDistributorComponent,
     BecomeDistributorComponent,
-    ReviewsliderComponent
+    ReviewsliderComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
