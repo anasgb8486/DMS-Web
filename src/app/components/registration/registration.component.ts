@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -21,6 +22,7 @@ export class RegistrationComponent implements OnInit {
     private _toastr: ToastrService) { }
 
   registrationForm: FormGroup;
+  formMoreDtails: FormGroup;
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
   // corresponding form control
@@ -69,6 +71,22 @@ export class RegistrationComponent implements OnInit {
       email: ['', [Validators.required,
       CustomValidators.startingWithEmptySpace(),
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      password: ['', [Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      confirmPassword: ['', [Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+
+    });
+
+    this.formMoreDtails = this._formBuilder.group({
+      test: ['', [Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     });
 
     this.registrationForm.valueChanges.subscribe(
@@ -118,6 +136,14 @@ export class RegistrationComponent implements OnInit {
 
   getMoreDetails() {
     this.registrationDto = new RegistrationDto();
+    console.log(this.registrationForm.value);
+    console.log(this.formMoreDtails.value);
+  }
+
+  goBackToFirstPage() {
+    this.registrationDto = new RegistrationDto();
+    console.log(this.registrationForm.value);
+    console.log(this.formMoreDtails.value);
   }
 
 }

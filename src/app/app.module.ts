@@ -27,6 +27,8 @@ import { AppointDistributorComponent } from './components/appoint-distributor/ap
 import { BecomeDistributorComponent } from './components/become-distributor/become-distributor.component';
 import { ReviewsliderComponent } from './components/reviewslider/reviewslider.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     ReactiveFormsModule,
     NgxSpinnerModule,
     MatDialogModule,
+    MatStepperModule,
+    MatIconModule,
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
