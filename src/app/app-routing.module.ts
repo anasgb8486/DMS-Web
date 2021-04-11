@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RequestCallbackComponent } from './components/request-callback/request-callback.component';
+import { SearchResultCategoryComponent } from './components/search-result-category/search-result-category.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'appointDistributor', component: AppointDistributorComponent},
   {path: 'becomeDistributor', component: BecomeDistributorComponent},
   {path: 'register', component: RegistrationComponent},
+  {path: 'searchresultcategory', component: SearchResultCategoryComponent}
 ];
 
 @NgModule({

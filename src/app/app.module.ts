@@ -29,6 +29,7 @@ import { ReviewsliderComponent } from './components/reviewslider/reviewslider.co
 import { RegistrationComponent } from './components/registration/registration.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
+import { SearchResultCategoryComponent } from '../app/components/search-result-category/search-result-category.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { MatIconModule } from '@angular/material/icon';
     AppointDistributorComponent,
     BecomeDistributorComponent,
     ReviewsliderComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SearchResultCategoryComponent
   ],
   imports: [
     BrowserModule,
