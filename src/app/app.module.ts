@@ -15,6 +15,7 @@ import { RequestCallbackComponent } from './components/request-callback/request-
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { EnquiryService } from './services/enquiry.service';
+import { RegistrationService } from './services/registration.service';
 import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
@@ -66,7 +67,8 @@ import { SearchResultCategoryComponent } from '../app/components/search-result-c
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
-    EnquiryService
+    EnquiryService,
+    RegistrationService
   ],
   entryComponents: [ DialogComponent],
   bootstrap: [AppComponent]
