@@ -16,4 +16,8 @@ export class SearchComponent implements OnInit {
   searchCategory(): void{
     this.router.navigate(['./searchresultcategory']);
   }
+
+  onKeyDownEvent(event: any) {
+    this.router.navigate(['/searchresultcategory'], { relativeTo: this.route });
+  }
 }
