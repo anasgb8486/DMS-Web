@@ -42,3 +42,13 @@ body{
 .multiselect-dropdown .dropdown-btn .selected-item {
     max-width: none !important;
   }
+.carousel-indicators{    
+    bottom: -60px !important;    
+  }
+
+  .carousel-indicators li{
+    background-color: blue;
+    height: 3px;
+    width: 5px;
+    border-radius: 50px;
+  }

@@ -18,29 +18,15 @@
   }
   figure img{width:300px;}
   
-  #blogCarousel {
-    /* padding-bottom: 100px; */
-  }
   
-  .blog .carousel-indicators {
-    left: 0;
-    top: 260px;
-    height: 50%;
+  
+  .carousel-indicators {
+    background-color: black !important;
   }
   
   
   /* The colour of the indicators */
   
-  .blog .carousel-indicators li {
-    background: #708198;
-    border-radius: 50%;
-    width: 10px;
-    height: 0px !important;
-  }
-  
-  .blog .carousel-indicators .active {
-    background: #0fc9af;
-  }
   
   
   

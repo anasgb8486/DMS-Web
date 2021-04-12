@@ -30,6 +30,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchResultCategoryComponent } from '../app/components/search-result-category/search-result-category.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { SearchResultCategoryComponent } from '../app/components/search-result-c
     MatStepperModule,
     MatIconModule,
     ToastrModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgbModule
   ],
   providers: [
     EnquiryService
