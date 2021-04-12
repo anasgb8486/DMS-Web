@@ -18,6 +18,9 @@ export class Brand {
     pan: string;
     gstNumber: string;
     experianceType: ExperianceType;
-    locations: number[];
     brandLogo: string;
+    countrywiseLocations: number[];
+    regionwiseLocations: number[];
+    statewiseLocations: number[];
+    citywiseLocations: number[];
 }

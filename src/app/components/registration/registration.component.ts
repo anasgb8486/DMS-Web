@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidators } from 'src/app/shared/custom.validators';
 import { RegistrationDto } from 'src/app/models/registration.model';
+import { RegistrationService } from 'src/app/services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -14,15 +15,19 @@ import { RegistrationDto } from 'src/app/models/registration.model';
 })
 export class RegistrationComponent implements OnInit {
 
+  distributorshipType: string;
   registrationDto: RegistrationDto;
 
   constructor(private _formBuilder: FormBuilder,
     private _spinnerService: NgxSpinnerService,
     private _router: Router,
-    private _toastr: ToastrService) { }
+    private _toastr: ToastrService,
+    private _registrationService: RegistrationService) { 
+      this.registrationDto = this._registrationService.registrationDto;
+    }
 
   registrationForm: FormGroup;
-  formMoreDtails: FormGroup;
+  formCompanyDtails: FormGroup;
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
   // corresponding form control
@@ -31,7 +36,10 @@ export class RegistrationComponent implements OnInit {
     email: '',
     password: '',
     confirmPassword: '',
-    passwordGroup: ''
+    passwordGroup: '',
+    companyName: '',
+    address: '',
+    postalCode: '',
   };
 
   // This object contains all the validation messages for this form
@@ -59,19 +67,31 @@ export class RegistrationComponent implements OnInit {
     passwordGroup: {
       passwordMismatch: 'Password and Confirm password do not match.'
     },
-
+    companyName: {
+      required: 'Company name is required.',
+      startingWithEmptySpace: 'You cannot start company name with empty spaces.',
+    },
+    address: {
+      required: 'Address is required.',
+      startingWithEmptySpace: 'You cannot start address with empty spaces.',
+    },
+    postalCode: {
+      minlength: 'Postal code must have 6 digits.',
+      maxlength: 'Postal code must have 6 digits.',
+      pattern: 'Only numbers are allowed.'
+    },
   };
 
   ngOnInit(): void {
     this.registrationForm = this._formBuilder.group({
-      mobileNumber: ['', [Validators.required,
+      mobileNumber: [this.registrationDto.mobileNumber, [Validators.required,
       Validators.minLength(10),
       Validators.maxLength(10),
       Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      email: ['', [Validators.required,
+      email: [this.registrationDto.email, [Validators.required,
       CustomValidators.startingWithEmptySpace(),
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: ['', [Validators.required,
+      password: [this.registrationDto.password, [Validators.required,
       Validators.minLength(10),
       Validators.maxLength(10),
       Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
@@ -82,11 +102,11 @@ export class RegistrationComponent implements OnInit {
 
     });
 
-    this.formMoreDtails = this._formBuilder.group({
-      test: ['', [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+    this.formCompanyDtails = this._formBuilder.group({
+      companyName: [this.registrationDto.companyName, [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      website: [this.registrationDto.website],
+      address: [this.registrationDto.address, [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      postalCode: [this.registrationDto.postalCode, [Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     });
 
     this.registrationForm.valueChanges.subscribe(
@@ -134,16 +154,25 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  getMoreDetails() {
-    this.registrationDto = new RegistrationDto();
-    console.log(this.registrationForm.value);
-    console.log(this.formMoreDtails.value);
+  saveUserDetails() {
+    this.registrationDto.mobileNumber = this.registrationForm.value.mobileNumber;
+    this.registrationDto.email = this.registrationForm.value.email;
+    this.registrationDto.password = this.registrationForm.value.password;
+    
+    console.log(this.registrationDto);
   }
 
-  goBackToFirstPage() {
-    this.registrationDto = new RegistrationDto();
-    console.log(this.registrationForm.value);
-    console.log(this.formMoreDtails.value);
+  saveCompanyDetails() {
+    this.registrationDto.companyName = this.formCompanyDtails.value.companyName;
+    this.registrationDto.website = this.formCompanyDtails.value.website;
+    this.registrationDto.address = this.formCompanyDtails.value.address;
+    this.registrationDto.postalCode = this.formCompanyDtails.value.postalCode;
+    
+    console.log(this.registrationDto);
+  }
+
+  ondistributorshipTypeChanged(event){
+    this.distributorshipType= event.target.value;
   }
 
 }

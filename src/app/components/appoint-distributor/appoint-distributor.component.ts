@@ -9,6 +9,7 @@ import { Brand } from 'src/app/models/brand.model';
 import { MasterDataDto } from 'src/app/models/master-data.model';
 import { LocationDto } from 'src/app/models/location.model';
 import { RequestType } from 'src/app/models/system.enums';
+import { RegistrationService } from 'src/app/services/registration.service';
 
 @Component({
   selector: 'app-appoint-distributor',
@@ -100,7 +101,8 @@ export class AppointDistributorComponent implements OnInit {
     private _spinnerService: NgxSpinnerService,
     private _toastr: ToastrService,
     private _distributorService: DistributorService,
-    private _masterDataService: MasterDataService) { }
+    private _masterDataService: MasterDataService,
+    private _registrationService: RegistrationService) { }
 
   ngOnInit(): void {
 
@@ -125,11 +127,15 @@ export class AppointDistributorComponent implements OnInit {
     this._spinnerService.show();
     //console.log(this.appointDistributorForm.value);
     let brandDto = this.mapFormValuesToModel();
-    this._distributorService.appointOrBecomeDistributorRequest(brandDto).subscribe((result: any) => {
-      this.handleSuccess(result);
-    }, (error: any) => {
-      this.handleError(error);
-    });
+
+    this._registrationService.registrationDto.brand = brandDto;
+    console.log(this._registrationService.registrationDto);
+
+    // this._distributorService.appointOrBecomeDistributorRequest(brandDto).subscribe((result: any) => {
+    //   this.handleSuccess(result);
+    // }, (error: any) => {
+    //   this.handleError(error);
+    // });
   }
 
   setupForm() {
@@ -169,7 +175,7 @@ export class AppointDistributorComponent implements OnInit {
       investmentRequired: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       establishmentYear: ['', [Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
-      categories: [''],
+      categories: [[]],
       totalDistributors: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       productsKeywords: ['', [CustomValidators.startingWithEmptySpace()]],
@@ -216,7 +222,7 @@ export class AppointDistributorComponent implements OnInit {
     brand.investmentRequired = this.appointDistributorForm.value.investmentRequired;
     brand.establishmentYear = this.appointDistributorForm.value.establishmentYear;
     brand.spaceRequired = this.appointDistributorForm.value.spaceRequired;
-    brand.categories = this.appointDistributorForm.value.categories.map(({ id }) => id);
+    brand.categories = [parseInt(this.appointDistributorForm.value.categories)];
     brand.totalDistributors = this.appointDistributorForm.value.totalDistributors;
     brand.annualSales = this.appointDistributorForm.value.annualSales;
     brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;

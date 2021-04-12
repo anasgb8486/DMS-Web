@@ -58,7 +58,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 text-center">
-                            <button mat-button matStepperNext class="btn btn-primary" (click)="getMoreDetails()"
+                            <button mat-button matStepperNext class="btn btn-primary" (click)="saveUserDetails()"
                                 style="margin-right: 20px;">Next</button>
                         </div>
                     </div>
@@ -67,32 +67,80 @@
             </div>
         </form>
     </mat-step>
-    <mat-step label="Company Details" [stepControl]="formMoreDtails">
-        <form class="form-horizontal" [formGroup]="formMoreDtails">
-            <input type="text" class="form-control" id="test" formControlName="test" placeholder="Enter mobile number"
-                name="mobileNumber" (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.mobileNumber}">
-            <span class="invalid-feedback" *ngIf="formErrors.mobileNumber">
-                {{formErrors.mobileNumber}}
-            </span>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <button mat-button matStepperPrevious class="btn btn-primary" (click)="goBackToFirstPage()"
-                        style="margin-right: 20px;">Previous</button>
+
+    <mat-step label="Company Details" [stepControl]="formCompanyDtails">
+        <form class="form-horizontal" [formGroup]="formCompanyDtails">
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="companyName">Company Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="companyName" formControlName="companyName"
+                        placeholder="Enter company name" name="companyName" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.companyName}">
+                    <span class="invalid-feedback" *ngIf="formErrors.companyName">
+                        {{formErrors.companyName}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="website">Website:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="website" formControlName="website"
+                        placeholder="Enter your website name" name="website">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="address">Address:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address" formControlName="address"
+                        placeholder="Enter your address" name="address" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.address}">
+                    <span class="invalid-feedback" *ngIf="formErrors.address">
+                        {{formErrors.address}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="postalCode">Postal Code:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="postalCode" formControlName="postalCode"
+                        placeholder="Enter your postal code" name="postalCode" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.postalCode}">
+                    <span class="invalid-feedback" *ngIf="formErrors.postalCode">
+                        {{formErrors.postalCode}}
+                    </span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <button mat-button matStepperNext class="btn btn-primary" (click)="goBackToFirstPage()"
+                    <button mat-button matStepperPrevious class="btn btn-primary" (click)="saveCompanyDetails()"
+                        style="margin-right: 20px;">Previous</button>
+                    <button mat-button matStepperNext class="btn btn-primary" (click)="saveCompanyDetails()"
                         style="margin-right: 20px;">Next</button>
                 </div>
             </div>
         </form>
     </mat-step>
+
     <mat-step label="Company Type">
-        <app-become-distributor></app-become-distributor>
-        <button mat-button matStepperPrevious class="btn btn-primary" (click)="goBackToFirstPage()"
-                        style="margin-right: 20px;">Previous</button>
+        <div class="form-group row text-center">
+            <div class="col-sm-12">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="appoint" name="distributorshipType" value="appoint" class="custom-control-input"
+                        (change)='ondistributorshipTypeChanged($event)'>
+                    <label class="custom-control-label" for="appoint">Want to appoint distributor</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="become" name="distributorshipType" value="become" class="custom-control-input"
+                        (change)='ondistributorshipTypeChanged($event)'>
+                    <label class="custom-control-label" for="become">Want to become distributor</label>
+                </div>
+            </div>
+        </div>
+
+        <app-appoint-distributor *ngIf="distributorshipType == 'appoint'"></app-appoint-distributor>
+        <app-become-distributor *ngIf="distributorshipType == 'become'"></app-become-distributor>
     </mat-step>
+
 </mat-horizontal-stepper>
 
 
