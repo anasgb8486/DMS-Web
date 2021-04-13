@@ -19,6 +19,7 @@ export class NavigationbarComponent implements OnInit {
       disableClose: true,
       width: '750px',
       data: componentName,
+      panelClass: 'full-width-dialog',      
     });
 
     dialogRef.afterClosed().subscribe(result => {
