@@ -63,9 +63,7 @@ export class RegistrationComponent implements OnInit {
     },
     confirmPassword: {
       required: 'Confirm password is required.',
-    },
-    passwordGroup: {
-      passwordMismatch: 'Password and Confirm password do not match.'
+      mustMatch: 'Password and confirm password must be same.'
     },
     companyName: {
       required: 'Company name is required.',
@@ -92,15 +90,14 @@ export class RegistrationComponent implements OnInit {
       CustomValidators.startingWithEmptySpace(),
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [this.registrationDto.password, [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      confirmPassword: ['', [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-
-    });
+      Validators.minLength(4),
+      Validators.maxLength(10), 
+      CustomValidators.startingWithEmptySpace()]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    {
+      validator: CustomValidators.MustMatch('password', 'confirmPassword')
+  });
 
     this.formCompanyDtails = this._formBuilder.group({
       companyName: [this.registrationDto.companyName, [Validators.required, CustomValidators.startingWithEmptySpace()]],

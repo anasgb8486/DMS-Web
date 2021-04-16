@@ -131,11 +131,11 @@ export class AppointDistributorComponent implements OnInit {
     this._registrationService.registrationDto.brand = brandDto;
     console.log(this._registrationService.registrationDto);
 
-    // this._distributorService.appointOrBecomeDistributorRequest(brandDto).subscribe((result: any) => {
-    //   this.handleSuccess(result);
-    // }, (error: any) => {
-    //   this.handleError(error);
-    // });
+    this._registrationService.saveUserRegistrationDetails(this._registrationService.registrationDto).subscribe((result: any) => {
+      this.handleSuccess(result);
+    }, (error: any) => {
+      this.handleError(error);
+    });
   }
 
   setupForm() {
@@ -228,6 +228,8 @@ export class AppointDistributorComponent implements OnInit {
     brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
     //brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.AppointDistributor;
+    brand.brandLogo = this.brandLogoUrl;
+    brand.brandImages = this.productsImages;
 
     return brand;
   }

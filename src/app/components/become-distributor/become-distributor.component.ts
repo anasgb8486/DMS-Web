@@ -113,11 +113,11 @@ export class BecomeDistributorComponent implements OnInit {
     let brandDto = this.mapFormValuesToModel();
     this._registrationService.registrationDto.brand = brandDto;
     console.log(this._registrationService.registrationDto);
-    // this._distributorService.appointOrBecomeDistributorRequest(brandDto).subscribe((result: any) => {
-    //   this.handleSuccess(result);
-    // }, (error: any) => {
-    //   this.handleError(error);
-    // });
+    this._registrationService.saveUserRegistrationDetails(this._registrationService.registrationDto).subscribe((result: any) => {
+      this.handleSuccess(result);
+    }, (error: any) => {
+      this.handleError(error);
+    });
   }
 
   setupForm() {
@@ -190,26 +190,27 @@ export class BecomeDistributorComponent implements OnInit {
     brand.description = this.becomeDistributorForm.value.description;
     brand.businessNatures = this.becomeDistributorForm.value.businessNatures != "" ? this.becomeDistributorForm.value.businessNatures.map(({ id }) => id) : null;
     brand.investmentRequired = this.becomeDistributorForm.value.investmentRequired;
-    brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
+    //brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
+    brand.productsKeywords = this.becomeDistributorForm.value.products;
     brand.pan = this.becomeDistributorForm.value.pan;
     brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
     brand.experianceType = this.becomeDistributorForm.value.experianceType;
     // brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.BecomeDistributor;
     //locations
-    if(this.countries.length > 0){
+    if (this.countries.length > 0) {
       brand.countrywiseLocations = this.countries.map(({ id }) => id);
     }
-    if(this.selectedRegions.length > 0){
+    if (this.selectedRegions.length > 0) {
       brand.regionwiseLocations = this.selectedRegions.map(({ id }) => id);
     }
-    if(this.selectedStates.length > 0){
+    if (this.selectedStates.length > 0) {
       brand.statewiseLocations = this.selectedStates.map(({ id }) => id);
     }
-    if(this.selectedCities.length > 0){
+    if (this.selectedCities.length > 0) {
       brand.citywiseLocations = this.selectedCities.map(({ id }) => id);
     }
-    
+
     return brand;
   }
 
