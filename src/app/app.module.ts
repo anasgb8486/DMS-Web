@@ -31,6 +31,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchResultCategoryComponent } from '../app/components/search-result-category/search-result-category.component';
+import { KnowMoreComponent } from '../app/components/know-more/know-more.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BecomeDistributorComponent,
     ReviewsliderComponent,
     RegistrationComponent,
-    SearchResultCategoryComponent
+    SearchResultCategoryComponent,
+    KnowMoreComponent
   ],
   imports: [
     BrowserModule,

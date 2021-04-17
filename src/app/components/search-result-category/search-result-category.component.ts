@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,7 +9,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SearchResultCategoryComponent implements OnInit {
 
-  constructor(config: NgbCarouselConfig) {
+  constructor(config: NgbCarouselConfig, private router: Router) {
     config.interval = 5000;
     config.wrap = true;
     config.keyboard = false;
@@ -18,6 +19,10 @@ export class SearchResultCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  openKnowMore(): void{
+    this.router.navigate(['./knowmore']);
   }
 
 }
