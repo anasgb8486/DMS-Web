@@ -2,7 +2,7 @@
 <br />
 <br />
 <div class="container">
-  <app-search></app-search>
+  <app-search *ngIf="router != '/register'"></app-search>
   <router-outlet></router-outlet>
   <br />
 </div>

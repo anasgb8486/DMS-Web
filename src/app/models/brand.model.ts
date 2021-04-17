@@ -23,4 +23,5 @@ export class Brand {
     regionwiseLocations: number[];
     statewiseLocations: number[];
     citywiseLocations: number[];
+    brandImages: string[];
 }
