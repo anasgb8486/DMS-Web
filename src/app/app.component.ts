@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
@@ -8,12 +8,18 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'DMS-Web';
   router: string;
 
   constructor(public dialog: MatDialog, private location: Location) { 
-    this.router = location.path(); 
+    // this.router = location.path(); 
+    // console.log(this.router)
+  }
+
+  ngOnInit(): void {
+    this.router = this.location.path(); 
+    console.log(this.router)
   }
 
   openDialog(componentName): void {

@@ -11,11 +11,10 @@ import { SearchResultCategoryComponent } from './components/search-result-catego
 
 
 const routes: Routes = [
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   {path: 'requestcallback', component: RequestCallbackComponent},
   {path: 'postrequirements', component: PostRequirementComponent},
-  {path: 'appointDistributor', component: AppointDistributorComponent},
-  {path: 'becomeDistributor', component: BecomeDistributorComponent},
   {path: 'register', component: RegistrationComponent},
   {path: 'searchresultcategory', component: SearchResultCategoryComponent},
   {path: 'knowmore', component: KnowMoreComponent}

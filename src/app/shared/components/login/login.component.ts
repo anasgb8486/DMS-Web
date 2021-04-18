@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   @Output() closePopupEvent = new EventEmitter<void>();
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +18,11 @@ export class LoginComponent implements OnInit {
     // this.postRequirmentForm.reset();
     // this._router.navigate(['home']);
     this.closePop();
+  }
+
+  registerUser(): void {
+    this.closePop();
+    this._router.navigate(['register']);
   }
 
   closePop(): void {
