@@ -50,7 +50,7 @@ export class RequestCallbackComponent implements OnInit {
     },
     email: {
       required: 'Email is required.',
-      startingWithEmptySpace: 'You cannot start description with empty spaces.',
+      startingWithEmptySpace: 'You cannot start email with empty spaces.',
       pattern: 'Please provide valid email address.'
     },
     city: {
@@ -114,6 +114,7 @@ export class RequestCallbackComponent implements OnInit {
     this.requestCallbackForm.reset();
     // alert('request callback submitted');
     this._toastr.success('Callback request submitted successfully. We will contact you soon.', 'Success');
+    this.closePop();
     this._router.navigate(['home']);
   }
 

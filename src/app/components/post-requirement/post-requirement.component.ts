@@ -29,6 +29,8 @@ export class PostRequirementComponent implements OnInit {
   formErrors = {
     requestType: '',
     mobileNumber: '',
+    email: '',
+    location: '',
     description: '',
     isAgreed: '',
   };
@@ -43,6 +45,16 @@ export class PostRequirementComponent implements OnInit {
       minlength: 'Mobile number should have 10 characters.',
       maxlength: 'Mobile number should have 10 characters.',
       pattern: 'Only numbers are allowed.'
+    },
+    email: {
+      required: 'Email is required.',
+      startingWithEmptySpace: 'You cannot start email with empty spaces.',
+      pattern: 'Please provide valid email address.'
+    },
+    location: {
+      required: 'Location is required.',
+      startingWithEmptySpace: 'You cannot start location with empty spaces.',
+      maxlength: 'Location should not exceed more than 100 characters.'
     },
     description: {
       required: 'Description is required.',
@@ -59,12 +71,16 @@ export class PostRequirementComponent implements OnInit {
     this.postRequirmentForm = this._formBuilder.group({
       requestType: ['', Validators.required],
       mobileNumber: ['', [Validators.required,
-                            Validators.minLength(10),
-                            Validators.maxLength(10),
-                            Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      email: ['', [Validators.required,
+      CustomValidators.startingWithEmptySpace(),
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      location: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       description: ['', [Validators.required,
-                         CustomValidators.startingWithEmptySpace(),
-                        Validators.maxLength(2000)]],
+      CustomValidators.startingWithEmptySpace(),
+      Validators.maxLength(2000)]],
       isAgreed: ['', Validators.requiredTrue],
     });
 
@@ -106,6 +122,7 @@ export class PostRequirementComponent implements OnInit {
     this.postRequirmentForm.reset();
     // alert('request callback submitted');
     this._toastr.success('Your requirements are saved successfully. We will contact you soon.', 'Success');
+    this.closePop();
     this._router.navigate(['home']);
   }
 
@@ -120,6 +137,8 @@ export class PostRequirementComponent implements OnInit {
     requirement.InquiryType = InquiryType.PostedRequirements;
     requirement.requestType = this.postRequirmentForm.value.requestType;
     requirement.mobileNumber = this.postRequirmentForm.value.mobileNumber;
+    requirement.email = this.postRequirmentForm.value.email;
+    requirement.city = this.postRequirmentForm.value.location;
     requirement.description = this.postRequirmentForm.value.description;
 
     return requirement;

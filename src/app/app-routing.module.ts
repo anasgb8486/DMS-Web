@@ -13,6 +13,7 @@ import { SearchbarDistributorLeadsComponent } from './components/searchbar-distr
 
 
 const routes: Routes = [
+<<<<<<< HEAD
   { path: 'home', component: HomeComponent },
   { path: 'requestcallback', component: RequestCallbackComponent },
   { path: 'postrequirements', component: PostRequirementComponent },
@@ -24,6 +25,15 @@ const routes: Routes = [
   { path: 'distributorleads', component: SearchbarDistributorLeadsComponent },
   { path: 'distributorleadsresult', component: DistributorLeadsResultsComponent },
 
+=======
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent},
+  {path: 'requestcallback', component: RequestCallbackComponent},
+  {path: 'postrequirements', component: PostRequirementComponent},
+  {path: 'register', component: RegistrationComponent},
+  {path: 'searchresultcategory', component: SearchResultCategoryComponent},
+  {path: 'knowmore', component: KnowMoreComponent}
+>>>>>>> 2ee04e1f400a45bb25a37a4d9dc1bb6cadfb08c9
 ];
 
 @NgModule({
