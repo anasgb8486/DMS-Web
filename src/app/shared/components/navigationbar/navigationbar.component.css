@@ -16,9 +16,13 @@ a:hover{
 }
 
 .centered {
-    position: absolute;
+    width: 100%;
+    font-size: 70px;
+    text-align: center;
+    margin-top: 40px;
+    /* position: absolute;
     top: 7%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 70px;
+    font-size: 70px; */
   }

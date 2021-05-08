@@ -1,9 +1,12 @@
-<app-navigationbar></app-navigationbar>
+<app-navigationbar (toggleSearchBar)=NavigationBarItemClicked($event)></app-navigationbar>
 <br />
 <br />
 <div class="container">
-  <app-search *ngIf="router != '/register'"></app-search>
-  <router-outlet></router-outlet>
+  <app-search *ngIf="flagToggleSearchBar && !flagDistributorLeads"></app-search>
+  
+  <app-searchbar-distributor-leads *ngIf="flagDistributorLeads && flagToggleSearchBar" (toggleSearchBar) = "displayRouterOutlet($event)"></app-searchbar-distributor-leads>
+
+  <router-outlet *ngIf="navigationItemName !== 'distributorsleads'"></router-outlet>
   <br />
 </div>
 <div class="pull-left w-100 footer">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -8,6 +8,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./navigationbar.component.css']
 })
 export class NavigationbarComponent implements OnInit {
+  @Output() toggleSearchBar: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(public dialog: MatDialog) { }
 
@@ -19,11 +20,15 @@ export class NavigationbarComponent implements OnInit {
       disableClose: true,
       width: '750px',
       data: componentName,
-      panelClass: 'full-width-dialog',      
+      panelClass: 'full-width-dialog',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  onNavBarClickEvent(navigationItemName): void{
+    return this.toggleSearchBar.emit(navigationItemName);
   }
 }

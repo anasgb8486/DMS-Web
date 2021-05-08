@@ -32,6 +32,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchResultCategoryComponent } from '../app/components/search-result-category/search-result-category.component';
 import { KnowMoreComponent } from '../app/components/know-more/know-more.component';
+import { SearchbarDistributorLeadsComponent } from '../app/components/searchbar-distributor-leads/searchbar-distributor-leads.component';
+import { DistributorLeadsResultsComponent } from '../app/components/distributor-leads-results/distributor-leads-results.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReviewsliderComponent,
     RegistrationComponent,
     SearchResultCategoryComponent,
-    KnowMoreComponent
+    KnowMoreComponent,
+    SearchbarDistributorLeadsComponent,
+    DistributorLeadsResultsComponent
   ],
   imports: [
     BrowserModule,
