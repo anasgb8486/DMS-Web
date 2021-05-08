@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   title = 'DMS-Web';
   router: string;
 
-<<<<<<< HEAD
   flagToggleSearchBar = true;
   flagDistributorLeads = false;
   navigationItemName = 'home';
@@ -23,16 +22,6 @@ export class AppComponent implements OnInit {
     this.router = _router.url;
   }
   ngOnInit(): void {
-=======
-  constructor(public dialog: MatDialog, private location: Location) { 
-    // this.router = location.path(); 
-    // console.log(this.router)
-  }
-
-  ngOnInit(): void {
-    this.router = this.location.path(); 
-    console.log(this.router)
->>>>>>> 2ee04e1f400a45bb25a37a4d9dc1bb6cadfb08c9
   }
 
   openDialog(componentName): void {
