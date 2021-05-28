@@ -63,7 +63,7 @@ export class AppointDistributorComponent implements OnInit {
     },
     investmentRequired: {
       required: 'Investment amount is required.',
-      pattern: 'Only numbers are allowed.'
+      startingWithEmptySpace: 'You cannot start with empty spaces.',
     },
     establishmentYear: {
       required: 'Establishment year is required.',
@@ -172,7 +172,7 @@ export class AppointDistributorComponent implements OnInit {
     this.appointDistributorForm = this._formBuilder.group({
       brandName: ['', [CustomValidators.startingWithEmptySpace()]],
       businessNatures: [[]],
-      investmentRequired: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      investmentRequired: ['', [CustomValidators.startingWithEmptySpace()]],
       establishmentYear: ['', [Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
       categories: [[]],

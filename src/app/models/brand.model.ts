@@ -5,7 +5,7 @@ export class Brand {
     name: string;
     description: string;
     businessNatures: number[];
-    investmentRequired: number;
+    investmentRequired: string;
     establishmentYear: number;
     spaceRequired: string;
     categories: number[];
@@ -18,6 +18,7 @@ export class Brand {
     pan: string;
     gstNumber: string;
     experianceType: ExperianceType;
+    experianceYears: string;
     brandLogo: string;
     countrywiseLocations: number[];
     regionwiseLocations: number[];

@@ -33,6 +33,7 @@ export class RegistrationComponent implements OnInit {
   // corresponding form control
   formErrors = {
     mobileNumber: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
