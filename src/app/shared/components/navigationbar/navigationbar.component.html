@@ -2,29 +2,24 @@
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand/logo -->
     <a class="navbar-brand" routerLink="home" (click)="onNavBarClickEvent('home')">
-      <img src="../../../../assets/images/logo.jpeg" width="50px" height="50px"/>
+      <!-- <img src="../../../../assets/images/logo.jpeg" width="50px" height="50px"/> -->
+      Welcome to Appoint distributor
     </a>
 
     <!-- Links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="distributorleads" (click)="onNavBarClickEvent('distributorsleads')">Distributors Leads</a>
+        <a class="nav-link" routerLink="distributorleads" (click)="onNavBarClickEvent('distributorsleads')"><b style="color: yellow;">Distributors Leads</b></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="openDialog('postrequirements')">Post Your Requirement</a>
+        <a class="nav-link" (click)="openDialog('postrequirements')"><b> Post Your Requirement </b></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="openDialog('requestcallback')">Request Callback</a>
+        <a class="nav-link" (click)="openDialog('requestcallback')"><b> Request Callback </b></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="openDialog('login')">Login</a>       
-      </li>
-      <li>
-        /
-      </li>
-      <li class="nav-item">        
-        <a class="nav-link" routerLink="register" (click)="onNavBarClickEvent('register')"> Join Free</a>
-      </li>      
+        <a class="nav-link" (click)="openDialog('login')"><b>Login | Join Free</b></a>       
+      </li>              
     </ul>
   </nav>
   <div class="centered">

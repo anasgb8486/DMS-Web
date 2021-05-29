@@ -5,6 +5,7 @@
     background-color: #fff !important;
     z-index: 100;
     box-shadow: 0 8px 6px -6px black;    
+    border-radius: 8px;
 }
 
 /* Bootstrap 4 text input with search icon */
