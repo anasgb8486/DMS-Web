@@ -16,6 +16,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { EnquiryService } from './services/enquiry.service';
 import { RegistrationService } from './services/registration.service';
+import { ApploadDataService } from '../app/services/appload-data.service';
 import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
 import { PostRequirementComponent } from './components/post-requirement/post-requirement.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
@@ -76,7 +77,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [
     EnquiryService,
-    RegistrationService
+    RegistrationService,
+    ApploadDataService
   ],
   entryComponents: [ DialogComponent],
   bootstrap: [AppComponent]

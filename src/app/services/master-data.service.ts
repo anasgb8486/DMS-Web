@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class MasterDataService {
     this.webAPIUrl = 'http://localhost:51276/api/MasterData/';
   }
 
-  public getAllCategories() {
-    return this._httpClient.get(this.webAPIUrl + 'GetAllCategories/');
+  public getAllCategories(): Observable<any[]> {
+    return this._httpClient.get<any[]>(this.webAPIUrl + 'GetAllCategories/');
   }
 
   public getAllBusinessNatures() {

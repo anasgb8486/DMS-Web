@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,8 +8,10 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CarouselComponent implements OnInit {
 
+  @Input() distributorLeads: any[] = [];
+
   constructor(config: NgbCarouselConfig) {
-    config.interval = 5000;
+    config.interval = 50000;
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = true;
@@ -18,6 +20,6 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.distributorLeads);
   }
-
 }

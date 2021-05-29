@@ -8,8 +8,8 @@ a:hover{
 }
 
 #header{
-    width:100%;
-    height: 300px;
+    /* width:100%;*/
+    height: 300px; 
     color: #fff;    
     background: #1d2226 url('../../../../assets/images/banner.jpg') no-repeat center center;
     background-size: cover;
@@ -17,7 +17,7 @@ a:hover{
 
 .centered {
     width: 100%;
-    font-size: 70px;
+    font-size: 55px;
     text-align: center;
     margin-top: 40px;
     /* position: absolute;

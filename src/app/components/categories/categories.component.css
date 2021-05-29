@@ -30,3 +30,8 @@ img {
 .rounded-circle{
     border-radius: 30% !important;
 }
+
+a label:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

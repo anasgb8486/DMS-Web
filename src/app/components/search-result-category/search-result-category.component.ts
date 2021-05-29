@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-search-result-category',
@@ -9,7 +10,10 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SearchResultCategoryComponent implements OnInit {
 
-  constructor(config: NgbCarouselConfig, private router: Router) {
+  constructor(
+    config: NgbCarouselConfig,
+    private router: Router,
+    private SpinnerService: NgxSpinnerService) {
     config.interval = 5000;
     config.wrap = true;
     config.keyboard = false;

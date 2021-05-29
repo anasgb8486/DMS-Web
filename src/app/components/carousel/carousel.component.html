@@ -6,354 +6,41 @@
         <div class="row">
             <div id="LatestDistributorsLeads" class='col-12'>
                 <ngb-carousel>
-                    <ng-template ngbSlide>
+                    <ng-template *ngFor="let rowItem of distributorLeads" ngbSlide>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
+                            <div class="col-md-3" *ngFor="let colItems of rowItem">
+                                <div class="item-box-blog">                                    
                                     <div class="item-box-blog-body">
                                         <!--Heading-->
                                         <div class="item-box-blog-heading">
                                             <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
+                                                <b>Client wants to take distributorship</b>
                                             </a>
                                         </div>
                                         <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
+                                        <!-- <div class="item-box-blog-data" style="padding: px 15px;">
                                             <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
                                                 Comments(3)</p>
-                                        </div>
+                                        </div> -->
                                         <!--Text-->
                                         <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
+                                            <label>Client name : Amol phapale</label>
+                                            <label>City Pune (State) : Maharashtra</label>
+                                            <label>Contact No : 9579306880 </label>
+                                            <label>Client wants to take distributorship :  {{colItems.name}}</label>
+                                            <label>Experienced : {{colItems.experianceType}}</label>
+                                            <label>Investment : {{colItems.investmentRequired}} </label>
+                                            <label>Company name : AP </label>
+                                            <label>E- mail id : aphapale2@gmail.com</label>
                                         </div>
                                         <div class="mt"> <a href="#" tabindex="0"
                                                 class="btn bg-blue-ui white read">View more</a> </div>
                                         <!--Read More Button-->
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                            
                         </div>
-                    </ng-template>
-                    <ng-template ngbSlide>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbSlide>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="item-box-blog">
-                                    
-                                    <div class="item-box-blog-body">
-                                        <!--Heading-->
-                                        <div class="item-box-blog-heading">
-                                            <a href="#" tabindex="0">
-                                                <h5>News Title</h5>
-                                            </a>
-                                        </div>
-                                        <!--Data-->
-                                        <div class="item-box-blog-data" style="padding: px 15px;">
-                                            <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i>
-                                                Comments(3)</p>
-                                        </div>
-                                        <!--Text-->
-                                        <div class="item-box-blog-text">
-                                            <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing.
-                                                Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet,
-                                                consectetuer adipiscing. Lorem ipsum dolor.</p>
-                                        </div>
-                                        <div class="mt"> <a href="#" tabindex="0"
-                                                class="btn bg-blue-ui white read">View more</a> </div>
-                                        <!--Read More Button-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
+                    </ng-template>                    
                 </ngb-carousel>
             </div>
         </div>

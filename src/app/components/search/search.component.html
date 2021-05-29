@@ -5,11 +5,7 @@
                 <div class="form-group">
                     <select class="form-control" id="sel1">
                         <option>Select Category</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option *ngFor="let catagory of catagories" [value] = "catagory.id" >{{catagory.name}}</option>                        
                     </select>
                 </div>
             </div>
