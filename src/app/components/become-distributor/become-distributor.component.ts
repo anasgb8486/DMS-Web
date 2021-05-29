@@ -58,7 +58,7 @@ export class BecomeDistributorComponent implements OnInit {
     },
     investmentRequired: {
       required: 'Investment amount is required.',
-      pattern: 'Only numbers are allowed.'
+      startingWithEmptySpace: 'You cannot start with empty spaces.',
     },
     pan: {
       required: 'PAN is required.',
@@ -149,7 +149,7 @@ export class BecomeDistributorComponent implements OnInit {
       businessNatures: [[]],
       products: [''],
       // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      investmentRequired: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      investmentRequired: ['', [CustomValidators.startingWithEmptySpace()]],
       // pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       pan: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       // gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
