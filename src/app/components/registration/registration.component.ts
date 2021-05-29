@@ -32,8 +32,8 @@ export class RegistrationComponent implements OnInit {
   // Notice, each key in this object has the same name as the
   // corresponding form control
   formErrors = {
-    mobileNumber: '',
     name: '',
+    mobileNumber: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -45,6 +45,12 @@ export class RegistrationComponent implements OnInit {
 
   // This object contains all the validation messages for this form
   validationMessages = {
+    name: {
+      required: 'Name is required.',
+      startingWithEmptySpace: 'You cannot start name with empty spaces.',
+      minlength: 'Name should at least have 2 characters.',
+      maxlength: 'Name cannot have more than 50 characters.',
+    },
     mobileNumber: {
       required: 'Mobile number is required.',
       minlength: 'Mobile number should have 10 characters.',
@@ -83,10 +89,14 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationForm = this._formBuilder.group({
+      name: [this.registrationDto.name, [Validators.required,
+      CustomValidators.startingWithEmptySpace(),
+      Validators.minLength(2),
+      Validators.maxLength(50)]],
       mobileNumber: [this.registrationDto.mobileNumber, [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       email: [this.registrationDto.email, [Validators.required,
       CustomValidators.startingWithEmptySpace(),
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -153,6 +163,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   saveUserDetails() {
+    this.registrationDto.name = this.registrationForm.value.name;
     this.registrationDto.mobileNumber = this.registrationForm.value.mobileNumber;
     this.registrationDto.email = this.registrationForm.value.email;
     this.registrationDto.password = this.registrationForm.value.password;

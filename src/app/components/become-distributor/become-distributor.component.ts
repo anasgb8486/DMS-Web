@@ -226,6 +226,7 @@ export class BecomeDistributorComponent implements OnInit {
 
   handleSuccess(resp: any): void {
     this._spinnerService.hide();
+    this._registrationService.registrationDto = null;
     this.becomeDistributorForm.reset();
     // alert('request callback submitted');
     this._toastr.success('Your data has been saved successfully.', 'Success');
