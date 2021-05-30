@@ -8,18 +8,19 @@ import { Brand } from '../models/brand.model';
 })
 export class DistributorService {
   webAPIUrl: string;
-  //private token = localStorage.getItem('jwt');
+  // private token = localStorage.getItem('jwt');
   private httpOptions = {
     headers: new HttpHeaders(
       {
-        //Authorization: 'Bearer ' + this.token , 
+        // Authorization: 'Bearer ' + this.token ,
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
       })
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.webAPIUrl = 'http://localhost:51276/api/BrandProduct/';
+    // this.webAPIUrl = 'http://localhost:51276/api/BrandProduct/';
+    this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
   }
 
   appointOrBecomeDistributorRequest(brandDto: Brand): Observable<any> {
