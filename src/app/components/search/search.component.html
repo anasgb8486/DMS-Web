@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <select class="form-control" id="sel1">
+                    <select class="form-control" id="sel1" style="height: 45px;">
                         <option>Select Category</option>
                         <option *ngFor="let catagory of catagories" [value] = "catagory.id" >{{catagory.name}}</option>                        
                     </select>
@@ -11,9 +11,9 @@
             </div>
             <div class="col-9">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search products" (keydown.enter)="onKeyDownEvent($event)">
+                    <input type="text" class="form-control" placeholder="Search products" (keydown.enter)="onKeyDownEvent($event)" style="height: 45px;">
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" (click)="searchCategory()">
+                        <button class="btn btn-secondary" type="button" (click)="searchCategory()" style="background-color: #208e39;">
                             <i class="fa fa-search"></i> &nbsp; Search
                         </button>
                     </div>

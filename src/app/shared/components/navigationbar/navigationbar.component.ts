@@ -18,7 +18,7 @@ export class NavigationbarComponent implements OnInit {
   openDialog(componentName): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
-      width: '750px',
+      width: componentName !== 'login' ? '750px' : '550px',
       data: componentName,
       panelClass: 'full-width-dialog',
     });
