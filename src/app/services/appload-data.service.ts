@@ -19,7 +19,8 @@ export class ApploadDataService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.webAPIUrl = 'http://localhost:51276/api/Home/GetApplicationLoadData/';
+    // this.webAPIUrl = 'http://localhost:51276/api/Home/GetApplicationLoadData/';
+    this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/Home/GetApplicationLoadData/';
   }
 
   public getApplicationLoadData(): Observable<any>{

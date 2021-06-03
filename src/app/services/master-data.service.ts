@@ -9,7 +9,8 @@ export class MasterDataService {
   webAPIUrl: string;
 
   constructor(private _httpClient: HttpClient) {
-    this.webAPIUrl = 'http://localhost:51276/api/MasterData/';
+    // this.webAPIUrl = 'http://localhost:51276/api/MasterData/';
+    this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/MasterData/';
   }
 
   public getAllCategories(): Observable<any[]> {
