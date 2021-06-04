@@ -195,7 +195,7 @@ export class AppointDistributorComponent implements OnInit {
   }
 
   loadMasterData() {
-    this._masterDataService.getAllCategories().subscribe((data: MasterDataDto[]) => {
+    this._masterDataService.getAllCategoriesMasterData().subscribe((data: MasterDataDto[]) => {
       this.categories = data;
     });
 

@@ -17,6 +17,10 @@ export class MasterDataService {
     return this._httpClient.get<any[]>(this.webAPIUrl + 'GetAllCategories/');
   }
 
+  public getAllCategoriesMasterData(): Observable<any[]> {
+    return this._httpClient.get<any[]>(this.webAPIUrl + 'getAllCategoriesMasterData/');
+  }
+
   public getAllBusinessNatures() {
     return this._httpClient.get(this.webAPIUrl + 'GetAllBusinessNatures/');
   }
