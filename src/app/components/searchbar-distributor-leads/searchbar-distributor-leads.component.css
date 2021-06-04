@@ -1,10 +1,11 @@
 .main {
     width: 100%;
     min-height: 100px;
-    margin: -95px 0 0 0;
+    margin: -50px 0 0 0;
     background-color: #fff !important;
     z-index: 100;
     box-shadow: 0 8px 6px -6px black;    
+    border-radius: 8px;
 }
 
 /* Bootstrap 4 text input with search icon */

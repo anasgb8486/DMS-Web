@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
@@ -10,7 +11,15 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class NavigationbarComponent implements OnInit {
   @Output() toggleSearchBar: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    config: NgbCarouselConfig) {
+      config.interval = 5000;
+      config.wrap = true;
+      config.keyboard = false;
+      config.pauseOnHover = true;
+      config.showNavigationIndicators = false;
+    }
 
   ngOnInit(): void {
   }
