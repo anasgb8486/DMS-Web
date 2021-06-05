@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { Enquiry } from '../models/enquiry.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnquiryService {
+  private API_URL= environment.API_URL;
   webAPIUrl: string;
   // private token = localStorage.getItem('jwt');
   private httpOptions = {
@@ -19,8 +21,8 @@ export class EnquiryService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    // this.webAPIUrl = 'http://localhost:51276/api/Enquiry/';
-    this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/Enquiry/';
+    this.webAPIUrl = this.API_URL + '/api/Enquiry/';
+    //this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/Enquiry/';
   }
 
   saveEnquiry(requestDto: Enquiry): Observable<any> {

@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MasterDataService {
+  private API_URL= environment.API_URL;
   webAPIUrl: string;
 
   constructor(private _httpClient: HttpClient) {
-    // this.webAPIUrl = 'http://localhost:51276/api/MasterData/';
-    this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/MasterData/';
+    this.webAPIUrl = this.API_URL + '/api/MasterData/';
+    //this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/MasterData/';
   }
 
   public getAllCategories(): Observable<any[]> {
