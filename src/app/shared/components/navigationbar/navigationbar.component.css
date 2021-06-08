@@ -1,3 +1,19 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  float: left;
+}
+
+.backgroundClr{
+  padding: 0 70px; 
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ccc;
+}
+
 .navbar-nav { 
     margin-left: auto; 
 } 
@@ -17,7 +33,7 @@ a:hover{
 
 .centered {
     width: 100%;
-    font-size: 55px;
+    font-size: 45px;
     text-align: center;
     margin-top: 30px;
     /* position: absolute;
@@ -49,4 +65,13 @@ a:hover{
 .button2:hover {
   background-color: #008bbab0;
   color: #008bbab0;
+}
+
+.nav-link{
+  padding: 8px;
+  font-size: 13px;
+}
+
+ul li > a{
+  color:rgb(90, 84, 84) !important;
 }

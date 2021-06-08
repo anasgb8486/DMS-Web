@@ -1,53 +1,38 @@
-<div>
-  <!--id="header" -->
-  <nav class="navbar navbar-expand-sm  navbar-dark" style="background-color: rgb(255, 255, 255);">
-    <!-- Brand/logo -->
-    <a class="navbar-brand" routerLink="home" (click)="onNavBarClickEvent('home')" style="font-size: medium;"
-      style="color: rgb(4, 0, 14);">
-      <!-- <img src="../../../../assets/images/logo.jpeg" width="50px" height="50px"/> -->
-      Welcome to Appoint distributors
-    </a>
-
-    <!-- Links -->
-    <ul class="navbar-nav">
+<div class="pull-left w-100 backgroundClr">
+  <nav>
+    <ul class="pull-left">
       <li class="nav-item">
-        <!-- <a class="nav-link" routerLink="distributorleads" (click)="onNavBarClickEvent('distributorsleads')"><b
-            style="color: rgb(4, 0, 14);" style="font-size: medium;">Distributors Leads</b></a> -->
-            <button class="button button2" onclick="distributorleads" (click)="onNavBarClickEvent('distributorsleads')"><b style="color: rgb(241, 241, 235);font-size: large;">Distributors Leads</b></button>
+        <a class="nav-link" routerLink="home" (click)="onNavBarClickEvent('home')">
+          Welcome User
+        </a>
+      </li>
+    </ul>
+    <ul style="margin: auto;">
+      <li>
+        <a class="nav-link">Call us @: +91-9838953812</a> 
+      </li>
+      <li>
+        <a class="nav-link">Email @: info@example.com</a> 
+      </li>
+    </ul>
+    <ul class="pull-right">
+      <li class="nav-item">
+        <a class="nav-link" (click)="onNavBarClickEvent('distributorsleads')">Distributors Leads
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="openDialog('postrequirements')"><b style="color: rgb(4, 0, 14);"> Post Your
-            Requirement </b></a>
+        <a class="nav-link" (click)="openDialog('requestcallback')">Request Callback
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="openDialog('requestcallback')"><b style="color: rgb(4, 0, 14);"> Request Callback
-          </b></a>
+        <a class="nav-link" (click)="openDialog('login')">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="openDialog('login')"><b style="color: rgb(4, 0, 14);">Login</b></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="register"><b style="color: rgb(4, 0, 14);">|&nbsp; Join Free</b></a>
+        <a class="nav-link" routerLink="register" style="color: #4CAF50 !important; "> Join Free</a>
       </li>
     </ul>
   </nav>
 </div>
-<div style="width:100%; height: 250px;position: absolute;z-index: -1;">  
-  <ngb-carousel>
-    <ng-template ngbSlide>
-      <div class="w-100" style="height: 250px;">
-        <img class="img-thumbnail" style="width:100%" height="250px" src="../../../../assets/images/banner1.jpeg" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="w-100" style="height: 250px;">
-        <img class="img-thumbnail" style="width:100%" height="250px" src="../../../../assets/images/banner2.jpeg" />
-      </div>
-    </ng-template>  
-    <ng-template ngbSlide>
-      <div class="w-100" style="height: 250px;">
-        <img class="img-thumbnail" style="width:100%" height="250px" src="../../../../assets/images/banner3.jpeg" />
-      </div>
-    </ng-template>    
-  </ngb-carousel>
+<div class="pull-left w-100 mb-3" style="border-bottom: 1px solid #ccc;box-shadow: 0 8px 6px -6px #ccc;">
+  <app-search></app-search>
 </div>

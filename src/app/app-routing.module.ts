@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'knowmore', component: KnowMoreComponent },
   { path: 'distributorleads', component: SearchbarDistributorLeadsComponent },
   { path: 'distributorleadsresult', component: DistributorLeadsResultsComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'home'}
 
 ];
 

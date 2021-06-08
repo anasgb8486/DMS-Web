@@ -1,9 +1,5 @@
 <app-navigationbar (toggleSearchBar)=NavigationBarItemClicked($event)></app-navigationbar>
-<div class="centered" style="font-size: xx-large;" style="color:rgb(240, 239, 245);">
-  <b>Search Distributors</b>
-</div>
-<div class="container">
-  <app-search *ngIf="flagToggleSearchBar && !flagDistributorLeads"></app-search>
+<div class="container">  
   
   <app-searchbar-distributor-leads *ngIf="flagDistributorLeads && flagToggleSearchBar" (toggleSearchBar) = "displayRouterOutlet($event)"></app-searchbar-distributor-leads>
 

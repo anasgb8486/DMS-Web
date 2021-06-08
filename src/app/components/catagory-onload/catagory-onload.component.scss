@@ -1,0 +1,39 @@
+.catagoryList{    
+    width:300px;
+    padding: 10px;
+}
+
+.catagoryList ul{
+    margin: 0;
+    padding: 0;
+}
+
+.catagoryList ul > li{
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ddd;
+}
+
+.catagoryList ul li:last-child {
+    border: none;
+  }
+
+.catagoryList ul > li > a {
+    width: 100%;    
+    color:rgb(90, 84, 84) !important;
+}
+
+.arrow {
+    border: solid #ddd;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    margin: 10px 0 0 0;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+
