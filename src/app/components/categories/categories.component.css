@@ -25,6 +25,7 @@ img {
 .alingCenter{
     width:100%;
     text-align: center !important;
+    color: rgb(90, 84, 84) !important;
 }
 
 .rounded-circle{
