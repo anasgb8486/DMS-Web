@@ -22,6 +22,7 @@
 .catagoryList ul > li > a {
     width: 100%;    
     color:rgb(90, 84, 84) !important;
+    font-size: 15px;
 }
 
 .arrow {
@@ -37,3 +38,14 @@
     -webkit-transform: rotate(-45deg);
   }
 
+h6{
+  color: #048c8a;
+}
+
+.catagoryList ul > li > a:hover{
+  color:#fc6600 !important;
+}
+
+.rounded-circle{
+  border-radius: 50% !important;
+}

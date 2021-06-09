@@ -1,28 +1,39 @@
-<div class="pull-left w-100 mb-4" style="border: 1px solid #ccc;height:420px;padding: 20px;">
+<div class="pull-left w-100 mb-4" style="border: 1px solid #ccc;height:575px;padding: 20px;">
   <div class="pull-left catagoryList">
     <h6>TRENDING CATEGORIES</h6>
     <ul>
       <li *ngFor="let catagory of catagories[0]">
+        <img width="30px" height="30px" class="rounded-circle mr-2" [src]="catagory.image" />
         <a href="#">{{ catagory.name }}</a> <i class="pull-right arrow right"></i>
       </li>
       <li>
-        <a href="#"> Transportation</a>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
+        <a href="#"> Consumer Electronics</a>
       </li>
       <li>
-        <a href="#" style="color:darkblue !important;"> All Catagories</a>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
+        <a href="#"> Pharmaceuticals (PCD)</a>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
+        <a href="#"> Automobile & Transportation</a>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
+         <a href="#" style="color:darkblue !important;"> All Catagories</a>
       </li>
     </ul>
   </div>
-  <div class="pull-left" style="width:765px;">
+  <div class="pull-left" style="width:828px;">
       <ngb-carousel>  
         <ng-template ngbSlide>  
-            <img height="385px" src="../../../assets/images/banner1.jpeg" alt="Delhi Metro">                  
+            <img height="530px" src="../../../assets/images/banner1.jpeg" alt="Delhi Metro">                  
         </ng-template>  
         <ng-template ngbSlide>  
-            <img height="385px" src="../../../assets/images/banner2.jpeg" alt="Bangalore Metro">                  
+            <img height="530px" src="../../../assets/images/banner2.jpeg" alt="Bangalore Metro">                  
         </ng-template>  
         <ng-template ngbSlide>  
-            <img height="385px" src="../../../assets/images/banner3.jpeg" alt="Channai Metro">                  
+            <img height="530px" src="../../../assets/images/banner3.jpeg" alt="Channai Metro">                  
         </ng-template>              
     </ngb-carousel>        
   </div>

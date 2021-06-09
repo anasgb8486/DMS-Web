@@ -68,10 +68,14 @@ a:hover{
 }
 
 .nav-link{
-  padding: 8px;
   font-size: 13px;
 }
 
 ul li > a{
   color:rgb(90, 84, 84) !important;
+}
+
+p{
+  margin: 0;
+  padding: 0;
 }
