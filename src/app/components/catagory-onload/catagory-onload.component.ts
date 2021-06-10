@@ -7,12 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CatagoryOnloadComponent implements OnInit {
 
-  @Input() catagories: any[] = [];
+  @Input() catagoriesOnLoad: any[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.catagories);
+    console.log(this.catagoriesOnLoad);
   }
 
 }

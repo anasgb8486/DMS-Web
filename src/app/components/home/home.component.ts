@@ -10,6 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class HomeComponent implements OnInit {
 
+  public catagoriesOnLoad: any[] = [];
   public catagories: any[] = [];
   public distributorLeads: any[] = [];
   constructor(
@@ -31,6 +32,15 @@ export class HomeComponent implements OnInit {
         this.distributorLeads.push(element);
       });
 
+      for (const catagory  of result.categories[0]){
+        this.catagoriesOnLoad.push(catagory);
+      }
+      for (const catagory  of result.categories[1].slice(0, 3)){
+        this.catagoriesOnLoad.push(catagory);
+      }
+
+
+      console.log(this.catagoriesOnLoad);
       this.SpinnerService.hide();
     });
   }
