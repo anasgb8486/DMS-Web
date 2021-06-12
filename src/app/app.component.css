@@ -33,15 +33,15 @@
   
   .scroll{
     overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #fff;
-  z-index: 200;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 200;
   }
 
   .main {
-    height: 1500px; /* Used in this example to enable scrolling */
+    max-height: 1500px; /* Used in this example to enable scrolling */
     margin-top:140px;
     z-index: 100;
   }
