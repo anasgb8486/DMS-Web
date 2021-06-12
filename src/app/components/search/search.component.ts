@@ -20,22 +20,22 @@ export class SearchComponent implements OnInit, OnDestroy {
     private masterDataService: MasterDataService,
     private SpinnerService: NgxSpinnerService,
     public dialog: MatDialog) {
-      this.event$ = this.router.events.subscribe((event: any) => {
-        if (event instanceof NavigationStart) {
-          // console.log(event.url);
-          this.displaySearch = (event.url.replace('/', '') !== 'distributorleads');
-        }
-      });
-    }
+    this.event$ = this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationStart) {
+        // console.log(event.url);
+        this.displaySearch = (event.url.replace('/', '') !== 'distributorleads');
+      }
+    });
+  }
 
 
   ngOnInit(): void {
     this.SpinnerService.show();
     this.masterDataService.getAllCategories().subscribe(result => {
-      if (result){
+      if (result) {
         result.forEach((collection) => {
           collection.forEach(element => {
-            this.catagories.push({id: element.id, name: element.name});
+            this.catagories.push({ id: element.id, name: element.name });
           });
         });
       }
@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
 
-  searchCategory(): void{
+  searchCategory(): void {
     this.router.navigate(['./searchresultcategory']);
   }
 
