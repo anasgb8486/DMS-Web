@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,6 +11,8 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
+  @Input() displaySearch: boolean = true;
 
   public catagories: any[] = [];
   constructor(
@@ -52,5 +54,9 @@ export class SearchComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  makeSeachVisible(): void{
+    this.displaySearch = true;
   }
 }

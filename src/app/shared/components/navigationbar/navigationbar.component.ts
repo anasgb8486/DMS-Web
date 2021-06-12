@@ -11,6 +11,8 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class NavigationbarComponent implements OnInit {
   @Output() toggleSearchBar: EventEmitter<string> = new EventEmitter<string>();
 
+  public displaySearch = true;
+
   constructor(
     public dialog: MatDialog,
     config: NgbCarouselConfig) {
@@ -37,7 +39,12 @@ export class NavigationbarComponent implements OnInit {
     });
   }
 
+  hideSearch(): void{
+    this.displaySearch = false;
+  }
+
   onNavBarClickEvent(navigationItemName): void{
+    this.displaySearch = true;
     return this.toggleSearchBar.emit(navigationItemName);
   }
 }
