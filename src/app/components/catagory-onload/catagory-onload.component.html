@@ -4,7 +4,7 @@
     <ul>
       <li *ngFor="let catagory of catagoriesOnLoad">
         <img width="30px" height="30px" class="rounded-circle mr-2" [src]="catagory.image" />
-        <a href="#">{{ catagory.name }}</a> <i class="pull-right arrow right"></i>
+        <a [routerLink]="['../searchresultcategory', catagory.id ]">{{ catagory.name }}</a> <i class="pull-right arrow right"></i>
       </li>      
       <li>
         <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
