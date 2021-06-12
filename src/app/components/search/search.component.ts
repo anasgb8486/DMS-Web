@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -10,17 +10,24 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
-
-  @Input() displaySearch: boolean = true;
-
+export class SearchComponent implements OnInit, OnDestroy {
+  event$;
+  public displaySearch: boolean;
   public catagories: any[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private masterDataService: MasterDataService,
     private SpinnerService: NgxSpinnerService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog) {
+      this.event$ = this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationStart) {
+          // console.log(event.url);
+          this.displaySearch = (event.url.replace('/', '') !== 'distributorleads');
+        }
+      });
+    }
+
 
   ngOnInit(): void {
     this.SpinnerService.show();
@@ -35,6 +42,8 @@ export class SearchComponent implements OnInit {
       this.SpinnerService.hide();
     });
   }
+
+
 
   searchCategory(): void{
     this.router.navigate(['./searchresultcategory']);
@@ -56,7 +65,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  makeSeachVisible(): void{
-    this.displaySearch = true;
+  ngOnDestroy(): void {
+    this.event$.unsubscribe();
   }
 }

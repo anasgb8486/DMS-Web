@@ -39,8 +39,6 @@ export class HomeComponent implements OnInit {
         this.catagoriesOnLoad.push(catagory);
       }
 
-
-      console.log(this.catagoriesOnLoad);
       this.SpinnerService.hide();
     });
   }
