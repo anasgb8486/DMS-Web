@@ -30,3 +30,18 @@
     transform: translate(-50%, -50%);
     font-size: 70px; */
   }
+  
+  .scroll{
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 200;
+  }
+
+  .main {
+    max-height: 1500px; /* Used in this example to enable scrolling */
+    margin-top:140px;
+    z-index: 100;
+  }

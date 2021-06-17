@@ -9,7 +9,6 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./navigationbar.component.css']
 })
 export class NavigationbarComponent implements OnInit {
-  @Output() toggleSearchBar: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     public dialog: MatDialog,
@@ -35,9 +34,5 @@ export class NavigationbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-  }
-
-  onNavBarClickEvent(navigationItemName): void{
-    return this.toggleSearchBar.emit(navigationItemName);
   }
 }

@@ -11,11 +11,8 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
 })
 export class AppComponent implements OnInit {
   title = 'DMS-Web';
-  router: string;
-
-  flagToggleSearchBar = true;
-  flagDistributorLeads = false;
-  navigationItemName = 'home';
+  // tslint:disable-next-line: no-trailing-whitespace
+  router: string;  
 
   constructor(public dialog: MatDialog, private location: Location, private _router: Router) {
     // this.router = location.path();
@@ -34,16 +31,5 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-  }
-
-  NavigationBarItemClicked(flagValue: string): void{
-    this.navigationItemName = flagValue;
-    this.flagToggleSearchBar = (this.navigationItemName !== 'register');
-    this.flagDistributorLeads = (this.navigationItemName === 'distributorsleads');
-    console.log(this.flagToggleSearchBar);
-  }
-
-  displayRouterOutlet(flagName: string): void{
-    this.navigationItemName = flagName;
   }
 }

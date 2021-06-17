@@ -11,12 +11,13 @@ export class SearchbarDistributorLeadsComponent implements OnInit {
   @Output() toggleSearchBar: EventEmitter<string> = new EventEmitter<string>();
   constructor(private router: Router, private route: ActivatedRoute) { }
 
+  public result: boolean = false;
+
   ngOnInit(): void {
   }
 
   searchDistributorsLeads(): void{
-    this.onSearchClickClickEvent();
-    this.router.navigate(['./distributorleadsresult']);
+    this.result = true;
   }
 
   onKeyDownEvent(event: any): void {

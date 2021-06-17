@@ -1,0 +1,28 @@
+<div class="pull-left w-100 mb-4" style="border: 1px solid #ccc;height:490px;padding: 20px;">
+  <div class="pull-left catagoryList">
+    <h6>TRENDING CATEGORIES</h6>
+    <ul>
+      <li *ngFor="let catagory of catagoriesOnLoad">
+        <img width="30px" height="30px" class="rounded-circle mr-2" [src]="catagory.image" />
+        <a [routerLink]="['../searchresultcategory', catagory.id ]">{{ catagory.name }}</a> <i class="pull-right arrow right"></i>
+      </li>      
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
+         <a href="#" style="color:darkblue !important;"> All Catagories</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pull-left" style="width:828px;">
+      <ngb-carousel>  
+        <ng-template ngbSlide>  
+            <img width="100%" height="440px" src="../../../assets/images/banner1.jpg" alt="Delhi Metro">                  
+        </ng-template>  
+        <ng-template ngbSlide>  
+            <img width="100%" height="440px" src="../../../assets/images/banner2.jpg" alt="Bangalore Metro">                  
+        </ng-template>  
+        <ng-template ngbSlide>  
+            <img width="100%" height="440px" src="../../../assets/images/banner3.jpg" alt="Channai Metro">                  
+        </ng-template>              
+    </ngb-carousel>        
+  </div>
+</div>

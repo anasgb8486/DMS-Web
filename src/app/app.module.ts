@@ -35,6 +35,7 @@ import { SearchResultCategoryComponent } from '../app/components/search-result-c
 import { KnowMoreComponent } from '../app/components/know-more/know-more.component';
 import { SearchbarDistributorLeadsComponent } from '../app/components/searchbar-distributor-leads/searchbar-distributor-leads.component';
 import { DistributorLeadsResultsComponent } from '../app/components/distributor-leads-results/distributor-leads-results.component';
+import { CatagoryOnloadComponent } from '../app/components/catagory-onload/catagory-onload.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SearchResultCategoryComponent,
     KnowMoreComponent,
     SearchbarDistributorLeadsComponent,
-    DistributorLeadsResultsComponent
+    DistributorLeadsResultsComponent,
+    CatagoryOnloadComponent
   ],
   imports: [
     BrowserModule,
