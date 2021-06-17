@@ -37,3 +37,7 @@ img {
     width:100%;
     text-align: center !important;
 }
+
+.img-thumbnail{
+    height:150px;
+}
