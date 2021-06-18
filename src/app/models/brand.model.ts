@@ -4,6 +4,9 @@ export class Brand {
     id: number;
     name: string;
     description: string;
+    brandOwner: string;
+    brandOwnerEmail: string;
+    brandOwnerContactNumber: string;
     businessNatures: number[];
     investmentRequired: string;
     establishmentYear: number;
@@ -20,9 +23,19 @@ export class Brand {
     experianceType: ExperianceType;
     experianceYears: string;
     brandLogo: string;
+    countryName: string;
+    stateName: string;
+    cityName: string;
+    postalCode: string;
+    website: string;
+    distributorsBenifit: string;
+    usp: string;
+    contactPersons: string;
+    brandPrimaryAddress: string;
     countrywiseLocations: number[];
     regionwiseLocations: number[];
     statewiseLocations: number[];
     citywiseLocations: number[];
     brandImages: string[];
+    allLocations: string[];
 }

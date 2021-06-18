@@ -29,4 +29,9 @@ export class DistributorService {
     console.log(brandDto);
     return this._httpClient.post<any>(this.webAPIUrl, JSON.stringify(brandDto), this.httpOptions);
   }
+
+  public getBrandsByCategoryId(categoryId: number){
+    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryId/' + categoryId);
+  }
+
 }
