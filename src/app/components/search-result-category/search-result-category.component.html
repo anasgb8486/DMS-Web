@@ -1,98 +1,49 @@
 <div class="w-100">
-  <p class="mb-4">445 Results found for spices</p>
+  <p class="mb-4">{{ collection.length }} Results found for spices</p>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="card mb-3" style="max-width: 550px;">
-        <div class="row no-gutters" style="padding:10px">
-          <div class="col-md-3">
-            <div style="width:85px;">
-              <img src="../../../assets/images/products/logo.jpg" class="card-img" alt="...">
+  <div>
+    <div class="row">
+      <div class="col-sm-6" *ngFor="let item of collection; let i = index">
+        <!-- {{collection | json }} -->
+        <div class="card mb-3" style="max-width: 550px;">
+          <div class="row no-gutters" style="padding:10px">
+            <div class="col-md-3">
+              <div style="width:85px;">
+                <img [src]="item.brandLogo" class="card-img" alt="...">
+              </div>
+            </div>
+            <div class="col-md-6 pt-4">
+              <p>Products Offering:</p>
+              <p style="color:lightgrey">{{item.productsKeywords}}</p>
+            </div>
+            <div class="col-md-3">
+              <div style="width:120px;height: 120px;">
+                <ngb-carousel>
+                  <ng-template *ngFor="let image of item.brandImages" ngbSlide>
+                    <img style="width:120px;height: 120px;" [src]="image" alt="Delhi Metro">
+                  </ng-template>
+                </ngb-carousel>
+              </div>
             </div>
           </div>
-          <div class="col-md-6 pt-4">
-            <p>Products Offering:</p>
-            <p style="color:lightgrey">Product 1, Product 2, Product 3</p>
-          </div>
-          <div class="col-md-3">
-            <div style="width:120px;height: 120px;">
-              <ngb-carousel>  
-                <ng-template ngbSlide>  
-                    <img style="width:120px;height: 120px;" src="../../../assets/images/products/logo.jpg" alt="Delhi Metro">                  
-                </ng-template>  
-                <ng-template ngbSlide>  
-                    <img style="width:120px;height: 120px;" src="../../../assets/images/Jellyfish.jpg" alt="Bangalore Metro">                  
-                </ng-template>  
-                <ng-template ngbSlide>  
-                    <img style="width:120px;height: 120px;" src="../../../assets/images/Lighthouse.jpg" alt="Channai Metro">                  
-                </ng-template>              
-            </ngb-carousel>                
+          <div class="row" style="padding:10px">
+            <div class="col-md-12">
+              <p>Investment <i class="fa fa-inr" aria-hidden="true"></i>: {{item.investmentRequired}}</p>
+              <p>Space Required: {{ item.spaceRequired }}</p>
+              <p>Distributers Required in: <i class="fa fa-map-marker"></i> PAN India/States,UP,MP</p>
             </div>
           </div>
-        </div>
-        <div class="row" style="padding:10px">
-          <div class="col-md-12">
-            <p>Investment <i class="fa fa-inr" aria-hidden="true"></i>:</p>
-            <p>Space Required: </p>
-            <p>Distributers Required in: <i class="fa fa-map-marker"></i> PAN India/States,UP,MP</p>
-          </div>
-        </div>
-        <div class="row" style="padding:10px">
-          <div class="col-md-12">
-            <button class="btn btn-primary" (click)="openKnowMore()">Know more</button>
-            <div class="pull-right">
-              <button class="btn btn-primary mr-1">Mobile</button>
-              <button class="btn btn-primary">Submit Enquiry</button>
+          <div class="row" style="padding:10px">
+            <div class="col-md-12">              
+              <button class="btn btn-primary" (click)="openKnowMore(item.id)">Know more</button>
+              <div class="pull-right">
+                <!-- <button class="btn btn-primary mr-1">Mobile</button> -->
+                <button class="btn btn-primary" (click)="openDialog('postrequirements')">Submit Enquiry</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card mb-3" style="max-width: 550px;">
-        <div class="row no-gutters" style="padding:10px">
-          <div class="col-md-3">
-            <div style="width:85px;">
-              <img src="../../../assets/images/products/logo.jpg" class="card-img" alt="...">
-            </div>
-          </div>
-          <div class="col-md-6 pt-4">
-            <p>Products Offering:</p>
-            <p style="color:lightgrey">Product 1, Product 2, Product 3</p>
-          </div>
-          <div class="col-md-3">
-            <div style="width:120px;height: 120px;">
-              <ngb-carousel>  
-                <ng-template ngbSlide>  
-                    <img style="width:120px;height: 120px;" src="../../../assets/images/products/logo.jpg" alt="Delhi Metro">                  
-                </ng-template>  
-                <ng-template ngbSlide>  
-                    <img style="width:120px;height: 120px;" src="../../../assets/images/Jellyfish.jpg" alt="Bangalore Metro">                  
-                </ng-template>  
-                <ng-template ngbSlide>  
-                    <img style="width:120px;height: 120px;" src="../../../assets/images/Lighthouse.jpg" alt="Channai Metro">                  
-                </ng-template>              
-            </ngb-carousel>    
-            </div>
-          </div>
-        </div>
-        <div class="row" style="padding:10px">
-          <div class="col-md-12">
-            <p>Investment <i class="fa fa-inr" aria-hidden="true"></i>:</p>
-            <p>Space Required: </p>
-            <p>Distributers Required in: <i class="fa fa-map-marker"></i> PAN India/States,UP,MP</p>
-          </div>
-        </div>
-        <div class="row" style="padding:10px">
-          <div class="col-md-12">
-            <button class="btn btn-primary" (click)="openKnowMore()">Know more</button>
-            <div class="pull-right">
-              <button class="btn btn-primary mr-1">Mobile</button>
-              <button class="btn btn-primary">Submit Enquiry</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div>      
     </div>
   </div>
 </div>

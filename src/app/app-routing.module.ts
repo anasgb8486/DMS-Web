@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'searchresultcategory', component: SearchResultCategoryComponent },
   { path: 'searchresultcategory/:id', component: SearchResultCategoryComponent },
-  { path: 'knowmore', component: KnowMoreComponent },
+  { path: 'knowmore/:brandId', component: KnowMoreComponent },
   { path: 'distributorleads', component: SearchbarDistributorLeadsComponent },
   { path: 'distributorleadsresult', component: DistributorLeadsResultsComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home'}

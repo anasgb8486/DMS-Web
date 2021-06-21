@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { GetbranddataService } from 'src/app/services/getbranddata.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-know-more',
@@ -8,7 +13,14 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class KnowMoreComponent implements OnInit {
 
-  constructor(config: NgbCarouselConfig) {
+  public BrandData: any;
+  public BrandDataCollection: any;
+  constructor(
+    config: NgbCarouselConfig,
+    private getBrandData: GetbranddataService,
+    private _activatedRoute: ActivatedRoute,
+    private SpinnerService: NgxSpinnerService,
+    public dialog: MatDialog) {
     config.interval = 3000;
     config.wrap = true;
     config.keyboard = false;
@@ -17,7 +29,36 @@ export class KnowMoreComponent implements OnInit {
     config.showNavigationIndicators = true;
   }
 
+
   ngOnInit(): void {
+    this.SpinnerService.show();
+    this._activatedRoute.params.subscribe(parameter => {
+      if (parameter.brandId) {
+        this.BrandDataCollection = this.getBrandData.getOption();
+        if (this.BrandDataCollection.BrandDataByCatagory) {
+          this.BrandData =  this.BrandDataCollection.BrandDataByCatagory.find(x => x.id == parameter.brandId);
+        }
+      }
+      this.SpinnerService.hide();
+    });
+    console.log(this.BrandData);
+  }
+
+  openDialog(componentName): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      disableClose: true,
+      width: '750px',
+      data: componentName,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  scroll(el: HTMLElement): void {
+    // el.scrollTo({behavior: 'smooth', top: 20});
+     el.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 
 }
