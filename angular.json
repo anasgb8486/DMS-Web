@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "DMS-Web"
+    }
+  },
+  "defaultProject": "DMS-Web",
+  "cli": {
+    "analytics": false
+  }
 }
