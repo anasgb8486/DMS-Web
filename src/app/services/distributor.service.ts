@@ -25,16 +25,12 @@ export class DistributorService {
     // this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
   }
 
-  public getBrandsByCategoryId(categoryId: number): Observable<any>{
-    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryId?categoryId=' + categoryId);
+  public getBrandsByCategoryId(categoryId: number, productsKeyword: string): Observable<any>{
+    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryAndProductsKeyword?categoryId=' + categoryId + '&searchKeyword=' + productsKeyword);
   }
 
   appointOrBecomeDistributorRequest(brandDto: Brand): Observable<any> {
     return this._httpClient.post<any>(this.webAPIUrl, JSON.stringify(brandDto), this.httpOptions);
-  }
-
-  public getBrandsByCategoryId(categoryId: number){
-    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryId/' + categoryId);
   }
 
 }
