@@ -25,8 +25,8 @@ export class DistributorService {
     // this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
   }
 
-  public getBrandsByCategoryId(categoryId: number, productsKeyword: string): Observable<any>{
-    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryAndProductsKeyword?categoryId=' + categoryId + '&searchKeyword=' + productsKeyword);
+  public getBrandsByCategoryAndProductsKeyword(categoryId: number, searchKeyword: string): Observable<any>{
+    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryAndProductsKeyword?categoryId=' + categoryId + '&searchKeyword=' + searchKeyword);
   }
 
   appointOrBecomeDistributorRequest(brandDto: Brand): Observable<any> {
