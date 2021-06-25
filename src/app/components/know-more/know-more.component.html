@@ -1,50 +1,55 @@
-<div class="pull-left w-100 p-4 mt-5 mb-5" style="border: 1px solid lightgrey;border-radius: 20px;">
+<div class="pull-left w-100 p-4 mb-4" style="border: 1px solid lightgrey;border-radius: 20px;">
   <div class="pull-left w-100">
     <div class="pull-left imgthumbnail p-1 mr-4" style="border: 1px solid lightgrey;width:270px;height: 220px;">
-      <img style="width: 260px; height: 210px;" src="../../../assets/images/medical-supplies.jpg" />
+      <img style="width: 260px; height: 210px;" [src]="BrandData.brandLogo" />
     </div>
     <div class="pull-left pt-2">
       <h3 class="pull-left">
-        Sample Store Pvt Ltd.
+        {{BrandData.name}}
       </h3>
       <div style="clear: both;"></div>
       <div class="pull-left pt-2">
         <div class="pull-left distributordetails">
-          Mode:
+          Brand Name: <br />
+          {{BrandData.name}}
         </div>
         <div class="pull-left distributordetails">
-          GST No.:
+          GST No.: <br />
+          {{BrandData.gstNumber}}
         </div>
         <div class="pull-left distributordetails">
-          Brand:
+          Establisment Year: <br />
+          {{BrandData.establishmentYear}}
         </div>
         <div style="clear: both;"></div>
         <div class="pull-left distributordetails">
-          Space Required:
+          Investment Required : <br />
+          {{BrandData.investmentRequired}}
         </div>
         <div class="pull-left distributordetails">
-          Investment Required :
+          Space Required: <br />
+          {{BrandData.spaceRequired}}
         </div>
         <div class="pull-left distributordetails">
-          Established:
+          No. of Employees:
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="pull-left w-100 p-2 mb-5" style="border: 1px solid lightgrey;border-radius: 20px;">
+<div class="pull-left w-100 p-2 mb-4" style="border: 1px solid lightgrey;border-radius: 20px;">
   <div class="pull-left" style="margin-left: 100px;">
     <div class="pull-left ml-4 pr-4 seperator">
-      <b><a>Company Profile</a></b>
+      <b><a (click)="scroll(CompanyProfile)">Company Profile</a></b>
     </div>
     <div class="pull-left ml-4 pr-4 seperator">
-      <b><a>Our Product Range</a></b>
+      <b><a (click)="scroll(ProductRange)">Our Product Range</a></b>
     </div>
     <div class="pull-left ml-4 pr-4 seperator">
-      <b><a>Investment Required</a></b>
+      <b><a (click)="scroll(InvestmentRequired)">Investment Required</a></b>
     </div>
     <div class="pull-left ml-4 pr-4 seperator">
-      <b><a>Distributor benefits</a></b>
+      <b><a (click)="scroll(DistributorsBenefits)">Distributor benefits</a></b>
     </div>
     <div class="pull-left ml-4 pr-4">
       <b><a>Contact Us</a></b>
@@ -56,80 +61,13 @@
   <div class="row">
     <div id="LatestDistributorsLeads" class='col-12'>
       <ngb-carousel>
-        <ng-template ngbSlide>
+        <ng-template *ngFor="let image of BrandData.brandImages" ngbSlide>
           <div class="row">
             <div class="col-md-3">
               <div class="item-box-blog">
                 <div class="item-box-blog-body">
                   <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="row">
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="item-box-blog">
-                <div class="item-box-blog-body">
-                  <div class="imageThumbnial">
-                    <img width="248px" height="200px" src="../../../assets/images/Jellyfish.jpg" />
+                    <img width="248px" height="200px" [src]="image" />
                   </div>
                 </div>
               </div>
@@ -141,9 +79,9 @@
   </div>
 </div>
 
-<div class="pull-left mb-5 w-100">
+<div class="pull-left mb-4 w-100">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" #CompanyProfile>
       Sample Company Profile
     </div>
     <div class="card-body">
@@ -173,9 +111,9 @@
     </div>
   </div>
 
-  <div class="pull-left mt-5 w-100">
+  <div class="pull-left mt-4 w-100">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header" #ProductRange>
         Our Product Range
       </div>
       <div class="card-body">
@@ -185,95 +123,81 @@
     </div>
   </div>
 
-  <div class="pull-left mt-5 w-100">
+  <div class="pull-left mt-4 w-100">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header" #InvestmentRequired>
         Investment Required
       </div>
       <div class="card-body">
         <b>The offer to target customers</b>
-        <p>
-          What does your product and/or service do? What benefits make your offer unique, or just different? What will
-          motivate customers to switch to your product and/or service? How would you describe a typical customer for
-          your product and/or service? How would you describe a group(s) of target customers?</p>
+        <p [innerHTML]="BrandData.investmentRequired">
 
-        <b>The market potential</b>
-        <p>What is the market potential for your product and/or service? Is the market growing, staying the same, or
-          declining? How many competitors are there? How will you compete (e.g. faster service, more convenient etc.)?
-          What sales can you realistically achieve in the first 6 months? First year?
         </p>
 
-        <b>Reaching target customers</b>
-        <p>Which route(s) to access your target customers will you use e.g. website, shop etc. What promotional methods
-          will you use (e.g. email, social media, advertising etc.)?</p>
-
       </div>
     </div>
   </div>
 
-  <div class="pull-left mt-5 w-100">
+  <div class="pull-left mt-4 w-100">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header" #DistributorsBenefits>
         Distributors Benefits
       </div>
-      <div class="card-body">
-        <b>Benefits of being our distributor:</b>
-        <p>- Periodic discounts and offers on achieving pre-set targets</p>
-        <p>- The assistance of our administration team in case of any quer</p>
-        <p>- Complete promotional guidance for products</p>
+      <div class="card-body" [innerHTML]="BrandData.distributorsBenefits">
+
       </div>
     </div>
   </div>
 
-  <div class="pull-left mt-5 w-100">
+  <div class="pull-left mt-4 w-100">
     <div class="card">
       <div class="card-header">
         Products USP’s
       </div>
       <div class="card-body">
         <b>Company USPs:</b>
-        <p>- In-depth industry knowledge</p>
-        <p>- Enormous production capacity</p>
-        <p>- Assurance of timely delivery</p>
+        <div [innerHTML]="BrandData.usp">
+
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="pull-left mt-5 w-100">
+  <div class="pull-left mt-4 w-100" id="ContactDetails">
     <div class="card">
       <div class="card-header">
         Contact Details
       </div>
       <div class="card-body">
-        <table border="1" cellpadding="3px"  class="w-100" style="border-collapse: collapse;border-color: lightgray;">
+        <table border="1" cellpadding="3px" class="w-100" style="border-collapse: collapse;border-color: lightgray;">
           <tr>
             <td><b>Name</b></td>
-            <td>Test Name</td>
+            <td>{{BrandData.brandOwner}}</td>
           </tr>
           <tr>
             <td><b>Company Name</b></td>
-            <td>Test Company Name</td>
+            <td>{{BrandData.name}}</td>
           </tr>
           <tr>
             <td><b>Address</b></td>
-            <td>Test Address</td>
+            <td>{{BrandData.brandPrimaryAddress}}</td>
           </tr>
           <tr>
             <td><b>City</b></td>
-            <td>Test City</td>
+            <td>{{BrandData.cityName}}</td>
           </tr>
           <tr>
             <td><b>State</b></td>
-            <td>Test State</td>
+            <td>{{BrandData.stateName}}</td>
           </tr>
           <tr>
             <td><b>Zip Code</b></td>
-            <td>Test Zip Code</td>
+            <td>{{BrandData.postalCode}}</td>
           </tr>
 
           <tr>
             <td><b>Country</b></td>
-            <td>Test Country</td>
+            <td>{{BrandData.countryName}}</td>
           </tr>
 
           <tr>
@@ -282,10 +206,21 @@
           </tr>
           <tr>
             <td><b>Mobile</b></td>
-            <td>0000000000</td>
+            <td>{{BrandData.brandOwnerContactNumber}}</td>
           </tr>
         </table>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-left mb-5 w-100">
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-primary mr-1 w-100">Contact Us</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-primary mr-1 w-100" (click)="openDialog('postrequirements')">Send Enquiry</button>
     </div>
   </div>
 </div>

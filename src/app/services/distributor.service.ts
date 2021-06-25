@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class DistributorService {
-  private API_URL= environment.API_URL;
+  private API_URL = environment.API_URL;
   webAPIUrl: string;
   // private token = localStorage.getItem('jwt');
   private httpOptions = {
@@ -22,11 +22,14 @@ export class DistributorService {
 
   constructor(private _httpClient: HttpClient) {
     this.webAPIUrl = this.API_URL + '/api/BrandProduct/';
-    //this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
+    // this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
+  }
+
+  public getBrandsByCategoryId(categoryId: number): Observable<any>{
+    return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryId?categoryId=' + categoryId);
   }
 
   appointOrBecomeDistributorRequest(brandDto: Brand): Observable<any> {
-    console.log(brandDto);
     return this._httpClient.post<any>(this.webAPIUrl, JSON.stringify(brandDto), this.httpOptions);
   }
 

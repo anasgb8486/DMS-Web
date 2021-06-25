@@ -14,6 +14,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   event$;
   public displaySearch: boolean;
   public catagories: any[] = [];
+
+  // tslint:disable-next-line: no-inferrable-types
+  public catagoryId: number = 0;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -46,7 +50,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
   searchCategory(): void {
-    this.router.navigate(['./searchresultcategory']);
+    this.router.navigate(['./searchresultcategory', this.catagoryId]);
   }
 
   onKeyDownEvent(event: any): void {
@@ -63,6 +67,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  setCatagoryId(catagoryId: number): void{
+    this.catagoryId = catagoryId;
   }
 
   ngOnDestroy(): void {

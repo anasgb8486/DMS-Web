@@ -1,4 +1,4 @@
-import { ExperianceType, RequestType } from "./system.enums";
+import { ExperianceType, RequestType } from './system.enums';
 
 export class Brand {
     id: number;
@@ -38,4 +38,5 @@ export class Brand {
     citywiseLocations: number[];
     brandImages: string[];
     allLocations: string[];
+    DistributorsBenefits: string;
 }

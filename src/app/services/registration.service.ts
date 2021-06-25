@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class RegistrationService {
-  private API_URL= environment.API_URL;
+  private API_URL = environment.API_URL;
   webAPIUrl: string;
   public registrationDto: RegistrationDto;
   // private token = localStorage.getItem('jwt');
@@ -24,7 +24,7 @@ export class RegistrationService {
   constructor(private _httpClient: HttpClient) {
     this.registrationDto = new RegistrationDto();
     this.webAPIUrl = this.API_URL + '/api/BrandProduct/';
-    //this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
+    // this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/BrandProduct/';
   }
 
   saveUserRegistrationDetails(registrationDto: RegistrationDto): Observable<any> {

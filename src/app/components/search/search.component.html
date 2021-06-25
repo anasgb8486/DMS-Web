@@ -10,7 +10,7 @@
                 <div class="pull-left" style="width:78%; margin: 0 10px;" *ngIf="displaySearch">
                     <div class="pull-left w-100">
                         <div class="pull-left form-group" style="width:25%; margin-right: 10px;">
-                            <select class="form-control" id="sel1" style="height: 45px;">
+                            <select class="form-control" id="sel1" style="height: 45px;" (change)="setCatagoryId($event.target.value)">
                                 <option>Select Category</option>
                                 <option *ngFor="let catagory of catagories" [value]="catagory.id">{{catagory.name}}
                                 </option>
