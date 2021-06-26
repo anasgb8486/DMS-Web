@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line: no-inferrable-types
   public catagoryId: number = 0;
+  public keyword: string;
 
   constructor(
     private router: Router,
@@ -50,7 +51,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
   searchCategory(): void {
-    this.router.navigate(['./searchresultcategory', this.catagoryId]);
+    this.router.navigate(['./searchresultcategory/', {id: this.catagoryId, key: this.keyword}]);
   }
 
   onKeyDownEvent(event: any): void {

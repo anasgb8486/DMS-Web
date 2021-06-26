@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'becomeDistributor', component: BecomeDistributorComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'searchresultcategory', component: SearchResultCategoryComponent },
-  { path: 'searchresultcategory/:id', component: SearchResultCategoryComponent },
+  { path: 'searchresultcategory/:id/:key', component: SearchResultCategoryComponent },
   { path: 'knowmore/:brandId', component: KnowMoreComponent },
   { path: 'distributorleads', component: SearchbarDistributorLeadsComponent },
   { path: 'distributorleadsresult', component: DistributorLeadsResultsComponent },

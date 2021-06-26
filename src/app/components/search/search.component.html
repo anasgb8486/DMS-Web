@@ -18,7 +18,7 @@
                         </div>
                         <div class="pull-left input-group" style="width:73%">
                             <input type="text" class="form-control" placeholder="Search products"
-                                (keydown.enter)="onKeyDownEvent($event)" style="height: 45px;">
+                                (keydown.enter)="onKeyDownEvent($event)" style="height: 45px;" [(ngModel)]="keyword" >
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button" (click)="searchCategory()"
                                     style="background-color: #208e39;">

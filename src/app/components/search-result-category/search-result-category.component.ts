@@ -36,7 +36,7 @@ export class SearchResultCategoryComponent implements OnInit {
     this._activatedRoute.params.subscribe(parameter => {
       if (parameter.id)
       {
-        this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, ' ').subscribe((result) => {
+        this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, parameter.key).subscribe((result) => {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
         });
