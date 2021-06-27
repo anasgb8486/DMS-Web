@@ -34,9 +34,9 @@ export class SearchResultCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.SpinnerService.show();
     this._activatedRoute.params.subscribe(parameter => {
-      if (parameter.id)
-      {
-        this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, parameter.key).subscribe((result) => {
+      if (parameter.id) {
+        //this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, parameter.key).subscribe((result) => {
+        this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, '').subscribe((result) => {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
         });
