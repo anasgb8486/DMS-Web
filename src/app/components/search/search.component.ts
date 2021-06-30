@@ -55,7 +55,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   onKeyDownEvent(event: any): void {
-    this.router.navigate(['/searchresultcategory'], { relativeTo: this.route });
+    this.searchCategory();
+    // this.router.navigate(['/searchresultcategory;id=' + this.catagoryId + ';key= ' + this.keyword], { relativeTo: this.route });
   }
 
   openDialog(componentName): void {
@@ -70,7 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  setCatagoryId(catagoryId: number): void{
+  setCatagoryId(catagoryId: number): void{    
     this.catagoryId = catagoryId;
   }
 

@@ -34,13 +34,22 @@ export class SearchResultCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.SpinnerService.show();
     this._activatedRoute.params.subscribe(parameter => {
-      if (parameter.id) {
-        //this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, parameter.key).subscribe((result) => {
-        this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, '').subscribe((result) => {
+
+      if (parameter.id && parameter.key) {
+        this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, parameter.key).subscribe((result) => {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
         });
+        console.log(parameter.key);
+        console.log('parameter.id && parameter.key');
+      }else{
+        this.distributorService.GetBrandsByCategoryId(parameter.id).subscribe((result) => {
+          this.collection = result;
+          this.getBrandData.setOption('BrandDataByCatagory', result);
+        });
+        console.log('parameter.id');
       }
+
       this.SpinnerService.hide();
     });
   }
