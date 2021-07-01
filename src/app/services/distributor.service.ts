@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { Brand } from '../models/brand.model';
+import { BrandFilter } from '../models/brandFilter.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -35,6 +36,10 @@ export class DistributorService {
 
   appointOrBecomeDistributorRequest(brandDto: Brand): Observable<any> {
     return this._httpClient.post<any>(this.webAPIUrl, JSON.stringify(brandDto), this.httpOptions);
+  }
+
+  getDistributorsLeadsBySearchFilter(filter: BrandFilter): Observable<any> {
+    return this._httpClient.post<any>(this.webAPIUrl + 'GetDistributorsLeadsBySearchFilter', JSON.stringify(filter), this.httpOptions);
   }
 
 }

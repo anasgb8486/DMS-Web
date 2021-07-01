@@ -39,4 +39,12 @@ export class MasterDataService {
     return this._httpClient.get(this.webAPIUrl + 'GetAllLocations/');
   }
 
+  public getAllStates(): Observable<any[]> {
+    return this._httpClient.get<any[]>(this.webAPIUrl + 'GetAllStates/');
+  }
+
+  public getAllCities(): Observable<any[]> {
+    return this._httpClient.get<any[]>(this.webAPIUrl + 'GetAllCities/');
+  }
+
 }
