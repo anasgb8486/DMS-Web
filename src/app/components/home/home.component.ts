@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
         this.catagoriesOnLoad.push(catagory);
       }
 
+      sessionStorage.setItem('catagories', JSON.stringify(this.catagories));
+
       this.SpinnerService.hide();
     });
   }

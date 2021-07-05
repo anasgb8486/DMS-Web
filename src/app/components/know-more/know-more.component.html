@@ -52,7 +52,7 @@
       <b><a (click)="scroll(DistributorsBenefits)">Distributor benefits</a></b>
     </div>
     <div class="pull-left ml-4 pr-4">
-      <b><a>Contact Us</a></b>
+      <b><a (click)="scroll(ContactUs)">Contact Us</a></b>
     </div>
   </div>
 </div>
@@ -61,9 +61,9 @@
   <div class="row">
     <div id="LatestDistributorsLeads" class='col-12'>
       <ngb-carousel>
-        <ng-template *ngFor="let image of BrandData.brandImages" ngbSlide>
+        <ng-template *ngFor="let images of imagesArr" ngbSlide>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" *ngFor="let image of images">
               <div class="item-box-blog">
                 <div class="item-box-blog-body">
                   <div class="imageThumbnial">
@@ -82,32 +82,9 @@
 <div class="pull-left mb-4 w-100">
   <div class="card">
     <div class="card-header" #CompanyProfile>
-      Sample Company Profile
+      Company Profile
     </div>
-    <div class="card-body">
-      <p>
-        Our story began in 1971. Back then we were a roaster and retailer of whole bean and ground coffee, tea and
-        spices with a single store in Seattle's Pike Place Market.</p>
-      <p>
-        Today, we are privileged to connect with millions of customers every day with exceptional products and more than
-        24,000 retail stores in 70 countries.</p>
-
-      <b>Folklore</b>
-      <p>Sample is named after the first mate in Herman Melville's Moby Dick. Our logo is also inspired by the sea -
-        featuring a twin-tailed siren from Greek mythology.</p>
-
-      <b>Sample Mission</b>
-      <p>Our mission: to inspire and nurture the human spirit - one person, one cup and one neighborhood at a time.</p>
-
-      <b>Our Coffee</b>
-      <p>We've always believed in serving the best coffee possible. It's our goal for all of our coffee to be grown
-        under the highest standards of quality, using ethical sourcing practices. Our coffee buyers personally travel to
-        coffe Latin America, Africa and Asia to select high quality beans. And our master roasters bring out the balance
-        and rich flavor of the beans through the signature Sample Roast.</p>
-      <b>Our Stores</b>
-      <p> Our stores are a neighborhood gathering place for meeting friends and family. Our customers enjoy quality
-        service, an inviting atmosphere and an exceptional beverage.</p>
-
+    <div class="card-body" [innerHTML]="BrandData.description">      
     </div>
   </div>
 
@@ -117,8 +94,7 @@
         Our Product Range
       </div>
       <div class="card-body">
-        Indian Raw Spices, Amchoor Powder, Garam Masala Powder, Coriander Powder, Red Chilli Powder, Turmeric Powder,
-        Indian Masala Powder
+        {{BrandData.productsKeywords}}
       </div>
     </div>
   </div>
@@ -163,7 +139,7 @@
     </div>
   </div>
 
-  <div class="pull-left mt-4 w-100" id="ContactDetails">
+  <div class="pull-left mt-4 w-100" id="ContactDetails" #ContactUs>
     <div class="card">
       <div class="card-header">
         Contact Details
@@ -182,7 +158,7 @@
             <td><b>Address</b></td>
             <td>{{BrandData.brandPrimaryAddress}}</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td><b>City</b></td>
             <td>{{BrandData.cityName}}</td>
           </tr>
@@ -203,7 +179,7 @@
           <tr>
             <td><b>Phone</b></td>
             <td>Test Phone</td>
-          </tr>
+          </tr> -->
           <tr>
             <td><b>Mobile</b></td>
             <td>{{BrandData.brandOwnerContactNumber}}</td>

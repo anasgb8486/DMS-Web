@@ -13,6 +13,8 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
 })
 export class KnowMoreComponent implements OnInit {
 
+  public imagesArr: any[] = [];
+
   public BrandData: any;
   public BrandDataCollection: any;
   constructor(
@@ -36,12 +38,14 @@ export class KnowMoreComponent implements OnInit {
       if (parameter.brandId) {
         this.BrandDataCollection = this.getBrandData.getOption();
         if (this.BrandDataCollection.BrandDataByCatagory) {
-          this.BrandData =  this.BrandDataCollection.BrandDataByCatagory.find(x => x.id == parameter.brandId);
+          this.BrandData = this.BrandDataCollection.BrandDataByCatagory.find(x => x.id == parameter.brandId);
+        }
+        if (this.BrandData) {
+          this.carouselImageAdjustment(this.BrandData.brandImages);
         }
       }
       this.SpinnerService.hide();
     });
-    console.log(this.BrandData);
   }
 
   openDialog(componentName): void {
@@ -58,7 +62,13 @@ export class KnowMoreComponent implements OnInit {
 
   scroll(el: HTMLElement): void {
     // el.scrollTo({behavior: 'smooth', top: 20});
-     el.scrollIntoView({behavior: 'smooth', block: 'center'});
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  carouselImageAdjustment(imageData: any[]): void {
+    while (imageData.length > 0) {
+      this.imagesArr.push(imageData.splice(0, 4));
+    }
   }
 
 }

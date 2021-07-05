@@ -40,14 +40,11 @@ export class SearchResultCategoryComponent implements OnInit {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
         });
-        console.log(parameter.key);
-        console.log('parameter.id && parameter.key');
       }else{
         this.distributorService.GetBrandsByCategoryId(parameter.id).subscribe((result) => {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
         });
-        console.log('parameter.id');
       }
 
       this.SpinnerService.hide();
