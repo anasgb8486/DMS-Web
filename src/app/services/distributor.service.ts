@@ -29,6 +29,14 @@ export class DistributorService {
     return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryAndProductsKeyword?categoryId=' + categoryId + '&searchKeyword=' + searchKeyword);
   }
 
+  public GetBrandsAssociatedWithUs(): Observable<any> {
+    return this._httpClient.get(this.webAPIUrl + 'GetBrandsAssociatedWithUs');
+  }
+
+  public GetBrandDataForKnowMore(brandId: number): Observable<any> {
+    return this._httpClient.get(this.webAPIUrl + 'GetBrandDataForKnowMore?brandId=' + brandId);
+  }
+
   public GetBrandsByCategoryId(categoryId: number): Observable<any> {
     return this._httpClient.get(this.webAPIUrl + 'GetBrandsByCategoryId?categoryId=' + categoryId);
   }
