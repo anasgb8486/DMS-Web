@@ -77,7 +77,7 @@ export class AppointDistributorComponent implements OnInit {
       startingWithEmptySpace: 'You cannot start with empty spaces.',
     },
     categories: {
-      required: 'Categories are required.',
+      required: 'Category is required.',
     },
     totalDistributors: {
       required: 'Please enter total number of distributors.',

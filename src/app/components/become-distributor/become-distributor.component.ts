@@ -24,6 +24,7 @@ export class BecomeDistributorComponent implements OnInit {
   businessNatureMultiSelectSettings = {};
   //products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
+  categories: MasterDataDto[] = [];
   // distributorshipTypes: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
   countries: LocationDto[] = [];
@@ -40,6 +41,7 @@ export class BecomeDistributorComponent implements OnInit {
   formErrors = {
     brandName: '',
     businessNature: '',
+    categories: '',
     investmentRequired: '',
     pan: '',
     gstNumber: '',
@@ -55,6 +57,9 @@ export class BecomeDistributorComponent implements OnInit {
     },
     businessNature: {
       required: 'Business nature is required.',
+    },
+    categories: {
+      required: 'Category is required.',
     },
     investmentRequired: {
       required: 'Investment amount is required.',
@@ -147,6 +152,7 @@ export class BecomeDistributorComponent implements OnInit {
       brandName: ['', [CustomValidators.startingWithEmptySpace()]],
       // businessNature: ['', Validators.required],
       businessNatures: [[]],
+      categories: [[]],
       products: [''],
       // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       investmentRequired: ['', [CustomValidators.startingWithEmptySpace()]],
@@ -170,6 +176,10 @@ export class BecomeDistributorComponent implements OnInit {
   }
 
   loadMasterData() {
+    this._masterDataService.getAllCategoriesMasterData().subscribe((data: MasterDataDto[]) => {
+      this.categories = data;
+    });
+
     this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[]) => {
       this.businessNatures = data;
     });
@@ -188,6 +198,7 @@ export class BecomeDistributorComponent implements OnInit {
 
     brand.name = this.becomeDistributorForm.value.brandName;
     brand.description = this.becomeDistributorForm.value.description;
+    brand.categories = [parseInt(this.becomeDistributorForm.value.categories)];
     brand.businessNatures = this.becomeDistributorForm.value.businessNatures != "" ? this.becomeDistributorForm.value.businessNatures.map(({ id }) => id) : null;
     brand.investmentRequired = this.becomeDistributorForm.value.investmentRequired;
     //brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
@@ -242,7 +253,7 @@ export class BecomeDistributorComponent implements OnInit {
       } else {
         this.formErrors[key] = '';
         if (abstractControl && !abstractControl.valid
-          && (abstractControl.touched || abstractControl.dirty)) {
+          && (key == 'categories' || abstractControl.touched || abstractControl.dirty)) {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
             if (errorKey) {
