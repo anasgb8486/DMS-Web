@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.SpinnerService.show();
     this.apploadDataService.getApplicationLoadData().subscribe(result => {
+      console.log(result);
       result.categories.forEach(element => {
         this.catagories.push(element);
       });
@@ -38,6 +39,8 @@ export class HomeComponent implements OnInit {
       for (const catagory  of result.categories[1].slice(0, 3)){
         this.catagoriesOnLoad.push(catagory);
       }
+
+      sessionStorage.setItem('catagories', JSON.stringify(this.catagories));
 
       this.SpinnerService.hide();
     });

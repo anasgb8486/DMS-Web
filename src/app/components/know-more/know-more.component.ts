@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { GetbranddataService } from 'src/app/services/getbranddata.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { DistributorService } from 'src/app/services/distributor.service';
 
 @Component({
   selector: 'app-know-more',
@@ -13,6 +14,8 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
 })
 export class KnowMoreComponent implements OnInit {
 
+  public imagesArr: any[] = [];
+
   public BrandData: any;
   public BrandDataCollection: any;
   constructor(
@@ -20,6 +23,7 @@ export class KnowMoreComponent implements OnInit {
     private getBrandData: GetbranddataService,
     private _activatedRoute: ActivatedRoute,
     private SpinnerService: NgxSpinnerService,
+    private distributorService: DistributorService,
     public dialog: MatDialog) {
     config.interval = 3000;
     config.wrap = true;
@@ -33,15 +37,20 @@ export class KnowMoreComponent implements OnInit {
   ngOnInit(): void {
     this.SpinnerService.show();
     this._activatedRoute.params.subscribe(parameter => {
+
       if (parameter.brandId) {
-        this.BrandDataCollection = this.getBrandData.getOption();
-        if (this.BrandDataCollection.BrandDataByCatagory) {
-          this.BrandData =  this.BrandDataCollection.BrandDataByCatagory.find(x => x.id == parameter.brandId);
-        }
+        console.log(parameter.brandId);
+        this.distributorService.GetBrandDataForKnowMore(parameter.brandId).subscribe((result) => {
+          if (result) {
+            this.BrandData = result[0];
+          }
+          if (this.BrandData) {
+            this.carouselImageAdjustment(this.BrandData.brandImages);
+          }
+        });
       }
       this.SpinnerService.hide();
     });
-    console.log(this.BrandData);
   }
 
   openDialog(componentName): void {
@@ -58,7 +67,13 @@ export class KnowMoreComponent implements OnInit {
 
   scroll(el: HTMLElement): void {
     // el.scrollTo({behavior: 'smooth', top: 20});
-     el.scrollIntoView({behavior: 'smooth', block: 'center'});
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  carouselImageAdjustment(imageData: any[]): void {
+    while (imageData.length > 0) {
+      this.imagesArr.push(imageData.splice(0, 4));
+    }
   }
 
 }

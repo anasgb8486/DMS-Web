@@ -2,148 +2,22 @@
     <div class="ExplorePremiumBrands">
         Brands Associated With Us
     </div>
-    <div class="row mrb10px">
-        <div class="col-12">
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/Kafi.png" />
-                <label class="alingCenter">
-                    Kafi Cosmetics Pvt. Ltd.
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/ORGANIC GLOW.jpeg" />
-                <label class="alingCenter">
-                    Organic Glow & Co.
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/super-foods.jpg" />
-                <label class="alingCenter">
-                    Super Food Products
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/arogya-tea.png" />
-                <label class="alingCenter">
-                    Arogya Label Tea
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/Panchratan.png" />
-                <label class="alingCenter">
-                    Rashi Dudh Sagar Private Limited
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/RkUdyog.jpeg" />
-                <label class="alingCenter">
-                    R K Udyog
-                </label>
-            </div>
+    <div class="row mrb10px" *ngIf="brandAssosiatedWithUsArrToDisplay.length == 0">
+        <div class="col-12 fl" style="height: 300px;">
+            <div class="text-center">
+                <div class="spinner-border"></div>
+                <span>Please wait ...</span>
+            </div>            
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" height="300px"
-                    src="../../../assets/images/brands/Lancer.jpeg" />
+    <div class="row mrb10px" *ngFor="let brandRow of brandAssosiatedWithUsArrToDisplay">
+        <div class="col-2 fl" *ngFor="let brand of brandRow">
+            <a [routerLink]="['../knowmore', brand.brandId ]">
+                <img class="img-thumbnail" height="300px" [src]="brand.brandLogo" />
                 <label class="alingCenter">
-                    Lancer Foods
+                    {{brand.brandName}}
                 </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/madhu.jpeg" />
-                <label class="alingCenter">
-                    Madhu Dravyam Honey
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/MetroIndiaAssociates.jpeg" />
-                <label class="alingCenter">
-                    Metro India Associates
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/TAPODHANI_FOOD.png" />
-                <label class="alingCenter">
-                    Tapodhani Food Products LLP
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/futurefame.png" />
-                <label class="alingCenter">
-                    Fortufame Agro Pvt Ltd
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/LOTUS.jpeg" />
-                <label class="alingCenter">
-                    LOTUS
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" height="300px"
-                    src="../../../assets/images/brands/KHADI.jpeg" />
-                <label class="alingCenter">
-                    Khadi Natural
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/ORGANIC.jpeg" />
-                <label class="alingCenter">
-                    Organic India
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/BIOTIQUE.jpeg" />
-                <label class="alingCenter">
-                    Biotic Advance Ayurveda
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/FREYAORGANIC.jpeg" />
-                <label class="alingCenter">
-                    Freya Organic
-                </label>
-
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/HERBALLIFE.jpeg" />
-                <label class="alingCenter">
-                    Herbal Life
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" src="../../../assets/images/brands/KAMA.jpeg" />
-                <label class="alingCenter">
-                    Kama Ayurveda
-                </label>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" height="300px"
-                    src="../../../assets/images/brands/TrueElement.jpeg" />
-                <label class="alingCenter">
-                    True Elements
-                </label>
-            </div>
-            <div class="col-2 fl">
-                <img class="img-thumbnail" height="300px" src="../../../assets/images/brands/Singapoori.jpeg" />
-                <label class="alingCenter">
-                    SP Singapoori
-                </label>
-            </div>
+            </a>
         </div>
     </div>
 </div>

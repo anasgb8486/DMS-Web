@@ -7,12 +7,12 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class MasterDataService {
-  private API_URL= environment.API_URL;
+  private API_URL = environment.API_URL;
   webAPIUrl: string;
 
   constructor(private _httpClient: HttpClient) {
     this.webAPIUrl = this.API_URL + '/api/MasterData/';
-    //this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/MasterData/';
+    // this.webAPIUrl = 'https://dmsapi20210529232937.azurewebsites.net/api/MasterData/';
   }
 
   public getAllCategories(): Observable<any[]> {
@@ -46,5 +46,4 @@ export class MasterDataService {
   public getAllCities(): Observable<any[]> {
     return this._httpClient.get<any[]>(this.webAPIUrl + 'GetAllCities/');
   }
-
 }
