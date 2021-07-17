@@ -16,6 +16,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { EnquiryService } from './services/enquiry.service';
 import { RegistrationService } from './services/registration.service';
+import { LoginService } from './services/login.service';
 import { ApploadDataService } from '../app/services/appload-data.service';
 import { GetbranddataService } from './services/getbranddata.service';
 import { PremiumBrandsComponent } from './components/premium-brands/premium-brands.component';
@@ -82,7 +83,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EnquiryService,
     RegistrationService,
     ApploadDataService,
-    GetbranddataService
+    GetbranddataService,
+    LoginService
   ],
   entryComponents: [ DialogComponent],
   bootstrap: [AppComponent]

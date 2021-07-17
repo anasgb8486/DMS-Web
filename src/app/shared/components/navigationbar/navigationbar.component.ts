@@ -10,6 +10,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class NavigationbarComponent implements OnInit {
 
+  user: any;
   constructor(
     public dialog: MatDialog,
     config: NgbCarouselConfig) {
@@ -18,6 +19,10 @@ export class NavigationbarComponent implements OnInit {
       config.keyboard = false;
       config.pauseOnHover = true;
       config.showNavigationIndicators = false;
+      console.log(sessionStorage.getItem('user'));
+      if (sessionStorage.getItem('user')) {
+        this.user = JSON.parse(sessionStorage.getItem('user'));
+      }
     }
 
   ngOnInit(): void {
@@ -32,7 +37,13 @@ export class NavigationbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.user = result;
+      // console.log('The dialog was closed');
     });
+  }
+
+  logout(): void{
+    sessionStorage.removeItem('user');
+    this.user = null;
   }
 }

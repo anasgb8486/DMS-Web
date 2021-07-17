@@ -20,9 +20,8 @@ export class DialogComponent implements OnInit {
   }
 
   onNoClick(value: any): void {
-    // document.body.classList.remove('overlay');
     this.renderer.removeClass(this.document.getElementById('popup'), 'overlay');
-    this.dialogRef.close();
+    this.dialogRef.close(value);
   }
 
 }
