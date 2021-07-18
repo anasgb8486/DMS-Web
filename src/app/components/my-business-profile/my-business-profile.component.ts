@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { BusinessProfile } from 'src/app/models/businessProfile.model';
 
 @Component({
   selector: 'app-my-business-profile',
@@ -8,10 +10,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class MyBusinessProfileComponent implements OnInit {
 
   @Output() closePopupEvent = new EventEmitter<any>();
-  
-  constructor() { }
+
+  public businessProfile: BusinessProfile = new BusinessProfile();
+
+  constructor(private _loginService: LoginService) { }
 
   ngOnInit(): void {
+    var user = JSON.parse(sessionStorage.getItem('user'));
+    this._loginService.getUserBusinessProfile(user.id).subscribe((data: BusinessProfile) => {
+      this.businessProfile = data;
+      console.log(this.businessProfile);
+    });
   }
 
   cancelRequest(): void {
