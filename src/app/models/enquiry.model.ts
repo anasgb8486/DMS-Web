@@ -6,4 +6,6 @@ export class Enquiry {
     requestType: number;
     description: string;
     InquiryType: number;
+    subject: string;
+    brandId: number;
 }

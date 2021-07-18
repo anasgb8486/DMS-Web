@@ -1,7 +1,8 @@
 export enum InquiryType {
     Callback = 1,
     PostedRequirements = 2,
-    AskExperts = 3
+    AskExperts = 3,
+    BrandInquiry = 4
 }
 export enum RequestType {
     BecomeDistributor = 1,

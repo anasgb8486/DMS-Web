@@ -42,6 +42,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { DistributedLeadDataComponent } from './components/distributed-lead-data/distributed-lead-data.component';
 import { MyBusinessProfileComponent } from './components/my-business-profile/my-business-profile.component';
+import { PaidMemberOnlyComponent } from './components/paid-member-only/paid-member-only.component';
+import { SendEnquiryComponent } from './components/send-enquiry/send-enquiry.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,9 @@ import { MyBusinessProfileComponent } from './components/my-business-profile/my-
     CatagoryOnloadComponent,
     MyProfileComponent,
     DistributedLeadDataComponent,
-    MyBusinessProfileComponent
+    MyBusinessProfileComponent,
+    PaidMemberOnlyComponent,
+    SendEnquiryComponent
   ],
   imports: [
     BrowserModule,

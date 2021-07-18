@@ -14,9 +14,8 @@ export class DialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               @Inject(DOCUMENT) private document: Document,
               private renderer: Renderer2) {
-                console.log(data);
                 this.tableData = data;
-               }
+              }
 
   ngOnInit(): void {
     this.renderer.addClass(this.document.getElementById('popup'), 'overlay');

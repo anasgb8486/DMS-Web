@@ -50,4 +50,8 @@ export class DistributorService {
     return this._httpClient.post<any>(this.webAPIUrl + 'GetDistributorsLeadsBySearchFilter', JSON.stringify(filter), this.httpOptions);
   }
 
+  getBrandSubscribedCategoriesByBrandId(brandId: number): Observable<any[]>{
+    return this._httpClient.get<any[]>(this.webAPIUrl + 'GetBrandSubscribedCategoriesByBrandId?brandId=' + brandId);
+  }
+
 }
