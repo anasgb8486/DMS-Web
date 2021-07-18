@@ -26,6 +26,8 @@ export class NavigationbarComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    // setInterval(this.checkForLogin, 10000, 'my text');
+    setInterval(() => this.checkForLogin(), 500);
   }
 
   openDialog(componentName): void {
@@ -45,5 +47,11 @@ export class NavigationbarComponent implements OnInit {
   logout(): void{
     sessionStorage.removeItem('user');
     this.user = null;
+  }
+
+  checkForLogin(): void {
+    if (sessionStorage.getItem('user')) {
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+    }
   }
 }

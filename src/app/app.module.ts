@@ -39,6 +39,8 @@ import { SearchbarDistributorLeadsComponent } from '../app/components/searchbar-
 import { DistributorLeadsResultsComponent } from '../app/components/distributor-leads-results/distributor-leads-results.component';
 import { CatagoryOnloadComponent } from '../app/components/catagory-onload/catagory-onload.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { DistributedLeadDataComponent } from './components/distributed-lead-data/distributed-lead-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +64,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     KnowMoreComponent,
     SearchbarDistributorLeadsComponent,
     DistributorLeadsResultsComponent,
-    CatagoryOnloadComponent
+    CatagoryOnloadComponent,
+    MyProfileComponent,
+    DistributedLeadDataComponent
   ],
   imports: [
     BrowserModule,

@@ -9,10 +9,14 @@ import { DOCUMENT } from '@angular/common';
 })
 export class DialogComponent implements OnInit {
 
+  tableData: any;
   constructor(public dialogRef: MatDialogRef<DialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               @Inject(DOCUMENT) private document: Document,
-              private renderer: Renderer2) { }
+              private renderer: Renderer2) {
+                console.log(data);
+                this.tableData = data;
+               }
 
   ngOnInit(): void {
     this.renderer.addClass(this.document.getElementById('popup'), 'overlay');

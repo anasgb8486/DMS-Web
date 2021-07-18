@@ -4,4 +4,6 @@
 
 <app-login (closePopupEvent)="onNoClick($event)" *ngIf="data == 'login'" ></app-login>
 
+<app-my-profile (closePopupEvent)="onNoClick($event)" *ngIf="data == 'myprofile'"></app-my-profile>
 
+<app-distributed-lead-data (closePopupEvent)="onNoClick($event)" *ngIf="data == 'distributorLeadsData'"></app-distributed-lead-data>
