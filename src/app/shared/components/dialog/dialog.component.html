@@ -7,3 +7,7 @@
 <app-my-profile (closePopupEvent)="onNoClick($event)" *ngIf="data == 'myprofile'"></app-my-profile>
 
 <app-distributed-lead-data (closePopupEvent)="onNoClick($event)" *ngIf="data == 'distributorLeadsData'"></app-distributed-lead-data>
+
+<app-paid-member-only (closePopupEvent)="onNoClick($event)" *ngIf="data == 'paidonly'"></app-paid-member-only>
+
+<app-send-enquiry (closePopupEvent)="onNoClick($event)" *ngIf="data[0] == 'sendenquiry'" [brandId]="data[1]"></app-send-enquiry> 

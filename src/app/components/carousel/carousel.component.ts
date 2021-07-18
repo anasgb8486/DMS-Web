@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { DistributorService } from 'src/app/services/distributor.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
 @Component({
@@ -14,7 +15,8 @@ export class CarouselComponent implements OnInit {
 
   constructor(
     config: NgbCarouselConfig,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private distributorService: DistributorService) {
     config.interval = 50000;
     config.wrap = true;
     config.keyboard = false;
@@ -52,10 +54,18 @@ export class CarouselComponent implements OnInit {
       });
 
       const lead = distributorLeadsArr.find(d => d.id === id);
-      if (lead) {
-        sessionStorage.setItem('lead', JSON.stringify(lead));
-        this.openDialog('distributorLeadsData');
-      }
+      const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+
+      this.distributorService.getBrandSubscribedCategoriesByBrandId(loggedInUser.brandId).subscribe((result) => {
+        if (result){
+          if (lead?.mainCategoryId > 0 && result.includes(lead?.mainCategoryId)) {
+            sessionStorage.setItem('lead', JSON.stringify(lead));
+            this.openDialog('distributorLeadsData');
+          }else{
+            this.openDialog('paidonly');
+          }
+        }
+      });
     }
   }
 }

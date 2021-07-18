@@ -40,7 +40,7 @@ export class SearchResultCategoryComponent implements OnInit {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
         });
-      }else{
+      } else {
         this.distributorService.GetBrandsByCategoryId(parameter.id).subscribe((result) => {
           this.collection = result;
           this.getBrandData.setOption('BrandDataByCatagory', result);
@@ -55,11 +55,11 @@ export class SearchResultCategoryComponent implements OnInit {
     this.router.navigate(['./knowmore', id]);
   }
 
-  openDialog(componentName): void {
+  openDialog(componentName, brandId): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '750px',
-      data: componentName,
+      data: [componentName, brandId],
     });
 
     dialogRef.afterClosed().subscribe(result => {
