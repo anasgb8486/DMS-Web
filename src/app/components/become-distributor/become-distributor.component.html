@@ -4,7 +4,7 @@
             Become Distributor
         </div>
         <div class="card-body">
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="control-label col-sm-2" for="brandName">Brand Name:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="brandName" formControlName="brandName"
@@ -14,7 +14,7 @@
                         {{formErrors.brandName}}
                     </span>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="categories">Business Categories:</label>
                 <div class="col-sm-10">
@@ -50,6 +50,17 @@
                         [ngClass]="{'is-invalid': formErrors.investmentRequired}">
                     <span class="invalid-feedback" *ngIf="formErrors.investmentRequired">
                         {{formErrors.investmentRequired}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="spaceRequired">Space Available (Sq Ft):</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="spaceRequired" formControlName="spaceRequired"
+                        placeholder="Enter space available (Sq Ft)" name="spaceRequired" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.spaceRequired}">
+                    <span class="invalid-feedback" *ngIf="formErrors.spaceRequired">
+                        {{formErrors.spaceRequired}}
                     </span>
                 </div>
             </div>

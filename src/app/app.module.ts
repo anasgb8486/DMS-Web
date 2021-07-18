@@ -41,6 +41,7 @@ import { CatagoryOnloadComponent } from '../app/components/catagory-onload/catag
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { DistributedLeadDataComponent } from './components/distributed-lead-data/distributed-lead-data.component';
+import { MyBusinessProfileComponent } from './components/my-business-profile/my-business-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +67,8 @@ import { DistributedLeadDataComponent } from './components/distributed-lead-data
     DistributorLeadsResultsComponent,
     CatagoryOnloadComponent,
     MyProfileComponent,
-    DistributedLeadDataComponent
+    DistributedLeadDataComponent,
+    MyBusinessProfileComponent
   ],
   imports: [
     BrowserModule,

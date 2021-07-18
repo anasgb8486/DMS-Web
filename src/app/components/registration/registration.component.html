@@ -57,7 +57,7 @@
                     <div class="form-group  row">
                         <label class="control-label col-sm-2" for="password">Confirm Password:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="confirmPassword"
+                            <input type="password" class="form-control" id="confirmPassword"
                                 formControlName="confirmPassword" placeholder="Confirm password" name="confirmPassword"
                                 (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.confirmPassword}">
                             <span class="invalid-feedback" *ngIf="formErrors.confirmPassword">
