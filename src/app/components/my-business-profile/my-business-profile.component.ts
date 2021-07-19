@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { BusinessProfile } from 'src/app/models/businessProfile.model';
+import { RequestType } from 'src/app/models/system.enums';
 
 @Component({
   selector: 'app-my-business-profile',
