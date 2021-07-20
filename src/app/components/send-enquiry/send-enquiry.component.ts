@@ -156,7 +156,6 @@ export class SendEnquiryComponent implements OnInit {
   postEnquiry(): void {
     this._spinnerService.show();
     const requirement = this.mapFormValuesToRquirementModel();
-    console.log(requirement);
     this._enquiryService.saveEnquiry(requirement).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {

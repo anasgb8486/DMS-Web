@@ -82,7 +82,6 @@ export class SearchbarDistributorLeadsComponent implements OnInit {
         if (this.catagories.find(x => x.id == this.selectedCatagory)) {
           this.selectedCatagoryName = this.catagories.find(x => x.id == this.selectedCatagory).name;
         }
-        console.log(this.resultDistributorLeads);
       }
     });
     this.result = true;

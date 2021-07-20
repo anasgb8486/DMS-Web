@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -13,13 +14,13 @@ export class NavigationbarComponent implements OnInit {
   user: any;
   constructor(
     public dialog: MatDialog,
-    config: NgbCarouselConfig) {
+    config: NgbCarouselConfig,
+    private _router: Router) {
       config.interval = 5000;
       config.wrap = true;
       config.keyboard = false;
       config.pauseOnHover = true;
       config.showNavigationIndicators = false;
-      console.log(sessionStorage.getItem('user'));
       if (sessionStorage.getItem('user')) {
         this.user = JSON.parse(sessionStorage.getItem('user'));
       }
@@ -47,11 +48,16 @@ export class NavigationbarComponent implements OnInit {
   logout(): void{
     sessionStorage.removeItem('user');
     this.user = null;
+    this._router.navigate(['/home']);
   }
 
   checkForLogin(): void {
     if (sessionStorage.getItem('user')) {
       this.user = JSON.parse(sessionStorage.getItem('user'));
     }
+  }
+
+  openEnquiries(): void{
+    this._router.navigate(['/myenquiries']);
   }
 }

@@ -54,4 +54,11 @@ export class DistributorService {
     return this._httpClient.get<any[]>(this.webAPIUrl + 'GetBrandSubscribedCategoriesByBrandId?brandId=' + brandId);
   }
 
+  getBrandEnquiriesByBrandId(brandId: number): Observable<any[]>{
+    return this._httpClient.get<any[]>(this.webAPIUrl + 'GetBrandEnquiriesByBrandId?brandId=' + brandId);
+  }
+
+  getBrandIdByUserName(brandId: number): Observable<number>{
+    return this._httpClient.get<number>(this.webAPIUrl + 'GetBrandIdByUserName?userName=' + brandId);
+  }
 }

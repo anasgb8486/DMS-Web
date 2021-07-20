@@ -122,7 +122,6 @@ export class BecomeDistributorComponent implements OnInit {
     //console.log(this.appointDistributorForm.value);
     let brandDto = this.mapFormValuesToModel();
     this._registrationService.registrationDto.brand = brandDto;
-    console.log(this._registrationService.registrationDto);
     this._registrationService.saveUserRegistrationDetails(this._registrationService.registrationDto).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {

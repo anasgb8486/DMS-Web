@@ -18,7 +18,6 @@ export class DistributorLeadsResultsComponent implements OnInit {
     private distributorService: DistributorService) { }
 
   ngOnInit(): void {
-    console.log(this.leads);
   }
 
   openDialog(componentName): void {
@@ -30,7 +29,7 @@ export class DistributorLeadsResultsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
     });
   }
 

@@ -28,7 +28,6 @@ export class RegistrationService {
   }
 
   saveUserRegistrationDetails(registrationDto: RegistrationDto): Observable<any> {
-    console.log(registrationDto);
     return this._httpClient.post<any>(this.webAPIUrl + 'SaveUserRegistrationDetails/', JSON.stringify(registrationDto), this.httpOptions);
   }
 

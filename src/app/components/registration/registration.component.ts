@@ -168,7 +168,6 @@ export class RegistrationComponent implements OnInit {
     this.registrationDto.email = this.registrationForm.value.email;
     this.registrationDto.password = this.registrationForm.value.password;
     
-    console.log(this.registrationDto);
   }
 
   saveCompanyDetails() {
@@ -177,7 +176,6 @@ export class RegistrationComponent implements OnInit {
     this.registrationDto.address = this.formCompanyDtails.value.address;
     this.registrationDto.postalCode = this.formCompanyDtails.value.postalCode;
     
-    console.log(this.registrationDto);
   }
 
   ondistributorshipTypeChanged(event){

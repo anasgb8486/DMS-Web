@@ -125,11 +125,10 @@ export class AppointDistributorComponent implements OnInit {
 
   appointDistributorSubmit(): void {
     this._spinnerService.show();
-    //console.log(this.appointDistributorForm.value);
+    // console.log(this.appointDistributorForm.value);
     let brandDto = this.mapFormValuesToModel();
 
     this._registrationService.registrationDto.brand = brandDto;
-    console.log(this._registrationService.registrationDto);
 
     this._registrationService.saveUserRegistrationDetails(this._registrationService.registrationDto).subscribe((result: any) => {
       this.handleSuccess(result);

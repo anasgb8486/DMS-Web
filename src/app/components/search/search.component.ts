@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   event$;
   public displaySearch: boolean;
   public catagories: any[] = [];
+  public routes: string[] = ['distributorleads','register'];
 
   // tslint:disable-next-line: no-inferrable-types
   public catagoryId: number = 0;
@@ -27,8 +28,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     public dialog: MatDialog) {
     this.event$ = this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
-        // console.log(event.url);
-        this.displaySearch = (event.url.replace('/', '') !== 'distributorleads');
+        console.log(event.url);
+        this.displaySearch = !this.routes.includes(event.url.replace('/', '')); // (event.url.replace('/', '') !== 'distributorleads');
       }
     });
   }

@@ -39,7 +39,6 @@ export class KnowMoreComponent implements OnInit {
     this._activatedRoute.params.subscribe(parameter => {
 
       if (parameter.brandId) {
-        console.log(parameter.brandId);
         this.distributorService.GetBrandDataForKnowMore(parameter.brandId).subscribe((result) => {
           if (result) {
             this.BrandData = result[0];

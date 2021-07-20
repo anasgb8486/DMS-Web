@@ -44,6 +44,7 @@ import { DistributedLeadDataComponent } from './components/distributed-lead-data
 import { MyBusinessProfileComponent } from './components/my-business-profile/my-business-profile.component';
 import { PaidMemberOnlyComponent } from './components/paid-member-only/paid-member-only.component';
 import { SendEnquiryComponent } from './components/send-enquiry/send-enquiry.component';
+import { DisplayBrandEnquiriesComponent } from './components/display-brand-enquiries/display-brand-enquiries.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import { SendEnquiryComponent } from './components/send-enquiry/send-enquiry.com
     DistributedLeadDataComponent,
     MyBusinessProfileComponent,
     PaidMemberOnlyComponent,
-    SendEnquiryComponent
+    SendEnquiryComponent,
+    DisplayBrandEnquiriesComponent
   ],
   imports: [
     BrowserModule,

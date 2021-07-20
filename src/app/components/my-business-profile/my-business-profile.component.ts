@@ -20,7 +20,6 @@ export class MyBusinessProfileComponent implements OnInit {
     var user = JSON.parse(sessionStorage.getItem('user'));
     this._loginService.getUserBusinessProfile(user.id).subscribe((data: BusinessProfile) => {
       this.businessProfile = data;
-      console.log(this.businessProfile);
     });
   }
 
