@@ -14,7 +14,7 @@
         <!-- {{collection | json }} -->
         <div class="card mb-3" style="max-width: 550px;">
           <div class="row no-gutters" style="padding:10px">
-            <div class="col-md-3">
+            <div class="pull-left col-md-3">
               <div style="width:115px;">
                 <img [src]="item.brandLogo" class="card-img" alt="...">
               </div>
@@ -22,11 +22,11 @@
                 {{item.name}}
               </div>
             </div>
-            <div class="col-md-6 pt-4">
+            <div class="pull-left col-md-9">
               <p>Products Offering:</p>
               <p style="color:lightgrey">{{item.productsKeywords}}</p>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
               <div style="width:120px;height: 120px;">
                 <ngb-carousel>
                   <ng-template *ngFor="let image of item.brandImages" ngbSlide>
@@ -34,7 +34,7 @@
                   </ng-template>
                 </ngb-carousel>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="row" style="padding:10px">
             <div class="col-md-12">

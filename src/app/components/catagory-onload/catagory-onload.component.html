@@ -2,9 +2,54 @@
   <div class="pull-left catagoryList">
     <h6>TRENDING CATEGORIES</h6>
     <ul>
-      <li *ngFor="let catagory of catagoriesOnLoad">
+      <!-- <li *ngFor="let catagory of catagoriesOnLoad">
         <img width="30px" height="30px" class="rounded-circle mr-2" [src]="catagory.image" />
-        <a [routerLink]="['../searchresultcategory', catagory.id ]">{{ catagory.name }}</a> <i
+        <a>{{ catagory.name }}</a> <i
+          class="pull-right arrow right"></i>
+      </li> -->
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Food & Beverage.jfif" />
+        <a [routerLink]="['../searchresultcategory', 12 ]">Food & Beverage</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Health & Personal Care.jfif" />
+        <a [routerLink]="['../searchresultcategory', 15 ]">Health & Personal Care</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Home Cleaning Products.jfif" />
+        <a [routerLink]="['../searchresultcategory', 16 ]">Home Cleaning Products</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Apparel & Fashion.jfif" />
+        <a [routerLink]="['../searchresultcategory', 2 ]">Apparel & Fashion</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Automobile & Transportation.jfif" />
+        <a [routerLink]="['../searchresultcategory', 3 ]">Automobile & Transportation</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Agriculture & Farming.jfif" />
+        <a [routerLink]="['../searchresultcategory', 1 ]">Agriculture & Farming</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Consumer Elctronic.png" />
+        <a [routerLink]="['../searchresultcategory', 8 ]">Consumer Elctronic</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Electronics & Electrical Supplies.png" />
+        <a [routerLink]="['../searchresultcategory', 9 ]">Electronics & Electrical Supplies</a> <i
+          class="pull-right arrow right"></i>
+      </li>
+      <li>
+        <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/icon/Pharmaceuticals (PCD).jfif" />
+        <a [routerLink]="['../searchresultcategory', 31 ]">Pharmaceuticals (PCD)</a> <i
           class="pull-right arrow right"></i>
       </li>
       <li>
@@ -37,11 +82,11 @@
         <img width="100%" height="440px" src="../../../assets/images/banner7.jpeg" alt="Channai Metro">
       </ng-template>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner8.jpeg" alt="Channai Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner8.jpg" alt="Channai Metro">
       </ng-template>
-      <ng-template ngbSlide>
+      <!-- <ng-template ngbSlide>
         <img width="100%" height="440px" src="../../../assets/images/banner9.jpeg" alt="Channai Metro">
-      </ng-template>
+      </ng-template> -->
     </ngb-carousel>
   </div>
 </div>

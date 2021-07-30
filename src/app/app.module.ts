@@ -45,6 +45,9 @@ import { MyBusinessProfileComponent } from './components/my-business-profile/my-
 import { PaidMemberOnlyComponent } from './components/paid-member-only/paid-member-only.component';
 import { SendEnquiryComponent } from './components/send-enquiry/send-enquiry.component';
 import { DisplayBrandEnquiriesComponent } from './components/display-brand-enquiries/display-brand-enquiries.component';
+import { ReplyEnquiriesComponent } from './components/reply-enquiries/reply-enquiries.component';
+import { SendEmailService } from './services/send-email.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +77,8 @@ import { DisplayBrandEnquiriesComponent } from './components/display-brand-enqui
     MyBusinessProfileComponent,
     PaidMemberOnlyComponent,
     SendEnquiryComponent,
-    DisplayBrandEnquiriesComponent
+    DisplayBrandEnquiriesComponent,
+    ReplyEnquiriesComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +100,8 @@ import { DisplayBrandEnquiriesComponent } from './components/display-brand-enqui
     RegistrationService,
     ApploadDataService,
     GetbranddataService,
-    LoginService
+    LoginService,
+    SendEmailService
   ],
   entryComponents: [ DialogComponent],
   bootstrap: [AppComponent]

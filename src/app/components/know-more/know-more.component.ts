@@ -70,7 +70,7 @@ export class KnowMoreComponent implements OnInit {
   }
 
   carouselImageAdjustment(imageData: any[]): void {
-    while (imageData.length > 0) {
+    while (imageData?.length > 0) {
       this.imagesArr.push(imageData.splice(0, 4));
     }
   }

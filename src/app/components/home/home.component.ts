@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   router: string;
   ngOnInit(): void {
-    this.SpinnerService.show();
+    // this.SpinnerService.show();
     this.apploadDataService.getApplicationLoadData().subscribe(result => {      
       result.categories.forEach(element => {
         this.catagories.push(element);

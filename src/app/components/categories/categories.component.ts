@@ -19,9 +19,13 @@ export class CategoriesComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (sessionStorage.getItem('catagories')) {
+      this.catagories = JSON.parse(sessionStorage.getItem('catagories'));
+    }
+  }
 
-  toggleDisplayAll(): void{
+  toggleDisplayAll(): void {
     this.displayAll = !this.displayAll;
   }
 
