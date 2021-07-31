@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:51276',
+  // API_URL: 'http://localhost:51276',
+  API_URL: 'https://dmsapi20210529232937.azurewebsites.net',
 };
 
 /*

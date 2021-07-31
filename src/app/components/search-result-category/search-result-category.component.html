@@ -2,7 +2,7 @@
   <p class="mb-4">{{ collection.length }} Results found</p>
 
   <div>
-    <div class="row mrb10px" *ngIf="collection.length == 0">
+    <div class="row mrb10px" *ngIf="displaySpinner">
       <div class="col-12 fl">
         <div class="text-center">
           <div class="spinner-border"></div>

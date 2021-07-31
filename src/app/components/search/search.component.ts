@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   event$;
   public displaySearch: boolean;
   public catagories: any[] = [];
-  public routes: string[] = ['distributorleads','register'];
+  public routes: string[] = ['distributorleads', 'register'];
 
   // tslint:disable-next-line: no-inferrable-types
   public catagoryId: number = 0;
@@ -32,6 +32,14 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.displaySearch = !this.routes.includes(event.url.replace('/', '')); // (event.url.replace('/', '') !== 'distributorleads');
       }
     });
+
+    router.events
+      .subscribe((event: NavigationStart) => {
+        if (event.navigationTrigger === 'popstate') {
+          console.log('Browser back button clicked');
+          this.keyword = '';
+        }
+      });
   }
 
 
@@ -52,7 +60,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
   searchCategory(): void {
-    this.router.navigate(['./searchresultcategory/', {id: this.catagoryId, key: this.keyword}]);
+    this.router.navigate(['./searchresultcategory/', { id: this.catagoryId, key: this.keyword }]);
   }
 
   onKeyDownEvent(event: any): void {
@@ -72,7 +80,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  setCatagoryId(catagoryId: number): void{    
+  setCatagoryId(catagoryId: number): void {
     this.catagoryId = catagoryId;
   }
 
