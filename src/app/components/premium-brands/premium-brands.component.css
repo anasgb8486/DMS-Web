@@ -41,3 +41,15 @@ img {
 .img-thumbnail{
     height:150px;
 }
+
+a label{
+    color:  rgb(90, 84, 84) !important;
+}
+
+a label:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color:#fc6600 !important;
+}
+
+

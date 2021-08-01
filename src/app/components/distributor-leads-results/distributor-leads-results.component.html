@@ -13,7 +13,7 @@
           <div class="col-md-12">            
             <p>Interested in : {{ lead.productsKeywords }}</p>
             <p>Investment <i class="fa fa-inr" aria-hidden="true"></i> : {{ lead.investmentRequired }}</p>
-            <p>Space Available : {{ lead.spaceRequired ? '100 S.F.' : lead.spaceRequired }}</p>
+            <p>Space Available : {{ !lead.spaceRequired ? '100 S.F.' : lead.spaceRequired }}</p>
             <p>Location : <i class="fa fa-map-marker"></i> {{ lead.brandPrimaryAddress }}</p>
           </div>
         </div>

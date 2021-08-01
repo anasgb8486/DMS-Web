@@ -47,6 +47,7 @@ import { SendEnquiryComponent } from './components/send-enquiry/send-enquiry.com
 import { DisplayBrandEnquiriesComponent } from './components/display-brand-enquiries/display-brand-enquiries.component';
 import { ReplyEnquiriesComponent } from './components/reply-enquiries/reply-enquiries.component';
 import { SendEmailService } from './services/send-email.service';
+import { ContactCustomerCareComponent } from './components/contact-customer-care/contact-customer-care.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { SendEmailService } from './services/send-email.service';
     PaidMemberOnlyComponent,
     SendEnquiryComponent,
     DisplayBrandEnquiriesComponent,
-    ReplyEnquiriesComponent
+    ReplyEnquiriesComponent,
+    ContactCustomerCareComponent
   ],
   imports: [
     BrowserModule,
