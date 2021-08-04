@@ -58,31 +58,31 @@
       </li>
     </ul>
   </div>
-  <div class="pull-left" style="width:828px;">
+  <div class="pull-left" style="width:828px;" id="banners">
     <ngb-carousel>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner1.jpg" alt="Delhi Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner1.jpg" (click)="openAllRealtedBrands(12)" alt="Lance">
       </ng-template>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner2.jpg" alt="Bangalore Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner2.jpg" (click)="openAllRealtedBrands(0)" alt="Bangalore Metro">
       </ng-template>
       <!-- <ng-template ngbSlide>
         <img width="100%" height="440px" src="../../../assets/images/banner3.jpg" alt="Channai Metro">
       </ng-template> -->
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner4.jpg" alt="Channai Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner4.jpg" (click)="openAllRealtedBrands(15)" alt="kanakm">
       </ng-template>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner5.jpeg" alt="Channai Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner5.jpeg" (click)="openAllRealtedBrands(4)" alt="Channai Metro">
       </ng-template>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner6.jpeg" alt="Channai Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner6.jpeg" (click)="openAllRealtedBrands(0)" alt="Channai Metro">
       </ng-template>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner7.jpeg" alt="Channai Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner7.jpeg" (click)="openAllRealtedBrands(2)" alt="Channai Metro">
       </ng-template>
       <ng-template ngbSlide>
-        <img width="100%" height="440px" src="../../../assets/images/banner/banner8.jpg" alt="Channai Metro">
+        <img width="100%" height="440px" src="../../../assets/images/banner/banner8.jpg" (click)="openAllRealtedBrands(0)" alt="Channai Metro">
       </ng-template>
       <!-- <ng-template ngbSlide>
         <img width="100%" height="440px" src="../../../assets/images/banner9.jpeg" alt="Channai Metro">
