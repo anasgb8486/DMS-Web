@@ -24,14 +24,31 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="investmentRequired">Investment Required:</label>
+                <label class="control-label col-sm-2">Investment Required:</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" id="minInvestmentAmount" formControlName="minInvestmentAmount"
+                        placeholder="Enter min investment amount in lacs" name="minInvestmentAmount" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.minInvestmentAmount}" maxlength="6">
+                    <span class="invalid-feedback" *ngIf="formErrors.minInvestmentAmount">
+                        {{formErrors.minInvestmentAmount}}
+                    </span>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="maxInvestmentAmount" formControlName="maxInvestmentAmount"
+                        placeholder="Enter max investment amount in lacs" name="maxInvestmentAmount" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.maxInvestmentAmount}" maxlength="6">
+                    <span class="invalid-feedback" *ngIf="formErrors.maxInvestmentAmount">
+                        {{formErrors.maxInvestmentAmount}}
+                    </span>
+                </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="investmentRequired" formControlName="investmentRequired"
+                    <!-- <input type="text" class="form-control" id="investmentRequired" formControlName="investmentRequired"
                         placeholder="Enter investment required" name="investmentRequired" (blur)="logValidationErrors()"
                         [ngClass]="{'is-invalid': formErrors.investmentRequired}">
                     <span class="invalid-feedback" *ngIf="formErrors.investmentRequired">
                         {{formErrors.investmentRequired}}
-                    </span>
+                    </span> -->
                 </div>
             </div>
             <div class="form-group  row">
@@ -76,13 +93,13 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="totalDistributors">Number of Distributors:</label>
+                <label class="control-label col-sm-2" for="totalEmployees">Number of Employees:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="totalDistributors" formControlName="totalDistributors"
-                        placeholder="Enter number of distributors" name="totalDistributors"
-                        (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.totalDistributors}">
-                    <span class="invalid-feedback" *ngIf="formErrors.totalDistributors">
-                        {{formErrors.totalDistributors}}
+                    <input type="text" class="form-control" id="totalEmployees" formControlName="totalEmployees"
+                        placeholder="Enter number of employees" name="totalEmployees"
+                        (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.totalEmployees}">
+                    <span class="invalid-feedback" *ngIf="formErrors.totalEmployees">
+                        {{formErrors.totalEmployees}}
                     </span>
                 </div>
             </div>
