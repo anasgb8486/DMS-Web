@@ -54,7 +54,9 @@
       </li>
       <li>
         <img width="30px" height="30px" class="rounded-circle mr-2" src="../../../assets/images/all-cat.jpeg" />
-        <a href="#" style="color:darkblue !important;"> All Catagories</a>
+        <a style="color:darkblue !important;" (click)='toggleDisplayAll()'>
+          {{ displayAll ? 'Hide' : 'Show All'}} Categories
+        </a>
       </li>
     </ul>
   </div>
