@@ -77,7 +77,7 @@ export class SearchbarDistributorLeadsComponent implements OnInit {
   searchDistributorsLeads(): void {
     const BrandFilterDto = { categoryId: +this.selectedCatagory, searchKeyword: this.searchText, stateId: +this.selectedState, cityId: +this.selectedcity, investmentAmount: +this.investmentAmount, requestType: 1 };
     this.distributorService.getDistributorsLeadsBySearchFilter(BrandFilterDto).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response) {
         this.resultDistributorLeads = response;
         if (this.catagories.find(x => x.id == this.selectedCatagory)) {

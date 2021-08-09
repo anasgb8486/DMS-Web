@@ -31,7 +31,7 @@ export class CatagoryOnloadComponent implements OnInit {
 
   openAllRealtedBrands(catagoryId: number): void {
     if (catagoryId > 0) {
-      this._router.navigate(['searchresultcategory', catagoryId]);
+      this._router.navigate(['knowmore', catagoryId]);
     }
   }
   toggleDisplayAll(): void {

@@ -38,7 +38,7 @@ export class DisplayBrandEnquiriesComponent implements OnInit {
   }
 
   replyToEnquiry(email: string, enquiryId: number): void{
-    console.log(enquiryId);
+    // console.log(enquiryId);
     this.openDialog('replyToenquiry', email, enquiryId);
   }
 

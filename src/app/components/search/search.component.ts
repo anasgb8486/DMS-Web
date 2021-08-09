@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public dialog: MatDialog) {
     this.event$ = this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
-        console.log(event.url);
+        // console.log(event.url);
         this.displaySearch = !this.routes.includes(event.url.replace('/', '')); // (event.url.replace('/', '') !== 'distributorleads');
       }
     });

@@ -40,7 +40,7 @@ export class KnowMoreComponent implements OnInit {
 
       if (parameter.brandId) {
         this.distributorService.GetBrandDataForKnowMore(parameter.brandId).subscribe((result) => {
-          console.log(result);
+          // console.log(result);
           if (result) {
             this.BrandData = result[0];
           }

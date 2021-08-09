@@ -17,6 +17,7 @@ export class PremiumBrandsComponent implements OnInit {
 
   ngOnInit(): void {
     this.distributorService.GetBrandsAssociatedWithUs().subscribe((result) => {
+      // console.log(result);
       if (result){
         result.forEach(element => {
           this.brandAssosiatedWithUs.push(element);

@@ -18,7 +18,7 @@ export class CategoriesComponent implements OnInit {
     private _sanitizer: DomSanitizer,
     private toggleAllCatagoriesService: ToggleAllCatagoriesService) {
     this.imagePath = ''; // this._sanitizer.bypassSecurityTrustResourceUrl(this.catagories[0][0].image);
-    console.log(this.displayAll);
+    // console.log(this.displayAll);
   }
 
 
@@ -27,11 +27,11 @@ export class CategoriesComponent implements OnInit {
       this.catagories = JSON.parse(sessionStorage.getItem('catagories'));
     }
     this.toggleAllCatagoriesService.currentApprovalStageMessage.subscribe(msg => this.displayAll = msg);
-    console.log(this.displayAll);
+    // console.log(this.displayAll);
   }
 
   get data(): boolean{
-    console.log(this.toggleAllCatagoriesService.displayAll);
+    // console.log(this.toggleAllCatagoriesService.displayAll);
     return this.toggleAllCatagoriesService.displayAll;
   }
 

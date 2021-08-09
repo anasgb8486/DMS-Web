@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // this.SpinnerService.show();
     this.apploadDataService.getApplicationLoadData().subscribe(result => {
-      console.log(result);
+      // console.log(result);
       result.categories.forEach(element => {
         this.catagories.push(element);
       });
