@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card paddingM">
     <div class="card-header bg-primary text-white">
         Create Profile/Signup
     </div>
@@ -93,6 +93,13 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="control-label col-sm-2" for="gstNo">GST No.:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gstNo" formControlName="gstNo"
+                        placeholder="Enter your gst number" name="gstNo">                        
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="control-label col-sm-2" for="website">Website:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="website" formControlName="website"
@@ -110,7 +117,7 @@
                     </span>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="control-label col-sm-2" for="postalCode">Postal Code:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="postalCode" formControlName="postalCode"
@@ -120,7 +127,7 @@
                         {{formErrors.postalCode}}
                     </span>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <button mat-button matStepperPrevious class="btn btn-primary" (click)="saveCompanyDetails()"

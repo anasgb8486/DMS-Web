@@ -5,12 +5,17 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
+import { SlideInOutAnimation } from './animations';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
+  animations: [SlideInOutAnimation]
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  @Input() user;
+  animationState = 'out';
+  animationCate = 'out';
   event$;
   public displaySearch: boolean;
   public catagories: any[] = [];
@@ -19,7 +24,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: no-inferrable-types
   public catagoryId: number = 0;
   public keyword: string;
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -28,7 +32,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public dialog: MatDialog) {
     this.event$ = this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
-        // console.log(event.url);
+        console.log(event.url);
         this.displaySearch = !this.routes.includes(event.url.replace('/', '')); // (event.url.replace('/', '') !== 'distributorleads');
       }
     });
@@ -82,6 +86,26 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   setCatagoryId(catagoryId: number): void {
     this.catagoryId = catagoryId;
+  }
+
+  openMenu(divName){
+    if(divName==='memu-slide'){
+      this.animationState = this.animationState === 'out' ? 'in' : 'out';
+    }
+  }
+
+  openCate(divName){
+    if(divName==='cate-slide'){
+      this.animationCate = this.animationCate === 'out' ? 'in' : 'out';
+    }
+  }
+
+
+
+  logout(): void{
+    sessionStorage.removeItem('user');
+    this.user = null;
+    this.router.navigate(['/home']);
   }
 
   ngOnDestroy(): void {

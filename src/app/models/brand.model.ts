@@ -39,5 +39,5 @@ export class Brand {
     citywiseLocations: number[];
     brandImages: string[];
     allLocations: string[];
-    DistributorsBenefits: string;
+    distributorsBenefits: string;
 }

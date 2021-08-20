@@ -18,13 +18,14 @@ export class RegistrationComponent implements OnInit {
   distributorshipType: string;
   registrationDto: RegistrationDto;
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(
+    private _formBuilder: FormBuilder,
     private _spinnerService: NgxSpinnerService,
     private _router: Router,
     private _toastr: ToastrService,
-    private _registrationService: RegistrationService) { 
-      this.registrationDto = this._registrationService.registrationDto;
-    }
+    private _registrationService: RegistrationService) {
+    this.registrationDto = this._registrationService.registrationDto;
+  }
 
   registrationForm: FormGroup;
   formCompanyDtails: FormGroup;
@@ -40,7 +41,7 @@ export class RegistrationComponent implements OnInit {
     passwordGroup: '',
     companyName: '',
     address: '',
-    postalCode: '',
+    // postalCode: '',
   };
 
   // This object contains all the validation messages for this form
@@ -80,11 +81,11 @@ export class RegistrationComponent implements OnInit {
       required: 'Address is required.',
       startingWithEmptySpace: 'You cannot start address with empty spaces.',
     },
-    postalCode: {
-      minlength: 'Postal code must have 6 digits.',
-      maxlength: 'Postal code must have 6 digits.',
-      pattern: 'Only numbers are allowed.'
-    },
+    // postalCode: {
+    //   minlength: 'Postal code must have 6 digits.',
+    //   maxlength: 'Postal code must have 6 digits.',
+    //   pattern: 'Only numbers are allowed.'
+    // },
   };
 
   ngOnInit(): void {
@@ -94,27 +95,28 @@ export class RegistrationComponent implements OnInit {
       Validators.minLength(2),
       Validators.maxLength(50)]],
       mobileNumber: [this.registrationDto.mobileNumber, [Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10),
-        Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       email: [this.registrationDto.email, [Validators.required,
       CustomValidators.startingWithEmptySpace(),
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [this.registrationDto.password, [Validators.required,
       Validators.minLength(4),
-      Validators.maxLength(10), 
+      Validators.maxLength(10),
       CustomValidators.startingWithEmptySpace()]],
       confirmPassword: ['', [Validators.required]],
     },
-    {
-      validator: CustomValidators.MustMatch('password', 'confirmPassword')
-  });
+      {
+        validator: CustomValidators.MustMatch('password', 'confirmPassword')
+      });
 
     this.formCompanyDtails = this._formBuilder.group({
       companyName: [this.registrationDto.companyName, [Validators.required, CustomValidators.startingWithEmptySpace()]],
       website: [this.registrationDto.website],
       address: [this.registrationDto.address, [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      postalCode: [this.registrationDto.postalCode, [Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      // postalCode: [this.registrationDto.postalCode, [Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      gstNo: [this.registrationDto.gstNo],
     });
 
     this.registrationForm.valueChanges.subscribe(
@@ -167,19 +169,18 @@ export class RegistrationComponent implements OnInit {
     this.registrationDto.mobileNumber = this.registrationForm.value.mobileNumber;
     this.registrationDto.email = this.registrationForm.value.email;
     this.registrationDto.password = this.registrationForm.value.password;
-    
   }
 
   saveCompanyDetails() {
     this.registrationDto.companyName = this.formCompanyDtails.value.companyName;
     this.registrationDto.website = this.formCompanyDtails.value.website;
     this.registrationDto.address = this.formCompanyDtails.value.address;
-    this.registrationDto.postalCode = this.formCompanyDtails.value.postalCode;
-    
+    // this.registrationDto.postalCode = this.formCompanyDtails.value.postalCode;
+    this.registrationDto.gstNo = this.formCompanyDtails.value.gstNo;
   }
 
-  ondistributorshipTypeChanged(event){
-    this.distributorshipType= event.target.value;
+  ondistributorshipTypeChanged(event) {
+    this.distributorshipType = event.target.value;
   }
 
 }

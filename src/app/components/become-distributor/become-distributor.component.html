@@ -16,6 +16,21 @@
                 </div>
             </div> -->
             <div class="form-group row">
+                <label class="control-label col-sm-2" for="categories">Products for Distributorship:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="products" formControlName="products"
+                        placeholder="Enter products' names (, seperated)" name="products"
+                        (blur)="logValidationErrors()">
+                    <span class="invalid-feedback" *ngIf="formErrors.products">
+                        {{formErrors.products}}
+                    </span>
+                    <!-- <ng-multiselect-dropdown formControlName="products"
+                                        [placeholder]="'Select one or more products'" [settings]="productsSettings"
+                                        [data]="products">
+                                    </ng-multiselect-dropdown> -->
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="control-label col-sm-2" for="categories">Business Categories:</label>
                 <div class="col-sm-10">
                     <!-- <ng-multiselect-dropdown formControlName="categories"
@@ -28,47 +43,22 @@
                     <select class="form-control" id="categories" formControlName="categories"
                         [ngClass]="{'is-invalid': formErrors.categories}" (blur)="logValidationErrors()">
                         <option value="" disabled>Select</option>
-                        <option *ngFor="let category of categories" value={{category.id}}>
+                        <option *ngFor="let category of categories" [value]="category.id">
                             {{category.name}}
                         </option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="businessNatures">Business Nature:</label>
+                <label class="control-label col-sm-2" for="investmentRequired">Investment Budget:</label>
                 <div class="col-sm-10">
-                    <ng-multiselect-dropdown formControlName="businessNatures" [placeholder]="'Business Nature'"
-                        [settings]="businessNatureMultiSelectSettings" [data]="businessNatures">
-                    </ng-multiselect-dropdown>
+                  <input type="text" class="form-control" id="minInvestmentAmount" formControlName="minInvestmentAmount"
+                  placeholder="Enter min investment amount" name="minInvestmentAmount" (blur)="logValidationErrors()"
+                  [ngClass]="{'is-invalid': formErrors.minInvestmentAmount}">
+              <span class="invalid-feedback" *ngIf="formErrors.minInvestmentAmount">
+                  {{formErrors.minInvestmentAmount}}
+              </span>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="control-label col-sm-2">Investment Budget:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="minInvestmentAmount" formControlName="minInvestmentAmount"
-                            placeholder="Enter min investment amount in lacs" name="minInvestmentAmount" (blur)="logValidationErrors()"
-                            [ngClass]="{'is-invalid': formErrors.minInvestmentAmount}" maxlength="6">
-                        <span class="invalid-feedback" *ngIf="formErrors.minInvestmentAmount">
-                            {{formErrors.minInvestmentAmount}}
-                        </span>
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="maxInvestmentAmount" formControlName="maxInvestmentAmount"
-                            placeholder="Enter max investment amount in lacs" name="maxInvestmentAmount" (blur)="logValidationErrors()"
-                            [ngClass]="{'is-invalid': formErrors.maxInvestmentAmount}" maxlength="6">
-                        <span class="invalid-feedback" *ngIf="formErrors.maxInvestmentAmount">
-                            {{formErrors.maxInvestmentAmount}}
-                        </span>
-                    </div>
-                <!-- <div class="col-sm-10">
-                    <input type="text" class="form-control" id="investmentRequired" formControlName="investmentRequired"
-                        placeholder="Enter investment budget" name="investmentRequired" (blur)="logValidationErrors()"
-                        [ngClass]="{'is-invalid': formErrors.investmentRequired}">
-                    <span class="invalid-feedback" *ngIf="formErrors.investmentRequired">
-                        {{formErrors.investmentRequired}}
-                    </span>
-                </div> -->
             </div>
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="spaceRequired">Space Available (Sq Ft):</label>
@@ -82,44 +72,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="categories">Products for Distributorship:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="products" formControlName="products"
-                        placeholder="Enter products' names (, seperated)" name="products"
-                        (blur)="logValidationErrors()">
-                    <!-- <span class="invalid-feedback" *ngIf="formErrors.products">
-                        {{formErrors.products}}
-                    </span> -->
-                    <!-- <ng-multiselect-dropdown formControlName="products"
-                                        [placeholder]="'Select one or more products'" [settings]="productsSettings"
-                                        [data]="products">
-                                    </ng-multiselect-dropdown> -->
-                </div>
-            </div>
-            <div class="form-group  row">
-                <label class="control-label col-sm-2" for="pan">PAN:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="pan" formControlName="pan" placeholder="Enter PAN"
-                        name="pan" (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.pan}">
-                    <span class="invalid-feedback" *ngIf="formErrors.pan">
-                        {{formErrors.pan}}
-                    </span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="control-label col-sm-2" for="gstNumber">GST:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="gstNumber" formControlName="gstNumber"
-                        placeholder="Enter GST number" name="gstNumber" (blur)="logValidationErrors()"
-                        [ngClass]="{'is-invalid': formErrors.gstNumber}">
-                    <span class="invalid-feedback" *ngIf="formErrors.gstNumber">
-                        {{formErrors.gstNumber}}
-                    </span>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="control-label col-sm-2" for="experiance">Experiance:</label>
-                <div class="col-sm-10">
+                <div class="col-sm-3">
                     <div class="form-check-inline">
                         <label class="form-check-label">
                             <input type="radio" value="1" formControlName="experianceType"
@@ -131,12 +85,48 @@
                             <input type="radio" value="2" formControlName="experianceType"
                                 class="form-check-input">Experienced
                         </label>
-                    </div>
+                    </div>                    
                     <span class="invalid-feedback" *ngIf="formErrors.experianceType">
                         {{formErrors.experianceType}}
                     </span>
                 </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="experianceYears" formControlName="experianceYears"
+                        placeholder="Enter total experience(in years)" name="experianceYears">
+                </div>
+                <div class="col-sm-4">
+                    &nbsp;
+                </div>
             </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="businessNatures">Business Nature:</label>
+                <div class="col-sm-10">
+                    <ng-multiselect-dropdown formControlName="businessNatures" [placeholder]="'Business Nature'"
+                        [settings]="businessNatureMultiSelectSettings" [data]="businessNatures">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>                                    
+            <div class="form-group  row">
+                <label class="control-label col-sm-2" for="pan">PAN:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="pan" formControlName="pan" placeholder="Enter PAN"
+                        name="pan" (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.pan}">
+                    <span class="invalid-feedback" *ngIf="formErrors.pan">
+                        {{formErrors.pan}}
+                    </span>
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                <label class="control-label col-sm-2" for="gstNumber">GST:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gstNumber" formControlName="gstNumber"
+                        placeholder="Enter GST number" name="gstNumber" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.gstNumber}">
+                    <span class="invalid-feedback" *ngIf="formErrors.gstNumber">
+                        {{formErrors.gstNumber}}
+                    </span>
+                </div>
+            </div> -->            
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="distributorshipType">Distributorship Type:</label>
                 <div class="col-sm-2">

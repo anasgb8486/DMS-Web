@@ -13,6 +13,7 @@ export class ReviewsliderComponent implements OnInit {
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = true;
+    // config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
   }
 

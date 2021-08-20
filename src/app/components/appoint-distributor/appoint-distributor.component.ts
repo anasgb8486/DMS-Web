@@ -10,6 +10,7 @@ import { MasterDataDto } from 'src/app/models/master-data.model';
 import { LocationDto } from 'src/app/models/location.model';
 import { RequestType } from 'src/app/models/system.enums';
 import { RegistrationService } from 'src/app/services/registration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appoint-distributor',
@@ -19,13 +20,13 @@ import { RegistrationService } from 'src/app/services/registration.service';
 export class AppointDistributorComponent implements OnInit {
 
   appointDistributorForm: FormGroup;
-  brandLogoUrl: string = '';
+  brandLogoUrl = '';
   locationMultiSelectSettings = {};
-  //categoriesSettings = {};
+  // categoriesSettings = {};
   businessNatureMultiSelectSettings = {};
   categories: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
-  //distributorshipTypes: MasterDataDto[] = [];
+  // distributorshipTypes: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
   regions: LocationDto[] = [];
   selectedRegions: LocationDto[] = [];
@@ -50,7 +51,7 @@ export class AppointDistributorComponent implements OnInit {
     totalEmployees: '',
     annualSales: '',
     productsKeywords: '',
-    //distributorshipType: '',
+    // distributorshipType: '',
   };
 
   // This object contains all the validation messages for this form
@@ -102,12 +103,14 @@ export class AppointDistributorComponent implements OnInit {
 
   };
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(
+    private _formBuilder: FormBuilder,
     private _spinnerService: NgxSpinnerService,
     private _toastr: ToastrService,
     private _distributorService: DistributorService,
     private _masterDataService: MasterDataService,
-    private _registrationService: RegistrationService) { }
+    private _registrationService: RegistrationService,
+    private _router: Router) { }
 
   ngOnInit(): void {
 
@@ -131,7 +134,7 @@ export class AppointDistributorComponent implements OnInit {
   appointDistributorSubmit(): void {
     this._spinnerService.show();
     // console.log(this.appointDistributorForm.value);
-    let brandDto = this.mapFormValuesToModel();
+    const brandDto = this.mapFormValuesToModel();
 
     this._registrationService.registrationDto.brand = brandDto;
 
@@ -140,6 +143,7 @@ export class AppointDistributorComponent implements OnInit {
     }, (error: any) => {
       this.handleError(error);
     });
+        this._router.navigate(['home']);
   }
 
   setupForm() {
@@ -174,17 +178,17 @@ export class AppointDistributorComponent implements OnInit {
     };
 
     this.appointDistributorForm = this._formBuilder.group({
-      brandName: ['', [CustomValidators.startingWithEmptySpace()]],
+      brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       businessNatures: [[]],
-      minInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
-      maxInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
-      establishmentYear: ['', [Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
+      minInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
+      maxInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
+      establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
       categories: [[]],
       totalEmployees: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      productsKeywords: ['', [CustomValidators.startingWithEmptySpace()]],
-      //distributorshipType: ['', Validators.required],
+      productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      // distributorshipType: ['', Validators.required],
       countrywise: [false],
       regionwise: [false],
       regions: [this.selectedRegions],
@@ -195,6 +199,7 @@ export class AppointDistributorComponent implements OnInit {
       brandLogo: [''],
       productsImages: [[]],
       description: [''],
+      distributorsBenefits: ['']
     });
 
   }
@@ -219,11 +224,11 @@ export class AppointDistributorComponent implements OnInit {
   }
 
   mapFormValuesToModel(): Brand {
-    let brand = new Brand();
+    const brand = new Brand();
 
     brand.name = this.appointDistributorForm.value.brandName;
     brand.description = this.appointDistributorForm.value.description;
-    brand.businessNatures = this.appointDistributorForm.value.businessNatures != "" ? this.appointDistributorForm.value.businessNatures.map(({ id }) => id) : null;
+    brand.businessNatures = this.appointDistributorForm.value.businessNatures != '' ? this.appointDistributorForm.value.businessNatures.map(({ id }) => id) : null;
     brand.minInvestmentAmount = this.appointDistributorForm.value.minInvestmentAmount;
     brand.maxInvestmentAmount = this.appointDistributorForm.value.maxInvestmentAmount;
     brand.establishmentYear = this.appointDistributorForm.value.establishmentYear;
@@ -232,10 +237,11 @@ export class AppointDistributorComponent implements OnInit {
     brand.totalEmployees = this.appointDistributorForm.value.totalEmployees;
     brand.annualSales = this.appointDistributorForm.value.annualSales;
     brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
-    //brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
+    // brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.AppointDistributor;
     brand.brandLogo = this.brandLogoUrl;
     brand.brandImages = this.productsImages;
+    brand.distributorsBenefits = this.appointDistributorForm.value.distributorsBenefits;
 
     return brand;
   }
@@ -246,7 +252,11 @@ export class AppointDistributorComponent implements OnInit {
     //   this._spinnerService.hide();
     // }
     console.log(error);
-    this._toastr.error('Oops something went wrong !!! Please try again after sometime', 'Error');
+    if (error?.error.includes('User already regitered with email. Kindly try with different email Id')) {
+      this._toastr.error('User already regitered with email. Kindly try with different email Id', 'Error');
+    } else {
+      this._toastr.error('Oops something went wrong !!! Please try again after sometime', 'Error');
+    }
     this._spinnerService.hide();
   }
 
@@ -255,8 +265,8 @@ export class AppointDistributorComponent implements OnInit {
     this._registrationService.registrationDto = null;
     this.appointDistributorForm.reset();
     // alert('request callback submitted');
-    this._toastr.success('Your data has been saved successfully.', 'Success');
-    //this._router.navigate(['home']);
+    this._toastr.success('Thanks for register your profile, Our team will contact you soon.', 'Success');
+    this._router.navigate(['home']);
   }
 
   logValidationErrors(group: FormGroup = this.appointDistributorForm): void {
@@ -312,34 +322,34 @@ export class AppointDistributorComponent implements OnInit {
 
   onLogoSelected(e) {
     if (e.target.files) {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.brandLogoUrl = event.target.result;
-      }
+      };
     }
   }
 
   onProductsImagesSelected(e) {
     if (e.target.files && e.target.files[0]) {
-      var totalFilesUploaded = e.target.files.length + this.productsImages.length;
-      if(totalFilesUploaded > 10){
+      const totalFilesUploaded = e.target.files.length + this.productsImages.length;
+      if (totalFilesUploaded > 10) {
         this._toastr.error('You can upload a maximum of 10 images', 'Error');
       }
-      else{
+      else {
         for (let i = 0; i < e.target.files.length; i++) {
-          var reader = new FileReader();
+          const reader = new FileReader();
           reader.readAsDataURL(e.target.files[i]);
           reader.onload = (event: any) => {
             this.productsImages.push(event.target.result);
-  
+
             this.appointDistributorForm.patchValue({
               productsImages: this.productsImages
             });
-          }
+          };
         }
       }
-      
+
     }
   }
 

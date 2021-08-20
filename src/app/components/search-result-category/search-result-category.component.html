@@ -1,5 +1,5 @@
-<div class="w-100">
-  <p class="mb-4">{{ collection.length }} Results found</p>
+<div class="w-100">  
+  <p class="mb-4">{{ loaderMessage}}</p>
 
   <div>
     <div class="row mrb10px" *ngIf="displaySpinner">
@@ -14,12 +14,11 @@
         <!-- {{collection | json }} -->
         <div class="card mb-3" style="max-width: 550px;">
           <div class="row no-gutters" style="padding:10px">
-            <div class="pull-left col-md-3">
-              <div style="width:115px;">
+            <div class="col-md-3 brand-container">
                 <img [src]="item.brandLogo" class="card-img" alt="...">
-              </div>
-              <div>
-                {{item.name}}
+
+              <div class="my-2">
+                {{item.companyName}}
               </div>
             </div>
             <div class="pull-left col-md-9">
@@ -39,7 +38,7 @@
           <div class="row" style="padding:10px">
             <div class="col-md-12">
               <p>Investment <i class="fa fa-inr" aria-hidden="true"></i>: {{item.investmentRequired}}</p>
-              <p>Space Available: {{ item.spaceRequired }}</p>
+              <p>Space Available: {{ item.spaceRequired }}</p>              
               <!-- <p>Experience: {{ item.experianceYears + ' Years'}}</p> -->
               <p>Distributors Required in: <i class="fa fa-map-marker"></i> {{item.allLocations[0]}}, {{item.stateName}}
               </p>

@@ -15,15 +15,14 @@ export class CatagoryOnloadComponent implements OnInit {
   public displayAll = false;
   public message = '';
 
-  constructor(
-    private _router: Router,
+  constructor(private _router: Router,
     private toggleAllCatagoriesService: ToggleAllCatagoriesService,
     config: NgbCarouselConfig) {
     config.interval = 5000;
     config.wrap = true;
     config.keyboard = true;
     config.pauseOnHover = true;
-  }
+    }
 
   ngOnInit(): void {
     this.toggleAllCatagoriesService.currentApprovalStageMessage.subscribe(msg => this.displayAll = msg);
@@ -34,6 +33,7 @@ export class CatagoryOnloadComponent implements OnInit {
       this._router.navigate(['knowmore', catagoryId]);
     }
   }
+
   toggleDisplayAll(): void {
     this.displayAll = !this.displayAll;
     this.toggleAllCatagoriesService.updateDisplayAllCatagoriesFlag(this.displayAll);

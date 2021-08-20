@@ -1,4 +1,4 @@
-import { Brand } from "./brand.model";
+import { Brand } from './brand.model';
 
 export class RegistrationDto {
     name: string;
@@ -9,6 +9,7 @@ export class RegistrationDto {
     companyName: string;
     website: string;
     address: string;
-    postalCode: string;
+    // postalCode: string;
+    gstNo: string;
     brand: Brand;
 }

@@ -10,6 +10,7 @@ import { MasterDataDto } from 'src/app/models/master-data.model';
 import { LocationDto } from 'src/app/models/location.model';
 import { RequestType } from 'src/app/models/system.enums';
 import { RegistrationService } from 'src/app/services/registration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-become-distributor',
@@ -22,7 +23,7 @@ export class BecomeDistributorComponent implements OnInit {
 
   locationMultiSelectSettings = {};
   businessNatureMultiSelectSettings = {};
-  //products: MasterDataDto[] = [];
+  // products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   categories: MasterDataDto[] = [];
   // distributorshipTypes: MasterDataDto[] = [];
@@ -39,16 +40,17 @@ export class BecomeDistributorComponent implements OnInit {
   // Notice, each key in this object has the same name as the
   // corresponding form control
   formErrors = {
-    //brandName: '',
+    // brandName: '',
+    products: '',
     businessNature: '',
     categories: '',
     minInvestmentAmount: '',
     maxInvestmentAmount: '',
     spaceRequired: '',
     pan: '',
-    gstNumber: '',
+    // gstNumber: '',
     experianceType: '',
-    //distributorshipType: ''
+    // distributorshipType: ''
   };
 
   // This object contains all the validation messages for this form
@@ -57,6 +59,9 @@ export class BecomeDistributorComponent implements OnInit {
     //   required: 'Brand name is required.',
     //   startingWithEmptySpace: 'You cannot start with empty spaces.',
     // },
+    products: {
+      required: 'Products for Distributorship is required.',
+    },
     businessNature: {
       required: 'Business nature is required.',
     },
@@ -81,12 +86,12 @@ export class BecomeDistributorComponent implements OnInit {
       maxlength: 'PAN should have 10 characters.',
       pattern: 'Enter a valid PAN.'
     },
-    gstNumber: {
-      required: 'GST number is required.',
-      minlength: 'GST number should have 15 characters.',
-      maxlength: 'GST number should have 15 characters.',
-      pattern: 'Enter a valid GST number.'
-    },
+    // gstNumber: {
+    //   required: 'GST number is required.',
+    //   minlength: 'GST number should have 15 characters.',
+    //   maxlength: 'GST number should have 15 characters.',
+    //   pattern: 'Enter a valid GST number.'
+    // },
     experianceType: {
       required: 'Select experiance.',
     },
@@ -97,11 +102,12 @@ export class BecomeDistributorComponent implements OnInit {
   };
 
   constructor(private _formBuilder: FormBuilder,
-    private _spinnerService: NgxSpinnerService,
-    private _toastr: ToastrService,
-    private _distributorService: DistributorService,
-    private _masterDataService: MasterDataService,
-    private _registrationService: RegistrationService) { }
+              private _spinnerService: NgxSpinnerService,
+              private _toastr: ToastrService,
+              private _distributorService: DistributorService,
+              private _masterDataService: MasterDataService,
+              private _registrationService: RegistrationService,
+              private _router: Router) { }
 
   ngOnInit(): void {
 
@@ -124,14 +130,16 @@ export class BecomeDistributorComponent implements OnInit {
 
   becomeDistributorSubmit(): void {
     this._spinnerService.show();
-    //console.log(this.appointDistributorForm.value);
-    let brandDto = this.mapFormValuesToModel();
+    // console.log(this.appointDistributorForm.value);
+    const brandDto = this.mapFormValuesToModel();
     this._registrationService.registrationDto.brand = brandDto;
     this._registrationService.saveUserRegistrationDetails(this._registrationService.registrationDto).subscribe((result: any) => {
       this.handleSuccess(result);
     }, (error: any) => {
       this.handleError(error);
     });
+
+    this._router.navigate(['home']);
   }
 
   setupForm() {
@@ -158,11 +166,11 @@ export class BecomeDistributorComponent implements OnInit {
 
     this.becomeDistributorForm = this._formBuilder.group({
       // brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      //brandName: ['', [CustomValidators.startingWithEmptySpace()]],
+      // brandName: ['', [CustomValidators.startingWithEmptySpace()]],
       // businessNature: ['', Validators.required],
       businessNatures: [[]],
       categories: [[]],
-      products: [''],
+      products: ['', [Validators.required]],
       // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       minInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
       maxInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
@@ -170,9 +178,10 @@ export class BecomeDistributorComponent implements OnInit {
       // pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       pan: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       // gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
-      gstNumber: ['', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
+      // gstNumber: ['', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
       // experianceType: [[], Validators.required],
       experianceType: [],
+      experianceYears: [],
       // distributorshipType: ['', Validators.required],
       countrywise: [false],
       regionwise: [false],
@@ -187,9 +196,19 @@ export class BecomeDistributorComponent implements OnInit {
   }
 
   loadMasterData() {
-    this._masterDataService.getAllCategoriesMasterData().subscribe((data: MasterDataDto[]) => {
-      this.categories = data;
-    });
+
+    if (sessionStorage.getItem('catagories')) {
+      const prodCatagories =  JSON.parse(sessionStorage.getItem('catagories'));
+      prodCatagories.forEach(element => {
+        element.forEach(item => {
+          this.categories.push(item);
+        });
+      });
+    }else{
+      this._masterDataService.getAllCategoriesMasterData().subscribe((data: MasterDataDto[]) => {
+        this.categories = data;
+      });
+    }
 
     this._masterDataService.getAllBusinessNatures().subscribe((data: MasterDataDto[]) => {
       this.businessNatures = data;
@@ -205,23 +224,24 @@ export class BecomeDistributorComponent implements OnInit {
   }
 
   mapFormValuesToModel(): Brand {
-    let brand = new Brand();
+    const brand = new Brand();
 
-    //brand.name = this.becomeDistributorForm.value.brandName;
+    // brand.name = this.becomeDistributorForm.value.brandName;
     brand.description = this.becomeDistributorForm.value.description;
     brand.categories = [parseInt(this.becomeDistributorForm.value.categories)];
-    brand.businessNatures = this.becomeDistributorForm.value.businessNatures != "" ? this.becomeDistributorForm.value.businessNatures.map(({ id }) => id) : null;
+    brand.businessNatures = this.becomeDistributorForm.value.businessNatures != '' ? this.becomeDistributorForm.value.businessNatures.map(({ id }) => id) : null;
     brand.minInvestmentAmount = this.becomeDistributorForm.value.minInvestmentAmount;
     brand.maxInvestmentAmount = this.becomeDistributorForm.value.maxInvestmentAmount;
     brand.spaceRequired = this.becomeDistributorForm.value.spaceRequired;
-    //brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
+    // brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
     brand.productsKeywords = this.becomeDistributorForm.value.products;
     brand.pan = this.becomeDistributorForm.value.pan;
-    brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
+    // brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
     brand.experianceType = this.becomeDistributorForm.value.experianceType;
+    brand.experianceYears = this.becomeDistributorForm.value.experianceYears;
     // brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.BecomeDistributor;
-    //locations
+    // locations
     if (this.countries.length > 0) {
       brand.countrywiseLocations = this.countries.map(({ id }) => id);
     }
@@ -254,7 +274,7 @@ export class BecomeDistributorComponent implements OnInit {
     this.becomeDistributorForm.reset();
     // alert('request callback submitted');
     this._toastr.success('Your data has been saved successfully.', 'Success');
-    //this._router.navigate(['home']);
+    this._router.navigate(['home']);
   }
 
   logValidationErrors(group: FormGroup = this.becomeDistributorForm): void {

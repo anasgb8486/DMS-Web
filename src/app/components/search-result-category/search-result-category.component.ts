@@ -15,6 +15,7 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
 export class SearchResultCategoryComponent implements OnInit {
 
   public collection: any[] = [];
+  public loaderMessage: string = 'Please wait ...';
   public displaySpinner: boolean = false;
   constructor(
     config: NgbCarouselConfig,
@@ -40,14 +41,19 @@ export class SearchResultCategoryComponent implements OnInit {
       if (parameter.id && parameter.key) {
         this.distributorService.getBrandsByCategoryAndProductsKeyword(parameter.id, parameter.key).subscribe((result) => {
           this.collection = result;
+          this.loaderMessage = this.collection.length + ' Results found';
           this.getBrandData.setOption('BrandDataByCatagory', result);
+          console.log(result);
         });
       } else {
         this.distributorService.GetBrandsByCategoryId(parameter.id).subscribe((result) => {
           this.collection = result;
+          this.loaderMessage = this.collection.length + ' Results found';
           this.getBrandData.setOption('BrandDataByCatagory', result);
+          console.log(result);
         });
       }
+
       this.SpinnerService.hide();
     });
   }
