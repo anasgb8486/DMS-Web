@@ -236,7 +236,7 @@ export class BecomeDistributorComponent implements OnInit {
     // brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
     brand.productsKeywords = this.becomeDistributorForm.value.products;
     brand.pan = this.becomeDistributorForm.value.pan;
-    // brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
+    brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
     brand.experianceType = this.becomeDistributorForm.value.experianceType;
     brand.experianceYears = this.becomeDistributorForm.value.experianceYears;
     // brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;

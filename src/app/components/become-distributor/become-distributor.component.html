@@ -16,8 +16,8 @@
                 </div>
             </div> -->
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="categories">Products for Distributorship:</label>
-                <div class="col-sm-10">
+                <label class="control-label col-sm-3" for="categories">Products for Distributorship:</label>
+                <div class="col-sm-9">
                     <input type="text" class="form-control" id="products" formControlName="products"
                         placeholder="Enter products' names (, seperated)" name="products"
                         (blur)="logValidationErrors()">
@@ -31,8 +31,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="categories">Business Categories:</label>
-                <div class="col-sm-10">
+                <label class="control-label col-sm-3" for="categories">Business Categories:</label>
+                <div class="col-sm-9">
                     <!-- <ng-multiselect-dropdown formControlName="categories"
                         [placeholder]="'Select one or more categories'" [settings]="categoriesSettings"
                         [data]="categories" [ngClass]="{'is-invalid': formErrors.categories}" (onDropDownClose)="logValidationErrors()" >
@@ -50,19 +50,27 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="investmentRequired">Investment Budget:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="minInvestmentAmount" formControlName="minInvestmentAmount"
-                  placeholder="Enter min investment amount" name="minInvestmentAmount" (blur)="logValidationErrors()"
-                  [ngClass]="{'is-invalid': formErrors.minInvestmentAmount}">
-              <span class="invalid-feedback" *ngIf="formErrors.minInvestmentAmount">
-                  {{formErrors.minInvestmentAmount}}
-              </span>
+                <label class="control-label col-sm-3" for="minInvestmentAmount">Investment Budget:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="minInvestmentAmount" formControlName="minInvestmentAmount"
+                        placeholder="Enter min investment amount in lacs" name="minInvestmentAmount" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.minInvestmentAmount}" maxlength="6">
+                    <span class="invalid-feedback" *ngIf="formErrors.minInvestmentAmount">
+                        {{formErrors.minInvestmentAmount}}
+                    </span>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="maxInvestmentAmount" formControlName="maxInvestmentAmount"
+                        placeholder="Enter max investment amount in lacs" name="maxInvestmentAmount" (blur)="logValidationErrors()"
+                        [ngClass]="{'is-invalid': formErrors.maxInvestmentAmount}" maxlength="6">
+                    <span class="invalid-feedback" *ngIf="formErrors.maxInvestmentAmount">
+                        {{formErrors.maxInvestmentAmount}}
+                    </span>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="spaceRequired">Space Available (Sq Ft):</label>
-                <div class="col-sm-10">
+                <label class="control-label col-sm-3" for="spaceRequired">Space Available (Sq Ft):</label>
+                <div class="col-sm-9">
                     <input type="text" class="form-control" id="spaceRequired" formControlName="spaceRequired"
                         placeholder="Enter space available (Sq Ft)" name="spaceRequired" (blur)="logValidationErrors()"
                         [ngClass]="{'is-invalid': formErrors.spaceRequired}">
@@ -72,7 +80,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="experiance">Experiance:</label>
+                <label class="control-label col-sm-3" for="experiance">Experiance:</label>
                 <div class="col-sm-3">
                     <div class="form-check-inline">
                         <label class="form-check-label">
@@ -92,23 +100,23 @@
                 </div>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" id="experianceYears" formControlName="experianceYears"
-                        placeholder="Enter total experience(in years)" name="experianceYears">
+                        placeholder="Enter total experience (in years)" name="experianceYears">
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     &nbsp;
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="businessNatures">Business Nature:</label>
-                <div class="col-sm-10">
+                <label class="control-label col-sm-3" for="businessNatures">Business Nature:</label>
+                <div class="col-sm-9">
                     <ng-multiselect-dropdown formControlName="businessNatures" [placeholder]="'Business Nature'"
                         [settings]="businessNatureMultiSelectSettings" [data]="businessNatures">
                     </ng-multiselect-dropdown>
                 </div>
             </div>                                    
             <div class="form-group  row">
-                <label class="control-label col-sm-2" for="pan">PAN:</label>
-                <div class="col-sm-10">
+                <label class="control-label col-sm-3" for="pan">PAN:</label>
+                <div class="col-sm-9">
                     <input type="text" class="form-control" id="pan" formControlName="pan" placeholder="Enter PAN"
                         name="pan" (blur)="logValidationErrors()" [ngClass]="{'is-invalid': formErrors.pan}">
                     <span class="invalid-feedback" *ngIf="formErrors.pan">
@@ -128,7 +136,7 @@
                 </div>
             </div> -->            
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="distributorshipType">Distributorship Type:</label>
+                <label class="control-label col-sm-3" for="distributorshipType">Distributorship Type:</label>
                 <div class="col-sm-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" id="countrywise" value="1" formControlName="countrywise"
@@ -151,7 +159,7 @@
 
             </div>
             <div class="form-group row">
-                <div class="col-sm-2"></div>
+                <div class="col-sm-3"></div>
                 <div class="col-sm-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" id="statewise" value="3" formControlName="statewise" name="statewise"
@@ -171,7 +179,7 @@
                         City-wise
                     </label>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <ng-multiselect-dropdown formControlName="cities" [placeholder]="'Cities'"
                         [settings]="locationMultiSelectSettings" [data]="cities" [(ngModel)]="selectedCities">
                     </ng-multiselect-dropdown>
