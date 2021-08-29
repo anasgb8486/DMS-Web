@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    public dialog: MatDialog
   ) { }
 
 
@@ -57,5 +60,24 @@ export class LoginComponent implements OnInit {
 
   closePop(user: any): any {
     return this.closePopupEvent.emit(user);
+  }
+
+  forgotPassword(): void{
+    this.closePop(null);
+    this._router.navigate(['forgotpassword']);
+  }
+
+  openDialog(componentName): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      disableClose: true,
+      width: componentName !== 'login' ? '750px' : '550px',
+      data: componentName,
+      panelClass: 'full-width-dialog',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.user = result;
+      // console.log('The dialog was closed');
+    });
   }
 }

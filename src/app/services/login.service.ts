@@ -31,4 +31,9 @@ export class LoginService  {
     return this._httpClient.get<BusinessProfile>(this.webAPIUrl + 'GetUserBusinessProfile?userId=' + userId);
   }
 
+  public forgotPassword(email: string): Observable<boolean>{
+    console.log(email);
+    return this._httpClient.post<any>(this.webAPIUrl + 'ForgotPassword' , JSON.stringify(email), this.httpOptions);
+  }
+
 }

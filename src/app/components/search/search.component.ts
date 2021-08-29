@@ -89,18 +89,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   openMenu(divName){
-    if(divName==='memu-slide'){
+    if (divName === 'memu-slide'){
       this.animationState = this.animationState === 'out' ? 'in' : 'out';
     }
   }
 
   openCate(divName){
-    if(divName==='cate-slide'){
+    if (divName === 'cate-slide'){
       this.animationCate = this.animationCate === 'out' ? 'in' : 'out';
     }
   }
 
-
+  moveToTop(): void{
+    window.scroll(0, 0);
+    // or document.body.scrollTop = 0;
+    // or document.querySelector('body').scrollTo(0,0)
+  }
 
   logout(): void{
     sessionStorage.removeItem('user');

@@ -7,6 +7,14 @@
     padding: 20px;
 }
 
+#fgp{
+    cursor: pointer !important;
+}
+
+#fgp:hover {
+    text-decoration: underline;
+}
+
 h1{
     margin:auto;
 }

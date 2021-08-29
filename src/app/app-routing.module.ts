@@ -11,6 +11,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { RequestCallbackComponent } from './components/request-callback/request-callback.component';
 import { SearchResultCategoryComponent } from './components/search-result-category/search-result-category.component';
 import { SearchbarDistributorLeadsComponent } from './components/searchbar-distributor-leads/searchbar-distributor-leads.component';
+import { ForgotPasswordComponent } from './shared/components/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'distributorleads', component: SearchbarDistributorLeadsComponent },
   { path: 'distributorleadsresult', component: DistributorLeadsResultsComponent },
   { path: 'myenquiries', component: DisplayBrandEnquiriesComponent },
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home'}
 
 ];
