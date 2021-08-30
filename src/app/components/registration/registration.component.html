@@ -1,4 +1,4 @@
-<div class="card paddingM">
+<div class="card"> <!--paddingM -->
     <div class="card-header bg-primary text-white">
         Create Profile/Signup
     </div>
@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="control-label col-sm-3" for="name">Name:</label>
+                        <label class="control-label col-sm-3" for="name">Name<span class="required">*</span>:</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="name" formControlName="name"
                                 placeholder="Enter name" name="name" (blur)="logValidationErrors()"
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="control-label col-sm-3" for="mobileNumber">Mobile Number:</label>
+                        <label class="control-label col-sm-3" for="mobileNumber">Mobile Number<span class="required">*</span>:</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber"
                                 placeholder="Enter mobile number" name="mobileNumber" (blur)="logValidationErrors()"
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="form-group  row">
-                        <label class="control-label col-sm-3" for="email">Email:</label>
+                        <label class="control-label col-sm-3" for="email">Email<span class="required">*</span>:</label>
                         <div class="col-sm-9">
                             <input type="email" class="form-control" id="email" formControlName="email"
                                 placeholder="Enter email" name="email" (blur)="logValidationErrors()"
@@ -44,7 +44,7 @@
                     </div>
                     <!-- <div formGroupName="passwordGroup"> -->
                     <div class="form-group  row">
-                        <label class="control-label col-sm-3" for="password">Password:</label>
+                        <label class="control-label col-sm-3" for="password">Password<span class="required">*</span>:</label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="password" formControlName="password"
                                 placeholder="Password" name="password" (blur)="logValidationErrors()"
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="form-group  row">
-                        <label class="control-label col-sm-3" for="password">Confirm Password:</label>
+                        <label class="control-label col-sm-3" for="password">Confirm Password<span class="required">*</span>:</label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="confirmPassword"
                                 formControlName="confirmPassword" placeholder="Confirm password" name="confirmPassword"
@@ -82,7 +82,7 @@
     <mat-step label="Company Details" [stepControl]="formCompanyDtails">
         <form class="form-horizontal" [formGroup]="formCompanyDtails">
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="companyName">Company Name:</label>
+                <label class="control-label col-sm-3" for="companyName">Company Name<span class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="companyName" formControlName="companyName"
                         placeholder="Enter company name" name="companyName" (blur)="logValidationErrors(formCompanyDtails)"
@@ -107,7 +107,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="address">Address:</label>
+                <label class="control-label col-sm-3" for="address">Address<span class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="address" formControlName="address"
                         placeholder="Enter your address" name="address" (blur)="logValidationErrors(formCompanyDtails)"

@@ -12,6 +12,7 @@ import { RequestCallbackComponent } from './components/request-callback/request-
 import { SearchResultCategoryComponent } from './components/search-result-category/search-result-category.component';
 import { SearchbarDistributorLeadsComponent } from './components/searchbar-distributor-leads/searchbar-distributor-leads.component';
 import { ForgotPasswordComponent } from './shared/components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'distributorleadsresult', component: DistributorLeadsResultsComponent },
   { path: 'myenquiries', component: DisplayBrandEnquiriesComponent },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'resetpassword', component: ResetPasswordComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home'}
 
 ];

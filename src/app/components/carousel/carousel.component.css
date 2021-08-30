@@ -100,8 +100,10 @@
   }
 
   .item-box-blog-text {
-    max-height: 100px;
-    overflow: hidden;
+    max-height: 100px;    
+    height: 250px !important; 
+    text-align: left;
+    overflow: auto;
   }
 
   .mt-10 {
@@ -130,3 +132,16 @@
    margin: 3px;
  }
 
+ .item-box-blog-text::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+.item-box-blog-text::-webkit-scrollbar-track {
+  background: orange;        /* color of the tracking area */
+}
+
+.item-box-blog-text::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid orange;  /* creates padding around scroll thumb */
+}

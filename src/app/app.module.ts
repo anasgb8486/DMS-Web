@@ -50,6 +50,7 @@ import { SendEmailService } from './services/send-email.service';
 import { ToggleAllCatagoriesService } from './services/toggle-all-catagories.service';
 import { ContactCustomerCareComponent } from './components/contact-customer-care/contact-customer-care.component';
 import { ForgotPasswordComponent } from './shared/components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { ForgotPasswordComponent } from './shared/components/forgot-password/for
     DisplayBrandEnquiriesComponent,
     ReplyEnquiriesComponent,
     ContactCustomerCareComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

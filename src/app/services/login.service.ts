@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BusinessProfile } from '../models/businessProfile.model';
 import { Login } from '../models/login.model';
+import { ResetPassword } from '../models/resetpassword.model';
 
 @Injectable()
 export class LoginService  {
@@ -32,8 +33,11 @@ export class LoginService  {
   }
 
   public forgotPassword(email: string): Observable<boolean>{
-    console.log(email);
     return this._httpClient.post<any>(this.webAPIUrl + 'ForgotPassword' , JSON.stringify(email), this.httpOptions);
+  }
+
+  public ResetPassword(ResetPasswordDto: ResetPassword): Observable<boolean>{
+    return this._httpClient.post<any>(this.webAPIUrl + 'ResetPassword' , JSON.stringify(ResetPasswordDto), this.httpOptions);
   }
 
 }

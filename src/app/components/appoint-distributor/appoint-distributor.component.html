@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="brandName">Brand Name:</label>
+                <label class="control-label col-sm-3" for="brandName">Brand Name<span class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="brandName" formControlName="brandName"
                         placeholder="Enter brand name" name="brandName" (blur)="logValidationErrors()"
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3">Investment Required:</label>
+                <label class="control-label col-sm-3">Investment Required<span class="required">*</span>:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="minInvestmentAmount"
                         formControlName="minInvestmentAmount" placeholder="Enter min investment amount in lacs"
@@ -54,7 +54,7 @@
                 </div> -->
             </div>
             <div class="form-group  row">
-                <label class="control-label col-sm-3" for="establishmentYear">Establishment Year:</label>
+                <label class="control-label col-sm-3" for="establishmentYear">Establishment Year<span class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="establishmentYear" formControlName="establishmentYear"
                         placeholder="Enter establishment year" name="establishmentYear" (blur)="logValidationErrors()"
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="productsKeywords">Products Keywords:</label>
+                <label class="control-label col-sm-3" for="productsKeywords">Products Keywords<span class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="productsKeywords" formControlName="productsKeywords"
                         placeholder="Enter products' keywords in comma seperated format" name="productsKeywords"
