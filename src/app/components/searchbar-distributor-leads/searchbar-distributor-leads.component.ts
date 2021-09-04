@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin } from 'rxjs';
 import { DistributorService } from 'src/app/services/distributor.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
+import { MasterDataDto } from 'src/app/models/master-data.model';
 
 @Component({
   selector: 'app-searchbar-distributor-leads',
@@ -15,29 +16,15 @@ export class SearchbarDistributorLeadsComponent implements OnInit {
   public catagories: any[] = [];
   public states: any[] = [];
   public cities: any[] = [];
-
+  public investmentRanges: MasterDataDto[] = [];
   public selectedState = 0;
   public selectedcity = 0;
   public selectedCatagory = 0;
   public searchText = '';
   public selectedCatagoryName: string;
-  public investmentAmount: number;
+  // public investmentAmount: number;
   public selectedInvestmentRange = 0;
   public resultDistributorLeads: any[];
-
-  public investmentRange: any[] = [
-    {id: 1, value: 'Rs. 5 Cr. and above'},
-    {id: 2, value: 'Rs. 2 Cr. - Rs. 5Cr.'},
-    {id: 3, value: 'Rs. 1 Cr. - Rs. 2Cr.'},
-    {id: 4, value: 'Rs. 50 Lac. - Rs. 99 Lac.'},
-    {id: 5, value: 'Rs. 30 Lac. - Rs. 50 Lac.'},
-    {id: 6, value: 'Rs. 20 Lac. - Rs. 30 Lac.'},
-    {id: 7, value: 'Rs. 10 Lac. - Rs. 20 Lac.'},
-    {id: 7, value: 'Rs. 5 Lac. - Rs. 10 Lac.'},
-    {id: 7, value: 'Rs. 2 Lac. - Rs. 5 Lac.'},
-    {id: 7, value: 'Rs. 1 Lac. - Rs. 2 Lac.'},
-    {id: 7, value: 'Rs. 50 k - Rs. 99 K'},
-  ];
 
   @Output() toggleSearchBar: EventEmitter<string> = new EventEmitter<string>();
   constructor(
@@ -85,12 +72,18 @@ export class SearchbarDistributorLeadsComponent implements OnInit {
       result.cities.forEach(item => {
         this.cities.push(item);
       });
+
     });
+
+    this.masterDataService.getAllInvestmentRanges().subscribe((data: MasterDataDto[]) => {
+      this.investmentRanges = data;
+    });
+
   }
 
 
   searchDistributorsLeads(): void {
-    const BrandFilterDto = { categoryId: +this.selectedCatagory, searchKeyword: this.searchText, stateId: +this.selectedState, cityId: +this.selectedcity, investmentAmount: +this.investmentAmount, requestType: 1 };
+    const BrandFilterDto = { categoryId: +this.selectedCatagory, searchKeyword: this.searchText, stateId: +this.selectedState, cityId: +this.selectedcity, investmentRangeId: +this.selectedInvestmentRange, requestType: 1 };
     this.distributorService.getDistributorsLeadsBySearchFilter(BrandFilterDto).subscribe((response) => {
       // console.log(response);
       if (response) {

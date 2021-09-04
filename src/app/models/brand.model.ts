@@ -10,6 +10,7 @@ export class Brand {
     businessNatures: number[];
     minInvestmentAmount: number;
     maxInvestmentAmount: number;
+    investmentRangeId: number;
     establishmentYear: number;
     spaceRequired: string;
     categories: number[];
@@ -39,5 +40,6 @@ export class Brand {
     citywiseLocations: number[];
     brandImages: string[];
     allLocations: string[];
+    distributorshipLocations: string;
     distributorsBenefits: string;
 }

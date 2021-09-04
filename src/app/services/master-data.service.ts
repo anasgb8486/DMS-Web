@@ -46,4 +46,9 @@ export class MasterDataService {
   public getAllCities(): Observable<any[]> {
     return this._httpClient.get<any[]>(this.webAPIUrl + 'GetAllCities/');
   }
+
+  public getAllInvestmentRanges() {
+    return this._httpClient.get(this.webAPIUrl + 'GetAllInvestmentRanges/');
+  }
+
 }

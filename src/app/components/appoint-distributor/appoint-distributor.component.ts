@@ -22,20 +22,18 @@ export class AppointDistributorComponent implements OnInit {
   appointDistributorForm: FormGroup;
   brandLogoUrl = '';
   locationMultiSelectSettings = {};
-  // categoriesSettings = {};
   businessNatureMultiSelectSettings = {};
   categories: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
-  // distributorshipTypes: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
-  regions: LocationDto[] = [];
-  selectedRegions: LocationDto[] = [];
   states: LocationDto[] = [];
   selectedStates: LocationDto[] = [];
   cities: LocationDto[] = [];
   selectedCities: LocationDto[] = [];
   productsImages: string[] = [];
-
+  investmentRanges: MasterDataDto[] = [];
+  // categoriesSettings = {};
+  // distributorshipTypes: MasterDataDto[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
@@ -43,15 +41,16 @@ export class AppointDistributorComponent implements OnInit {
   formErrors = {
     brandName: '',
     businessNature: '',
-    minInvestmentAmount: '',
-    maxInvestmentAmount: '',
     establishmentYear: '',
     spaceRequired: '',
     categories: '',
+    investmentAmount: '',
     totalEmployees: '',
     annualSales: '',
     productsKeywords: '',
     // distributorshipType: '',
+    // minInvestmentAmount: '',
+    // maxInvestmentAmount: '',
   };
 
   // This object contains all the validation messages for this form
@@ -63,13 +62,8 @@ export class AppointDistributorComponent implements OnInit {
     businessNature: {
       required: 'Business nature is required.',
     },
-    minInvestmentAmount: {
-      required: 'Please provide minimum investment amount.',
-      pattern: 'Only numbers are allowed.'
-    },
-    maxInvestmentAmount: {
-      required: 'Please provide maximum investment amount.',
-      pattern: 'Only numbers are allowed.'
+    investmentAmount: {
+      min: 'Please select investment range'
     },
     establishmentYear: {
       required: 'Establishment year is required.',
@@ -100,7 +94,14 @@ export class AppointDistributorComponent implements OnInit {
     distributorshipType: {
       required: 'Distributorship type is required.',
     },
-
+    // minInvestmentAmount: {
+    //   required: 'Please provide minimum investment amount.',
+    //   pattern: 'Only numbers are allowed.'
+    // },
+    // maxInvestmentAmount: {
+    //   required: 'Please provide maximum investment amount.',
+    //   pattern: 'Only numbers are allowed.'
+    // },
   };
 
   constructor(
@@ -180,26 +181,22 @@ export class AppointDistributorComponent implements OnInit {
     this.appointDistributorForm = this._formBuilder.group({
       brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       businessNatures: [[]],
-      minInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
-      maxInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
+      investmentAmount: [0],
       establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
       categories: [[]],
       totalEmployees: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      // distributorshipType: ['', Validators.required],
-      countrywise: [false],
-      regionwise: [false],
-      regions: [this.selectedRegions],
-      statewise: [false],
       states: [this.selectedStates],
-      citywise: [false],
       cities: [this.selectedCities],
       brandLogo: [''],
       productsImages: [[]],
       description: [''],
       distributorsBenefits: ['']
+      // distributorshipType: ['', Validators.required],
+      // minInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
+      // maxInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
     });
 
   }
@@ -213,13 +210,20 @@ export class AppointDistributorComponent implements OnInit {
       this.businessNatures = data;
     });
 
-    // this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[])=>{
-    //   this.distributorshipTypes = data;
-    // });
+    this._masterDataService.getAllInvestmentRanges().subscribe((data: MasterDataDto[]) => {
+      this.investmentRanges = data;
+    });
 
     this._masterDataService.getAllLocations().subscribe((data: LocationDto[]) => {
       this.allLocations = data;
+
+      this.getAllStates(3);
+      this.getAllCities(4);
     });
+
+    // this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[])=>{
+    //   this.distributorshipTypes = data;
+    // });
 
   }
 
@@ -229,20 +233,27 @@ export class AppointDistributorComponent implements OnInit {
     brand.name = this.appointDistributorForm.value.brandName;
     brand.description = this.appointDistributorForm.value.description;
     brand.businessNatures = this.appointDistributorForm.value.businessNatures != '' ? this.appointDistributorForm.value.businessNatures.map(({ id }) => id) : null;
-    brand.minInvestmentAmount = this.appointDistributorForm.value.minInvestmentAmount;
-    brand.maxInvestmentAmount = this.appointDistributorForm.value.maxInvestmentAmount;
+    brand.investmentRangeId = parseInt(this.appointDistributorForm.value.investmentAmount);
     brand.establishmentYear = this.appointDistributorForm.value.establishmentYear;
     brand.spaceRequired = this.appointDistributorForm.value.spaceRequired;
     brand.categories = [parseInt(this.appointDistributorForm.value.categories)];
     brand.totalEmployees = this.appointDistributorForm.value.totalEmployees;
     brand.annualSales = this.appointDistributorForm.value.annualSales;
     brand.productsKeywords = this.appointDistributorForm.value.productsKeywords;
-    // brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.AppointDistributor;
     brand.brandLogo = this.brandLogoUrl;
     brand.brandImages = this.productsImages;
     brand.distributorsBenefits = this.appointDistributorForm.value.distributorsBenefits;
-
+    // locations
+    if (this.selectedStates.length > 0) {
+      brand.statewiseLocations = this.selectedStates.map(({ id }) => id);
+    }
+    if (this.selectedCities.length > 0) {
+      brand.citywiseLocations = this.selectedCities.map(({ id }) => id);
+    }
+    // brand.minInvestmentAmount = this.appointDistributorForm.value.minInvestmentAmount;
+    // brand.maxInvestmentAmount = this.appointDistributorForm.value.maxInvestmentAmount;
+    // brand.distributorshipType = this.appointDistributorForm.value.distributorshipType;
     return brand;
   }
 
@@ -290,34 +301,22 @@ export class AppointDistributorComponent implements OnInit {
     });
   }
 
-  onRegionChecked(event) {
-    if (event.target.checked) {
-      this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.regions = [];
-      this.selectedRegions = [];
-    }
+  // onRegionChecked(event) {
+  //   if (event.target.checked) {
+  //     this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+  //   }
+  //   else {
+  //     this.regions = [];
+  //     this.selectedRegions = [];
+  //   }
+  // }
+
+  getAllStates(stateType) {
+    this.states = this.allLocations.filter(x => x.distributorshipTypeId === stateType);
   }
 
-  onStateChecked(event) {
-    if (event.target.checked) {
-      this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.states = [];
-      this.selectedStates = [];
-    }
-  }
-
-  onCityChecked(event) {
-    if (event.target.checked) {
-      this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.cities = [];
-      this.selectedCities = [];
-    }
+  getAllCities(cityType) {
+    this.cities = this.allLocations.filter(x => x.distributorshipTypeId === cityType);
   }
 
   onLogoSelected(e) {

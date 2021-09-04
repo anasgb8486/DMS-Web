@@ -23,42 +23,38 @@ export class BecomeDistributorComponent implements OnInit {
 
   locationMultiSelectSettings = {};
   businessNatureMultiSelectSettings = {};
-  // products: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   categories: MasterDataDto[] = [];
-  // distributorshipTypes: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
-  countries: LocationDto[] = [];
-  regions: LocationDto[] = [];
-  selectedRegions: LocationDto[] = [];
   states: LocationDto[] = [];
   selectedStates: LocationDto[] = [];
   cities: LocationDto[] = [];
   selectedCities: LocationDto[] = [];
+  investmentRanges: MasterDataDto[] = [];
+  // products: MasterDataDto[] = [];
+  // distributorshipTypes: MasterDataDto[] = [];
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
   // corresponding form control
   formErrors = {
-    // brandName: '',
     products: '',
     businessNature: '',
     categories: '',
-    minInvestmentAmount: '',
-    maxInvestmentAmount: '',
+    investmentAmount: '',
     spaceRequired: '',
     pan: '',
-    // gstNumber: '',
     experianceType: '',
+    // brandName: '',
     // distributorshipType: ''
+    // minInvestmentAmount: '',
+    // maxInvestmentAmount: '',
+    // gstNumber: '',
   };
 
   // This object contains all the validation messages for this form
   validationMessages = {
-    // brandName: {
-    //   required: 'Brand name is required.',
-    //   startingWithEmptySpace: 'You cannot start with empty spaces.',
-    // },
+    
     products: {
       required: 'Products for Distributorship is required.',
     },
@@ -68,13 +64,8 @@ export class BecomeDistributorComponent implements OnInit {
     categories: {
       required: 'Category is required.',
     },
-    minInvestmentAmount: {
-      required: 'Please provide minimum investment amount.',
-      pattern: 'Only numbers are allowed.'
-    },
-    maxInvestmentAmount: {
-      required: 'Please provide maximum investment amount.',
-      pattern: 'Only numbers are allowed.'
+    investmentAmount: {
+      min: 'Please select investment range'
     },
     spaceRequired: {
       required: 'Space is required.',
@@ -86,18 +77,31 @@ export class BecomeDistributorComponent implements OnInit {
       maxlength: 'PAN should have 10 characters.',
       pattern: 'Enter a valid PAN.'
     },
-    // gstNumber: {
-    //   required: 'GST number is required.',
-    //   minlength: 'GST number should have 15 characters.',
-    //   maxlength: 'GST number should have 15 characters.',
-    //   pattern: 'Enter a valid GST number.'
-    // },
+    
     experianceType: {
       required: 'Select experiance.',
     },
     distributorshipType: {
       required: 'Distributorship type is required.',
     },
+    // brandName: {
+    //   required: 'Brand name is required.',
+    //   startingWithEmptySpace: 'You cannot start with empty spaces.',
+    // },
+    // minInvestmentAmount: {
+    //   required: 'Please provide minimum investment amount.',
+    //   pattern: 'Only numbers are allowed.'
+    // },
+    // maxInvestmentAmount: {
+    //   required: 'Please provide maximum investment amount.',
+    //   pattern: 'Only numbers are allowed.'
+    // },
+    // gstNumber: {
+    //   required: 'GST number is required.',
+    //   minlength: 'GST number should have 15 characters.',
+    //   maxlength: 'GST number should have 15 characters.',
+    //   pattern: 'Enter a valid GST number.'
+    // },
 
   };
 
@@ -165,32 +169,29 @@ export class BecomeDistributorComponent implements OnInit {
     };
 
     this.becomeDistributorForm = this._formBuilder.group({
-      // brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      // brandName: ['', [CustomValidators.startingWithEmptySpace()]],
-      // businessNature: ['', Validators.required],
       businessNatures: [[]],
       categories: [[]],
       products: ['', [Validators.required]],
-      // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      minInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
-      maxInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
+      investmentAmount: [0],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
-      // pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       pan: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
+      experianceType: [],
+      experianceYears: [],
+      states: [this.selectedStates],
+      cities: [this.selectedCities],
+      description: [''],
+
+      // brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
+      // brandName: ['', [CustomValidators.startingWithEmptySpace()]],
+      // businessNature: ['', Validators.required],
+      // investmentRequired: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      // minInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
+      // maxInvestmentAmount: ['', [Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
       // gstNumber: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
       // gstNumber: ['', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]],
       // experianceType: [[], Validators.required],
-      experianceType: [],
-      experianceYears: [],
+      // pan: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/[A-Z]{5}[0-9]{4}[A-Z]{1}/)]],
       // distributorshipType: ['', Validators.required],
-      countrywise: [false],
-      regionwise: [false],
-      regions: [this.selectedRegions],
-      statewise: [false],
-      states: [this.selectedStates],
-      citywise: [false],
-      cities: [this.selectedCities],
-      description: [''],
     });
 
   }
@@ -214,40 +215,37 @@ export class BecomeDistributorComponent implements OnInit {
       this.businessNatures = data;
     });
 
-    // this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[]) => {
-    //   this.distributorshipTypes = data;
-    // });
+    this._masterDataService.getAllInvestmentRanges().subscribe((data: MasterDataDto[]) => {
+      this.investmentRanges = data;
+    });
 
     this._masterDataService.getAllLocations().subscribe((data: LocationDto[]) => {
       this.allLocations = data;
+
+      this.getAllStates(3);
+      this.getAllCities(4);
     });
+
+    // this._masterDataService.getAllDistributorshipTypes().subscribe((data: MasterDataDto[]) => {
+    //   this.distributorshipTypes = data;
+    // });
   }
 
   mapFormValuesToModel(): Brand {
     const brand = new Brand();
-
-    // brand.name = this.becomeDistributorForm.value.brandName;
+    
     brand.description = this.becomeDistributorForm.value.description;
     brand.categories = [parseInt(this.becomeDistributorForm.value.categories)];
     brand.businessNatures = this.becomeDistributorForm.value.businessNatures != '' ? this.becomeDistributorForm.value.businessNatures.map(({ id }) => id) : null;
-    brand.minInvestmentAmount = this.becomeDistributorForm.value.minInvestmentAmount;
-    brand.maxInvestmentAmount = this.becomeDistributorForm.value.maxInvestmentAmount;
+    brand.investmentRangeId = parseInt(this.becomeDistributorForm.value.investmentAmount);
     brand.spaceRequired = this.becomeDistributorForm.value.spaceRequired;
-    // brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
     brand.productsKeywords = this.becomeDistributorForm.value.products;
     brand.pan = this.becomeDistributorForm.value.pan;
     brand.gstNumber = this.becomeDistributorForm.value.gstNumber;
     brand.experianceType = this.becomeDistributorForm.value.experianceType;
     brand.experianceYears = this.becomeDistributorForm.value.experianceYears;
-    // brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
     brand.requestType = RequestType.BecomeDistributor;
     // locations
-    if (this.countries.length > 0) {
-      brand.countrywiseLocations = this.countries.map(({ id }) => id);
-    }
-    if (this.selectedRegions.length > 0) {
-      brand.regionwiseLocations = this.selectedRegions.map(({ id }) => id);
-    }
     if (this.selectedStates.length > 0) {
       brand.statewiseLocations = this.selectedStates.map(({ id }) => id);
     }
@@ -256,6 +254,12 @@ export class BecomeDistributorComponent implements OnInit {
     }
 
     return brand;
+
+    // brand.name = this.becomeDistributorForm.value.brandName;
+    // brand.minInvestmentAmount = this.becomeDistributorForm.value.minInvestmentAmount;
+    // brand.maxInvestmentAmount = this.becomeDistributorForm.value.maxInvestmentAmount;
+    // brand.products = this.becomeDistributorForm.value.products != "" ? this.becomeDistributorForm.value.products.map(({ id }) => id) : null;
+    // brand.distributorshipType = this.becomeDistributorForm.value.distributorshipType;
   }
 
   handleError(error: any): void {
@@ -298,43 +302,51 @@ export class BecomeDistributorComponent implements OnInit {
     });
   }
 
-  public onCountryChecked(event) {
-    if (event.target.checked) {
-      this.countries = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.countries = [];
-    }
+  getAllStates(stateType) {
+    this.states = this.allLocations.filter(x => x.distributorshipTypeId === stateType);
   }
 
-  public onRegionChecked(event) {
-    if (event.target.checked) {
-      this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.regions = [];
-      this.selectedRegions = [];
-    }
+  getAllCities(cityType) {
+    this.cities = this.allLocations.filter(x => x.distributorshipTypeId === cityType);
   }
 
-  public onStateChecked(event) {
-    if (event.target.checked) {
-      this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.states = [];
-      this.selectedStates = [];
-    }
-  }
+  // public onCountryChecked(event) {
+  //   if (event.target.checked) {
+  //     this.countries = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+  //   }
+  //   else {
+  //     this.countries = [];
+  //   }
+  // }
 
-  public onCityChecked(event) {
-    if (event.target.checked) {
-      this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
-    }
-    else {
-      this.cities = [];
-      this.selectedCities = [];
-    }
-  }
+  // public onRegionChecked(event) {
+  //   if (event.target.checked) {
+  //     this.regions = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+  //   }
+  //   else {
+  //     this.regions = [];
+  //     this.selectedRegions = [];
+  //   }
+  // }
+
+  // public onStateChecked(event) {
+  //   if (event.target.checked) {
+  //     this.states = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+  //   }
+  //   else {
+  //     this.states = [];
+  //     this.selectedStates = [];
+  //   }
+  // }
+
+  // public onCityChecked(event) {
+  //   if (event.target.checked) {
+  //     this.cities = this.allLocations.filter(x => x.distributorshipTypeId === parseInt(event.target.value));
+  //   }
+  //   else {
+  //     this.cities = [];
+  //     this.selectedCities = [];
+  //   }
+  // }
 
 }

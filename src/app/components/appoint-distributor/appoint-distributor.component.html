@@ -24,8 +24,17 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3">Investment Required<span class="required">*</span>:</label>
-                <div class="col-sm-4">
+                <label class="control-label col-sm-3" for="investmentAmount">Investment Required<span class="required">*</span>:</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="investmentAmount" formControlName="investmentAmount"
+                        [ngClass]="{'is-invalid': formErrors.investmentAmount}" (blur)="logValidationErrors()">
+                        <option value="0" disabled>Select</option>
+                        <option *ngFor="let invRange of investmentRanges" [value]="invRange.id">
+                            {{invRange.name}}
+                        </option>
+                    </select>
+                </div>
+                <!-- <div class="col-sm-4">
                     <input type="text" class="form-control" id="minInvestmentAmount"
                         formControlName="minInvestmentAmount" placeholder="Enter min investment amount in lacs"
                         name="minInvestmentAmount" (blur)="logValidationErrors()"
@@ -34,7 +43,6 @@
                         {{formErrors.minInvestmentAmount}}
                     </span>
                 </div>
-                <!-- <div class="col-sm-1"></div> -->
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="maxInvestmentAmount"
                         formControlName="maxInvestmentAmount" placeholder="Enter max investment amount in lacs"
@@ -43,14 +51,6 @@
                     <span class="invalid-feedback" *ngIf="formErrors.maxInvestmentAmount">
                         {{formErrors.maxInvestmentAmount}}
                     </span>
-                </div>
-                <!-- <div class="col-sm-10">
-                    <input type="text" class="form-control" id="investmentRequired" formControlName="investmentRequired"
-                      placeholder="Enter investment required" name="investmentRequired" (blur)="logValidationErrors()"
-                      [ngClass]="{'is-invalid': formErrors.investmentRequired}">
-                  <span class="invalid-feedback" *ngIf="formErrors.investmentRequired">
-                      {{formErrors.investmentRequired}}
-                  </span> 
                 </div> -->
             </div>
             <div class="form-group  row">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="categories">Business Categories:</label>
+                <label class="control-label col-sm-3" for="categories">Business Categories<span class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <!-- <ng-multiselect-dropdown formControlName="categories"
                       [placeholder]="'Select one or more categories'" [settings]="categoriesSettings"
@@ -143,7 +143,7 @@
                         name="distributorsBenefits"></textarea>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="control-label col-sm-3" for="distributorshipType">Distributorship Type:</label>
                 <div class="col-sm-2">
                     <label class="checkbox-inline">
@@ -164,29 +164,29 @@
                         [settings]="locationMultiSelectSettings" [data]="regions" [(ngModel)]="selectedRegions">
                     </ng-multiselect-dropdown>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-2">
+                <label class="control-label col-sm-3" for="distributorshipType">Distributorship Type:</label>
+                <!-- <div class="col-sm-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" id="statewise" value="3" formControlName="statewise" name="statewise"
                             (change)='onStateChecked($event)'>
                         State-wise
                     </label>
-                </div>
+                </div> -->
                 <div class="col-sm-3">
                     <ng-multiselect-dropdown formControlName="states" [placeholder]="'States'"
                         [settings]="locationMultiSelectSettings" [data]="states" [(ngModel)]="selectedStates">
                     </ng-multiselect-dropdown>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" id="citywise" value="4" formControlName="citywise" name="citywise"
                             (change)='onCityChecked($event)'>
                         City-wise
                     </label>
-                </div>
-                <div class="col-sm-2">
+                </div> -->
+                <div class="col-sm-3">
                     <ng-multiselect-dropdown formControlName="cities" [placeholder]="'Cities'"
                         [settings]="locationMultiSelectSettings" [data]="cities" [(ngModel)]="selectedCities">
                     </ng-multiselect-dropdown>
