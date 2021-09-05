@@ -181,10 +181,10 @@ export class AppointDistributorComponent implements OnInit {
     this.appointDistributorForm = this._formBuilder.group({
       brandName: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
       businessNatures: [[]],
-      investmentAmount: [0],
+      investmentAmount: ['', [Validators.required]],
       establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
-      categories: [[]],
+      categories: ['', [ Validators.required]],
       totalEmployees: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
@@ -289,7 +289,7 @@ export class AppointDistributorComponent implements OnInit {
       } else {
         this.formErrors[key] = '';
         if (abstractControl && !abstractControl.valid
-          && (key == 'categories' || abstractControl.touched || abstractControl.dirty)) {
+          && (abstractControl.touched || abstractControl.dirty)) {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
             if (errorKey) {
