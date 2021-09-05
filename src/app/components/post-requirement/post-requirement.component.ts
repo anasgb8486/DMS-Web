@@ -81,7 +81,7 @@ export class PostRequirementComponent implements OnInit {
       description: ['', [Validators.required,
       CustomValidators.startingWithEmptySpace(),
       Validators.maxLength(2000)]],
-      isAgreed: ['', Validators.requiredTrue],
+      isAgreed: [true, Validators.requiredTrue],
     });
 
     this.postRequirmentForm.valueChanges.subscribe(
