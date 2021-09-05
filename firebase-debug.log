@@ -1,0 +1,13 @@
+[debug] [2021-09-05T16:26:34.074Z] ----------------------------------------------------------------------
+[debug] [2021-09-05T16:26:34.079Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mohammad Anas\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2021-09-05T16:26:34.080Z] CLI Version:   9.13.1
+[debug] [2021-09-05T16:26:34.080Z] Platform:      win32
+[debug] [2021-09-05T16:26:34.080Z] Node Version:  v14.17.1
+[debug] [2021-09-05T16:26:34.088Z] Time:          Sun Sep 05 2021 21:56:34 GMT+0530 (India Standard Time)
+[debug] [2021-09-05T16:26:34.089Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-09-05T16:26:34.109Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-09-05T16:26:34.109Z] > authorizing via signed-in user (md.anas87@gmail.com)
+[debug] [2021-09-05T16:26:34.110Z] [iam] checking project adms-c8994 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-09-05T16:26:34.117Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/adms-c8994:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}

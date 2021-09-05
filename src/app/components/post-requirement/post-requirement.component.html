@@ -10,8 +10,8 @@
                     <select class="form-control" id="requestType" formControlName="requestType"
                         [ngClass]="{'is-invalid': formErrors.requestType}" (blur)="logValidationErrors()">
                         <option value="" disabled>Select</option>
-                        <option value="1">become distributor</option>
-                        <option value="2">appoint distributor</option>
+                        <option value="2">Appoint distributor</option>
+                        <option value="1">Become distributor</option>                        
                     </select>
                     <span class="invalid-feedback" *ngIf="formErrors.requestType">
                         {{formErrors.requestType}}
