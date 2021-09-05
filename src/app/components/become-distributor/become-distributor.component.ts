@@ -36,6 +36,8 @@ export class BecomeDistributorComponent implements OnInit {
   cities: LocationDto[] = [];
   selectedCities: LocationDto[] = [];
 
+  hideExperienceTextBox: boolean = false;
+
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
   // corresponding form control
@@ -102,12 +104,12 @@ export class BecomeDistributorComponent implements OnInit {
   };
 
   constructor(private _formBuilder: FormBuilder,
-              private _spinnerService: NgxSpinnerService,
-              private _toastr: ToastrService,
-              private _distributorService: DistributorService,
-              private _masterDataService: MasterDataService,
-              private _registrationService: RegistrationService,
-              private _router: Router) { }
+    private _spinnerService: NgxSpinnerService,
+    private _toastr: ToastrService,
+    private _distributorService: DistributorService,
+    private _masterDataService: MasterDataService,
+    private _registrationService: RegistrationService,
+    private _router: Router) { }
 
   ngOnInit(): void {
 
@@ -198,13 +200,13 @@ export class BecomeDistributorComponent implements OnInit {
   loadMasterData() {
 
     if (sessionStorage.getItem('catagories')) {
-      const prodCatagories =  JSON.parse(sessionStorage.getItem('catagories'));
+      const prodCatagories = JSON.parse(sessionStorage.getItem('catagories'));
       prodCatagories.forEach(element => {
         element.forEach(item => {
           this.categories.push(item);
         });
       });
-    }else{
+    } else {
       this._masterDataService.getAllCategoriesMasterData().subscribe((data: MasterDataDto[]) => {
         this.categories = data;
       });
@@ -334,6 +336,14 @@ export class BecomeDistributorComponent implements OnInit {
     else {
       this.cities = [];
       this.selectedCities = [];
+    }
+  }
+
+  toggleExperienceTextBox(experience: number): void {
+    if (experience === 1) {
+      this.hideExperienceTextBox = false;
+    } else {
+      this.hideExperienceTextBox = true;
     }
   }
 

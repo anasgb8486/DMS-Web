@@ -85,20 +85,20 @@
                     <div class="form-check-inline">
                         <label class="form-check-label">
                             <input type="radio" value="1" formControlName="experianceType"
-                                class="form-check-input">Fresher
+                                class="form-check-input" (click)="toggleExperienceTextBox(1)">Fresher
                         </label>
                     </div>
                     <div class="form-check-inline">
                         <label class="form-check-label">
                             <input type="radio" value="2" formControlName="experianceType"
-                                class="form-check-input">Experienced
+                                class="form-check-input" (click)="toggleExperienceTextBox(2)">Experienced
                         </label>
                     </div>                    
                     <span class="invalid-feedback" *ngIf="formErrors.experianceType">
                         {{formErrors.experianceType}}
                     </span>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3" *ngIf='hideExperienceTextBox'>
                     <input type="text" class="form-control" id="experianceYears" formControlName="experianceYears"
                         placeholder="Enter total experience (in years)" name="experianceYears">
                 </div>

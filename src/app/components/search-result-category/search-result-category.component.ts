@@ -48,7 +48,7 @@ export class SearchResultCategoryComponent implements OnInit {
       } else {
         this.distributorService.GetBrandsByCategoryId(parameter.id).subscribe((result) => {
           this.collection = result;
-          this.loaderMessage = this.collection.length + ' Results found';
+          this.loaderMessage = ''; // this.collection.length + ' Results found';
           this.getBrandData.setOption('BrandDataByCatagory', result);
           console.log(result);
         });
