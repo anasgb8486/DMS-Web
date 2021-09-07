@@ -20,7 +20,8 @@
                                         <!--Data-->
                                         <div class="item-box-blog-data" style="padding: px 15px;">
                                             <p>
-                                                <i class="fa fa-user" aria-hidden="true"></i> {{ colItems.brandOwner == null ? 'Not
+                                                <i class="fa fa-user" aria-hidden="true"></i> {{ colItems.brandOwner ==
+                                                null ? 'Not
                                                 provided' : colItems.brandOwner }}
                                                 <!-- , <i class="fa fa-comments-o"></i>
                                                 Comments(3) -->
@@ -30,11 +31,19 @@
                                         <div class="item-box-blog-text">
                                             <p>Interested in : {{ colItems.productsKeywords }}</p>
                                             <p>Experience : {{ colItems.experianceYears }}</p>
-                                            <p>Investment <i class="fa fa-inr" aria-hidden="true"></i> : {{
-                                                colItems.minInvestmentAmount - colItems.maxInvestmentAmount }}</p>
+                                            <div [ngSwitch]="colItems.investmentRangeId">
+                                                <p *ngSwitchCase="1">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 50k to 1 Lac</p>
+                                                <p *ngSwitchCase="2">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 1 Lakh to 3 Lac</p>
+                                                <p *ngSwitchCase="3">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 3 Lakh to 5 Lac</p>
+                                                <p *ngSwitchCase="4">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 5 Lakh to 10 Lac</p>
+                                                <p *ngSwitchCase="5">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 10 Lakh to 20 Lac</p>
+                                                <p *ngSwitchCase="6">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 30 Lakh to 40 Lac</p>
+                                                <p *ngSwitchCase="6">Investment <i class="fa fa-inr" aria-hidden="true"></i> : 40 Lakh to 50 Lac</p>
+                                            </div>
                                             <p>Space Available : {{ !colItems.spaceRequired ? '100 S.F.' :
                                                 colItems.spaceRequired }}</p>
-                                            <p>Location : <i class="fa fa-map-marker"></i> {{ colItems.distributorshipLocations }}</p>
+                                            <p>Location : <i class="fa fa-map-marker"></i> {{
+                                                colItems.distributorshipLocations }}</p>
                                             <!-- <label>Client name : {{ colItems.brandOwner == null ? 'Not provided' : colItems.brandOwner  }}</label>
                                             <label>City (State) : {{ colItems.brandPrimaryAddress == null ? 'Not provided' : colItems.brandPrimaryAddress  }}</label>
                                             <label>Client wants to take distributorship :  {{colItems.productsKeywords}}</label>
