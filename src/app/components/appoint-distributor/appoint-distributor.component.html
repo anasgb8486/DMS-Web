@@ -24,7 +24,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="investmentAmount">Investment Required<span class="required">*</span>:</label>
+                <label class="control-label col-sm-3" for="investmentAmount">Investment Required<span
+                        class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <select class="form-control" id="investmentAmount" formControlName="investmentAmount"
                         [ngClass]="{'is-invalid': formErrors.investmentAmount}" (blur)="logValidationErrors()">
@@ -57,7 +58,8 @@
                 </div> -->
             </div>
             <div class="form-group  row">
-                <label class="control-label col-sm-3" for="establishmentYear">Establishment Year<span class="required">*</span>:</label>
+                <label class="control-label col-sm-3" for="establishmentYear">Establishment Year<span
+                        class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="establishmentYear" formControlName="establishmentYear"
                         placeholder="Enter establishment year" name="establishmentYear" (blur)="logValidationErrors()"
@@ -79,7 +81,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="categories">Business Categories<span class="required">*</span>:</label>
+                <label class="control-label col-sm-3" for="categories">Business Categories<span
+                        class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <!-- <ng-multiselect-dropdown formControlName="categories"
                       [placeholder]="'Select one or more categories'" [settings]="categoriesSettings"
@@ -123,7 +126,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="productsKeywords">Products Keywords<span class="required">*</span>:</label>
+                <label class="control-label col-sm-3" for="productsKeywords">Products Keywords<span
+                        class="required">*</span>:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="productsKeywords" formControlName="productsKeywords"
                         placeholder="Enter products' keywords in comma seperated format" name="productsKeywords"
@@ -142,7 +146,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="productsKeywords">Distributors Benefits:</label>               
+                <label class="control-label col-sm-3" for="productsKeywords">Distributors Benefits:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control" id="distributorsBenefits" rows="3"
                         formControlName="distributorsBenefits" placeholder="Distributor benefits"
@@ -172,7 +176,7 @@
                 </div>
             </div> -->
             <div class="form-group row">
-                <label class="control-label col-sm-3" for="distributorshipType">Distributorship Type:</label>
+                <label class="control-label col-sm-3" for="distributorshipType">Distributorship Location:</label>
                 <!-- <div class="col-sm-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" id="statewise" value="3" formControlName="statewise" name="statewise"
@@ -180,10 +184,121 @@
                         State-wise
                     </label>
                 </div> -->
-                <div class="col-sm-3">
-                    <ng-multiselect-dropdown formControlName="states" [placeholder]="'States'"
+                <div class="col-sm-9">
+                    <div class="fl w-100">
+                        <label>
+                            <input type="checkbox" value="0" (click)="selectAllStates($event)" />
+                            Country wise
+                        </label>
+                    </div>
+                    <div class="fl w-100">
+                        <div class="displayStates" formArrayName="states">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="displayStates color-blue"><b>Central</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataCentral; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataCentral[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataCentral[i].name}}
+                                        </label>
+                                    </div>
+
+                                    <br/><br/><br/>
+
+                                    <div class="displayStates color-blue"><b>West</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataWest; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataWest[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataWest[i].name}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="displayStates color-blue"><b>East</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataEast; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataEast[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataEast[i].name}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="displayStates color-blue"><b>North</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataNorth; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataNorth[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataNorth[i].name}}
+                                        </label>
+                                    </div>
+                                    <br/> <br/> <br/>
+
+                                    <div class="displayStates color-blue"><b>South</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataSouth; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataSouth[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataSouth[i].name}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-2">
+                                    <div class="displayStates"><b>South</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataSouth; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataSouth[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataSouth[i].name}}
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-sm-2">
+                                    <div class="displayStates"><b>West</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataWest; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataWest[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataWest[i].name}}
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <div class="col-sm-3">
+                                    <div class="displayStates color-blue"><b>Union Territories</b></div>
+                                    <div class="displayStates" *ngFor="let state of statesDataUT; let i = index">
+                                        <label>
+                                            <input type="checkbox" [formControlName]="i"
+                                                [value]="statesDataUT[i].id"
+                                                (click)="selectState($event.target.value)">
+                                            {{statesDataUT[i].name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="fl w-100">
+                        <div class="displayStates" formArrayName="states"
+                            *ngFor="let state of statesFormArray.controls; let i = index">
+                            <label>
+                                <input type="checkbox" [formControlName]="i" [value]="statesData[i].id" (click)="selectState($event.target.value)">
+                                {{statesData[i].name}}
+                            </label>
+                        </div>
+                    </div> -->
+
+                    <!-- <ng-multiselect-dropdown formControlName="states" [placeholder]="'States'"
                         [settings]="locationMultiSelectSettings" [data]="states" [(ngModel)]="selectedStates">
-                    </ng-multiselect-dropdown>
+                    </ng-multiselect-dropdown> -->
                 </div>
                 <!-- <div class="col-sm-2">
                     <label class="checkbox-inline">
@@ -193,9 +308,9 @@
                     </label>
                 </div> -->
                 <div class="col-sm-3">
-                    <ng-multiselect-dropdown formControlName="cities" [placeholder]="'Cities'"
+                    <!-- <ng-multiselect-dropdown formControlName="cities" [placeholder]="'Cities'"
                         [settings]="locationMultiSelectSettings" [data]="cities" [(ngModel)]="selectedCities">
-                    </ng-multiselect-dropdown>
+                    </ng-multiselect-dropdown> -->
                 </div>
             </div>
             <div class="form-group row">

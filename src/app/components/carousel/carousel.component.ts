@@ -41,9 +41,7 @@ export class CarouselComponent implements OnInit {
         } else {
           this.showNavigationArrows = false;
         }
-      });
-
-    console.log(this.distributorLeads);
+      });    
   }
 
   openDialog(componentName): void {

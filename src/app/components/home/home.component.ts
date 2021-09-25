@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit {
   constructor(
      private location: Location,
      private apploadDataService: ApploadDataService,
-     private SpinnerService: NgxSpinnerService,public breakpointObserver: BreakpointObserver, public mediaMatcher: MediaMatcher) {
+     private SpinnerService: NgxSpinnerService, public breakpointObserver: BreakpointObserver, public mediaMatcher: MediaMatcher) {
     this.router = location.path();
     this.viewportSizes.forEach((s) => {
       this.sizeMessage.push(
         mediaMatcher.matchMedia(s)
-      )
+      );
     });
   }
 
@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // this.SpinnerService.show();
     this.apploadDataService.getApplicationLoadData().subscribe(result => {
+      console.log(result);
       result.categories.forEach(element => {
         this.catagories.push(element);
       });
@@ -46,22 +47,17 @@ export class HomeComponent implements OnInit {
         Breakpoints.Large,
         Breakpoints.XLarge])
       .subscribe((state: BreakpointState) => {
-        if(state.breakpoints['(max-width: 599.98px)']==true){
-          this.distributorLeads = this.chunk(result.distributorLeads.flat(), 1)
-        } else if(state.breakpoints['(min-width: 600px) and (max-width: 959.98px)']==true){
-          this.distributorLeads = this.chunk(result.distributorLeads.flat(), 2)
+        if (state.breakpoints['(max-width: 599.98px)'] == true){
+          this.distributorLeads = this.chunk(result.distributorLeads.flat(), 1);
+        } else if (state.breakpoints['(min-width: 600px) and (max-width: 959.98px)'] == true){
+          this.distributorLeads = this.chunk(result.distributorLeads.flat(), 2);
 
         } else {
           result.distributorLeads.forEach(element => {
             this.distributorLeads.push(element);
           });
         }
-      })
-
-
-
-
-
+      });
 
       for (const catagory  of result.categories[0]){
         this.catagoriesOnLoad.push(catagory);
@@ -77,7 +73,7 @@ export class HomeComponent implements OnInit {
   }
 
   chunk(arr, size){
-    let result = arr.reduce((rows, key, index) => (index % size == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows, []);
+    const result = arr.reduce((rows, key, index) => (index % size == 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) && rows, []);
     return result;
 }
 

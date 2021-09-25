@@ -51,6 +51,7 @@ import { ToggleAllCatagoriesService } from './services/toggle-all-catagories.ser
 import { ContactCustomerCareComponent } from './components/contact-customer-care/contact-customer-care.component';
 import { ForgotPasswordComponent } from './shared/components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
+import { LoadMoreService } from './services/load-more.service';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { ResetPasswordComponent } from './shared/components/reset-password/reset
     GetbranddataService,
     LoginService,
     SendEmailService,
-    ToggleAllCatagoriesService
+    ToggleAllCatagoriesService,
+    LoadMoreService
   ],
   entryComponents: [ DialogComponent],
   bootstrap: [AppComponent]

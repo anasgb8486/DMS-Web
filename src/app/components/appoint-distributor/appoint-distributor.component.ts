@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidators } from 'src/app/shared/custom.validators';
@@ -26,7 +26,99 @@ export class AppointDistributorComponent implements OnInit {
   categories: MasterDataDto[] = [];
   businessNatures: MasterDataDto[] = [];
   allLocations: LocationDto[] = [];
-  states: LocationDto[] = [];
+  statesData: LocationDto[] = [
+    { id: 145, distributorshipTypeId: 3, name: 'Andaman and Nicobar Islands', parentId: null },
+    { id: 7, distributorshipTypeId: 3, name: 'Andhra Pradesh', parentId: null },
+    { id: 122, distributorshipTypeId: 3, name: 'Arunachal Pradesh', parentId: null },
+    { id: 128, distributorshipTypeId: 3, name: 'Assam', parentId: null },
+    { id: 18, distributorshipTypeId: 3, name: 'Bihar', parentId: null },
+    { id: 146, distributorshipTypeId: 3, name: 'Chandigarh', parentId: null },
+    { id: 16, distributorshipTypeId: 3, name: 'Chhatisgarh', parentId: null },
+    { id: 143, distributorshipTypeId: 3, name: 'Dadra and Nagar Haveli', parentId: null },
+    { id: 147, distributorshipTypeId: 3, name: 'Daman and Diu', parentId: null },
+    { id: 133, distributorshipTypeId: 3, name: 'Delhi', parentId: null },
+    { id: 149, distributorshipTypeId: 3, name: 'Goa', parentId: null },
+    { id: 151, distributorshipTypeId: 3, name: 'Gujrat', parentId: null },
+    { id: 135, distributorshipTypeId: 3, name: 'Haryana', parentId: null },
+    { id: 137, distributorshipTypeId: 3, name: 'Himachal Pradesh', parentId: null },
+    { id: 134, distributorshipTypeId: 3, name: 'Jammu & Kashmir', parentId: null },
+    { id: 138, distributorshipTypeId: 3, name: 'Karnataka', parentId: null },
+    { id: 139, distributorshipTypeId: 3, name: 'Kerala', parentId: null },
+    { id: 142, distributorshipTypeId: 3, name: 'Lakshadweep', parentId: null },
+    { id: 6, distributorshipTypeId: 3, name: 'Madhya Pradesh', parentId: null },
+    { id: 148, distributorshipTypeId: 3, name: 'Maharashtra', parentId: null },
+    { id: 125, distributorshipTypeId: 3, name: 'Manipur', parentId: null },
+    { id: 129, distributorshipTypeId: 3, name: 'Meghalaya', parentId: null },
+    { id: 123, distributorshipTypeId: 3, name: 'Mizoram', parentId: null },
+    { id: 124, distributorshipTypeId: 3, name: 'Nagaland', parentId: null },
+    { id: 130, distributorshipTypeId: 3, name: 'Odisha', parentId: null },
+    { id: 144, distributorshipTypeId: 3, name: 'Peducherry', parentId: null },
+    { id: 136, distributorshipTypeId: 3, name: 'Punjab', parentId: null },
+    { id: 150, distributorshipTypeId: 3, name: 'Rajasthan', parentId: null },
+    { id: 131, distributorshipTypeId: 3, name: 'Sikkim', parentId: null },
+    { id: 140, distributorshipTypeId: 3, name: 'Tamil Nadu', parentId: null },
+    { id: 141, distributorshipTypeId: 3, name: 'Telangana', parentId: null },
+    { id: 126, distributorshipTypeId: 3, name: 'Tripura', parentId: null },
+    { id: 5, distributorshipTypeId: 3, name: 'Uttar Pradesh', parentId: null },
+    { id: 132, distributorshipTypeId: 3, name: 'Uttarakhand', parentId: null },
+    { id: 127, distributorshipTypeId: 3, name: 'West Bengal', parentId: null }
+  ];
+
+  statesDataCentral: LocationDto[] = [
+    { id: 18, distributorshipTypeId: 3, name: 'Bihar', parentId: null },
+    { id: 16, distributorshipTypeId: 3, name: 'Chhatisgarh', parentId: null },
+    { id: 6, distributorshipTypeId: 3, name: 'Madhya Pradesh', parentId: null },
+  ];
+
+  statesDataEast: LocationDto[] = [
+    { id: 122, distributorshipTypeId: 3, name: 'Arunachal Pradesh', parentId: null },
+    { id: 123, distributorshipTypeId: 3, name: 'Mizoram', parentId: null },
+    { id: 124, distributorshipTypeId: 3, name: 'Nagaland', parentId: null },
+    { id: 125, distributorshipTypeId: 3, name: 'Manipur', parentId: null },
+    { id: 126, distributorshipTypeId: 3, name: 'Tripura', parentId: null },
+    { id: 127, distributorshipTypeId: 3, name: 'West Bengal', parentId: null },
+    { id: 128, distributorshipTypeId: 3, name: 'Assam', parentId: null },
+    { id: 129, distributorshipTypeId: 3, name: 'Meghalaya', parentId: null },
+    { id: 130, distributorshipTypeId: 3, name: 'Odisha', parentId: null },
+    { id: 131, distributorshipTypeId: 3, name: 'Sikkim', parentId: null },
+  ];
+
+  statesDataNorth: LocationDto[] = [
+    { id: 5, distributorshipTypeId: 3, name: 'Uttar Pradesh', parentId: null },
+    { id: 132, distributorshipTypeId: 3, name: 'Uttarakhand', parentId: null },
+    { id: 133, distributorshipTypeId: 3, name: 'Delhi', parentId: null },
+    { id: 134, distributorshipTypeId: 3, name: 'Jammu & Kashmir', parentId: null },
+    { id: 135, distributorshipTypeId: 3, name: 'Haryana', parentId: null },
+    { id: 136, distributorshipTypeId: 3, name: 'Punjab', parentId: null },
+    { id: 137, distributorshipTypeId: 3, name: 'Himachal Pradesh', parentId: null },
+  ];
+
+
+  statesDataSouth: LocationDto[] = [
+    { id: 138, distributorshipTypeId: 3, name: 'Karnataka', parentId: null },
+    { id: 7, distributorshipTypeId: 3, name: 'Andhra Pradesh', parentId: null },
+    { id: 139, distributorshipTypeId: 3, name: 'Kerala', parentId: null },
+    { id: 140, distributorshipTypeId: 3, name: 'Tamil Nadu', parentId: null },
+    { id: 141, distributorshipTypeId: 3, name: 'Telangana', parentId: null },
+  ];
+
+  statesDataWest: LocationDto[] = [
+    { id: 148, distributorshipTypeId: 3, name: 'Maharashtra', parentId: null },
+    { id: 149, distributorshipTypeId: 3, name: 'Goa', parentId: null },
+    { id: 150, distributorshipTypeId: 3, name: 'Rajasthan', parentId: null },
+    { id: 151, distributorshipTypeId: 3, name: 'Gujrat', parentId: null },
+  ];
+
+  statesDataUT: LocationDto[] = [
+    { id: 142, distributorshipTypeId: 3, name: 'Lakshadweep', parentId: null },
+    { id: 143, distributorshipTypeId: 3, name: 'Dadra and Nagar Haveli', parentId: null },
+    { id: 144, distributorshipTypeId: 3, name: 'Peducherry', parentId: null },
+    { id: 145, distributorshipTypeId: 3, name: 'Andaman and Nicobar Islands', parentId: null },
+    { id: 146, distributorshipTypeId: 3, name: 'Chandigarh', parentId: null },
+    { id: 147, distributorshipTypeId: 3, name: 'Daman and Diu', parentId: null }
+  ];
+
+
   selectedStates: LocationDto[] = [];
   cities: LocationDto[] = [];
   selectedCities: LocationDto[] = [];
@@ -104,6 +196,10 @@ export class AppointDistributorComponent implements OnInit {
     // },
   };
 
+  get statesFormArray() {
+    return this.appointDistributorForm.controls.states as FormArray;
+  }
+
   constructor(
     private _formBuilder: FormBuilder,
     private _spinnerService: NgxSpinnerService,
@@ -111,7 +207,9 @@ export class AppointDistributorComponent implements OnInit {
     private _distributorService: DistributorService,
     private _masterDataService: MasterDataService,
     private _registrationService: RegistrationService,
-    private _router: Router) { }
+    private _router: Router) {
+
+    }
 
   ngOnInit(): void {
 
@@ -144,7 +242,7 @@ export class AppointDistributorComponent implements OnInit {
     }, (error: any) => {
       this.handleError(error);
     });
-        this._router.navigate(['home']);
+    this._router.navigate(['home']);
   }
 
   setupForm() {
@@ -184,11 +282,11 @@ export class AppointDistributorComponent implements OnInit {
       investmentAmount: ['', [Validators.required]],
       establishmentYear: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1900), Validators.max(2050)]],
       spaceRequired: ['', [CustomValidators.startingWithEmptySpace()]],
-      categories: ['', [ Validators.required]],
+      categories: ['', [Validators.required]],
       totalEmployees: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       annualSales: ['', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       productsKeywords: ['', [Validators.required, CustomValidators.startingWithEmptySpace()]],
-      states: [this.selectedStates],
+      states: new FormArray([]) , // [this.selectedStates],
       cities: [this.selectedCities],
       brandLogo: [''],
       productsImages: [[]],
@@ -198,7 +296,7 @@ export class AppointDistributorComponent implements OnInit {
       // minInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
       // maxInvestmentAmount: ['', [Validators.required, Validators.pattern(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/)]],
     });
-
+    this.addCheckboxes();
   }
 
   loadMasterData() {
@@ -244,6 +342,12 @@ export class AppointDistributorComponent implements OnInit {
     brand.brandLogo = this.brandLogoUrl;
     brand.brandImages = this.productsImages;
     brand.distributorsBenefits = this.appointDistributorForm.value.distributorsBenefits;
+
+    // const selecteSatatesIds = this.appointDistributorForm.value.orders
+    //   .map((checked, i) => checked ? this.statesData[i].id : null)
+    //   .filter(v => v !== null);
+    // console.log(selecteSatatesIds);
+
     // locations
     if (this.selectedStates.length > 0) {
       brand.statewiseLocations = this.selectedStates.map(({ id }) => id);
@@ -312,7 +416,7 @@ export class AppointDistributorComponent implements OnInit {
   // }
 
   getAllStates(stateType) {
-    this.states = this.allLocations.filter(x => x.distributorshipTypeId === stateType);
+    // this.states = this.allLocations.filter(x => x.distributorshipTypeId === stateType);
   }
 
   getAllCities(cityType) {
@@ -360,4 +464,35 @@ export class AppointDistributorComponent implements OnInit {
     }
   }
 
+  private addCheckboxes() {
+    this.statesData.forEach(() => this.statesFormArray.push(new FormControl(false)));
+  }
+
+  selectState(stateId: number): void {
+    const stateObject = this.statesData.find(s => s.id == stateId);
+
+    if (this.selectedStates.length > 0) {
+      const selectStateObjet = this.selectedStates.find(s => s.id == stateId);
+      if (selectStateObjet == null) {
+        this.selectedStates.push(stateObject);
+      } else {
+        const index = this.selectedStates.findIndex(x => x.id == stateId);
+        this.selectedStates.splice(index, 1);
+      }
+    }else{
+      this.selectedStates.push(stateObject);
+    }
+    // console.log(this.selectedStates);
+  }
+
+  selectAllStates(event): void{
+    this.selectedStates = [];
+    this.appointDistributorForm.get('states').reset();
+    if (event.target.checked){
+      this.selectedStates = this.statesData;
+      this.appointDistributorForm.get('states').disable();
+    }else{
+      this.appointDistributorForm.get('states').enable();
+    } 
+  }
 }
