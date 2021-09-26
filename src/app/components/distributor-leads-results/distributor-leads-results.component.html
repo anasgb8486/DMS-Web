@@ -1,7 +1,7 @@
 <div class="w-100 mt-5 ml-3 card-mobile">
   <p class="mb-4">{{leads?.length}} Results found for {{catagoryName}}</p>
 
-  <div class="row forscroll" (scroll)="onScroll($event)">
+  <div class="row"> <!-- (scroll)="onScroll($event)" -->
     <div class="col-sm-6" *ngFor="let lead of leads">
       <div class="card mb-3" style="max-width: 550px;">
         <div class="row" style="padding:10px">

@@ -27,19 +27,18 @@ export class DistributorLeadsResultsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @HostListener('scroll', ['$event'])
-  onScroll(event: any) {
-    // visible height + pixel scrolled >= total height
-    if (this.loadMoreResponse) {
-      if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      // you're at the bottom of the page
+      if (this.loadMoreResponse) {
         const BrandFilterDto = JSON.parse(sessionStorage.getItem('BrandFilterDto'));
         BrandFilterDto.skip = this.skip;
         this.loadMoreResponse = false;
         this.distributorService.getDistributorsLeadsBySearchFilter(BrandFilterDto).subscribe((response) => {
           // console.log(response);
           if (response) {
-            if (response.length === 0)
-            {
+            if (response.length === 0) {
               this.loadMoreResponse = false;
             }
             this.loadMoreResponse = true;
@@ -49,10 +48,36 @@ export class DistributorLeadsResultsComponent implements OnInit {
             this.skip = this.skip + 24;
           }
         });
-        console.log(this.skip);
       }
+      console.log('END');
     }
   }
+
+  // @HostListener('scroll', ['$event'])
+  // onScroll(event: any) {
+  //   console.log(event.target.scrollHeight);
+  //   // visible height + pixel scrolled >= total height
+  //   if (this.loadMoreResponse) {
+  //     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
+  //       const BrandFilterDto = JSON.parse(sessionStorage.getItem('BrandFilterDto'));
+  //       BrandFilterDto.skip = this.skip;
+  //       this.loadMoreResponse = false;
+  //       this.distributorService.getDistributorsLeadsBySearchFilter(BrandFilterDto).subscribe((response) => {
+  //         // console.log(response);
+  //         if (response) {
+  //           if (response.length === 0) {
+  //             this.loadMoreResponse = false;
+  //           }
+  //           this.loadMoreResponse = true;
+  //           this.leads = this.leads.concat(response);
+  //           console.log(response);
+  //           console.log(this.leads);
+  //           this.skip = this.skip + 24;
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 
   openDialog(componentName): void {
     const dialogRef = this.dialog.open(DialogComponent, {
